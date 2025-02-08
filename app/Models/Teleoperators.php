@@ -9,5 +9,5 @@ use Carbon\Carbon;
 class Teleoperators extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'email', 'phoneNumber', 'zoneId', 'motherTongue', 'hiringDate', 'code', 'password', 'firingDate'];
+    protected $fillable = ['name', 'email', 'phone_number', 'zone_id', 'mother_tongue', 'hiring_date', 'code', 'password', 'firing_date'];
 }

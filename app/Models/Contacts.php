@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class WarningTypes extends Model
+class Contacts extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'category'];
+    protected $fillable = ['dni', 'name', 'adress', 'phone_number', 'email'];
 }
- 

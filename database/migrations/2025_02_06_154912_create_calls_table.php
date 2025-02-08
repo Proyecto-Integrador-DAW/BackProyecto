@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('calls', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('dateTime');
-            $table->unsignedBigInteger('operatorId');
-            $table->unsignedBigInteger('patientId');
+            $table->timestamp('date_time');
+            $table->unsignedBigInteger('operator_id');
+            $table->unsignedBigInteger('patient_id');
             $table->string('description');
-            $table->unsignedBigInteger('callType');
+            $table->unsignedBigInteger('call_type');
             $table->string('type');
-            $table->unsignedBigInteger('warningId')->nullable();
+            $table->unsignedBigInteger('warning_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('operatorId')->references('id')->on('teleoperators');
-            $table->foreign('patientId')->references('id')->on('patients');
-            $table->foreign('callType')->references('id')->on('call_types');
-            $table->foreign('warningId')->references('id')->on('warnings');
+            $table->foreign('operator_id')->references('id')->on('teleoperators');
+            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('call_type')->references('id')->on('call_types');
+            $table->foreign('warning_id')->references('id')->on('warnings');
         });
     }
 

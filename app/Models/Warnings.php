@@ -9,6 +9,6 @@ use Carbon\Carbon;
 class Warnings extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'typeId'];
+    protected $fillable = ['description', 'type_id', 'start_date', 'end_date', 'periodicity', 'week_day'];
     
 }

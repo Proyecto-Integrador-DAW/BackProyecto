@@ -9,5 +9,5 @@ use Carbon\Carbon;
 class Patients extends Model
 {
     use HasFactory;
-    protected $fillable = ['DNI', 'name', 'adress', 'phoneNumber', 'healthCard', 'email', 'zoneId', 'personalSituation', 'healthSituation', 'housingSituation', 'economicSituation', 'autonomy'];
+    protected $fillable = ['dni', 'name', 'birth_date', 'adress', 'phone_number', 'health_card', 'email', 'zone_id', 'personal_situation', 'health_situation', 'housing_situation', 'economic_situation', 'autonomy'];
 }

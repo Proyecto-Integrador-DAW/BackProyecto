@@ -9,5 +9,5 @@ use Carbon\Carbon;
 class Zones extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['city','zone'];
 }

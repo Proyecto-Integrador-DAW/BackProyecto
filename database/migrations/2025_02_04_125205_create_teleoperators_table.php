@@ -15,16 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('email')->unique();
-            $table->string('phoneNumber');
-            $table->unsignedBigInteger('zoneId');
-            $table->string('motherTongue');
-            $table->date('hiringDate');
+            $table->string('phone_number');
+            $table->unsignedBigInteger('zone_id');
+            $table->string('mother_tongue');
+            $table->date('hiring_date');
             $table->string('code')->unique();
             $table->string('password')->hash();
-            $table->date('firingDate')->nullable();
+            $table->date('firing_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('zoneId')->references('id')->on('zones');
+            $table->foreign('zone_id')->references('id')->on('zones');
         });
     }
 

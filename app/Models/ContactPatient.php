@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class WarningTypes extends Model
+class ContactPatient extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'category'];
+    protected $table = 'contact_patient';
+    protected $fillable = ['patient_id', 'contact_id', 'relationship'];
 }
- 

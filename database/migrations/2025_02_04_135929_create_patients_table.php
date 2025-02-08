@@ -13,21 +13,22 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('DNI')->unique();
+            $table->string('dni')->unique();
             $table->string('name');
+            $table->date('birth_date');
             $table->string('adress');
-            $table->integer('phoneNumber')->unique();
-            $table->string('healthCard')->unique();
+            $table->integer('phone_number')->unique();
+            $table->string('health_card')->unique();
             $table->string('email')->unique();
-            $table->unsignedBigInteger('zoneId');
-            $table->string('personalSituation');
-            $table->string('healthSituation');
-            $table->string('housingSituation');
-            $table->string('economicSituation');
+            $table->unsignedBigInteger('zone_id');
+            $table->string('personal_situation');
+            $table->string('health_situation');
+            $table->string('housing_situation');
+            $table->string('economic_situation');
             $table->string('autonomy');
             $table->timestamps();
 
-            $table->foreign('zoneId')->references('id')->on('zones');
+            $table->foreign('zone_id')->references('id')->on('zones');
         });
     }
 

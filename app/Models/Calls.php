@@ -9,5 +9,13 @@ use Carbon\Carbon;
 class Calls extends Model
 {
     use HasFactory;
-    protected $fillable = ['dateTime', 'operatorId', 'patientId', 'description', 'callType', 'type', 'warningId'];
+    protected $fillable = [
+        'date_time',
+        'operator_id',
+        'patient_id',
+        'description',
+        'call_type',
+        'type_id',
+        'warning_id',
+    ];
 }
