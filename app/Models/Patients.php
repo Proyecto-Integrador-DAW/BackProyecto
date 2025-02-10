@@ -10,4 +10,10 @@ class Patients extends Model
 {
     use HasFactory;
     protected $fillable = ['dni', 'name', 'birth_date', 'adress', 'phone_number', 'health_card', 'email', 'zone_id', 'personal_situation', 'health_situation', 'housing_situation', 'economic_situation', 'autonomy'];
+    
+    public function contacts()
+    {
+        return $this->belongsToMany(Contacts::class, 'contact_patient')->withPivot('relationship');
+    }
+
 }

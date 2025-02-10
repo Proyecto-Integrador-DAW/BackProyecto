@@ -10,4 +10,9 @@ class Contacts extends Model
 {
     use HasFactory;
     protected $fillable = ['dni', 'name', 'adress', 'phone_number', 'email'];
+
+    public function patients()
+    {
+        return $this->belongsToMany(Patients::class, 'contact_patient')->withPivot('relationship');
+    }
 }
