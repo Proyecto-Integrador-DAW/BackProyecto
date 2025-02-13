@@ -8,24 +8,21 @@
         PatientsController,
         ContactsController,
         AlertController,
-        AuthController
+        AuthController,
+        TeleoperatorController
     };
 
-    // use App\Http\Controllers\Api\ZonesController;
-    // use App\Http\Controllers\Api\TeleoperatorsController;
-    // use App\Http\Controllers\Api\PatientsController;
-    // use App\Http\Controllers\Api\ContactsController;
-    // use App\Http\Controllers\Api\AlertController;
-    // use App\Http\Controllers\Api\AuthController;
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    })->middleware('auth:sanctum');
 
-    // Route::get('/user', function (Request $request) {
-    //     return $request->user();
-    // })->middleware('auth:sanctum');
     Route::post('login', [AuthController::class, 'login'])->middleware('api');
     // Route::post('register', [AuthController::class, 'register'])->middleware('api');
 
     Route::middleware(['auth:sanctum','api'])->group( function () {
-        Route::apiResource('/alerts',  AlertController::class);
+
+        Route::apiResource('alerts',  AlertController::class);
+        Route::apiResource('teleoperators',  TeleoperatorController::class);
         // Route::apiResource('zones',  ZonesController::class);
         // Route::apiResource('operators',  TeleoperatorsController::class);
         // Route::apiResource('patients', PatientsController::class);
