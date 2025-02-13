@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('dni')->unique();
             $table->string('name');
             $table->date('birth_date');
-            $table->string('adress');
+            $table->string('address');
             $table->integer('phone_number')->unique();
             $table->string('health_card')->unique();
             $table->string('email')->unique();

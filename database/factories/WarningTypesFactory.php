@@ -19,7 +19,7 @@ class WarningTypesFactory extends Factory
     {
         return [
             'description' => $this->faker->sentence(4),
-            'category' => WarningCategories::inRandomOrder()->first()->id ?? 1,
+            'category_id' => WarningCategories::inRandomOrder()->first()->id ?? 1,
         ];
     }
 }

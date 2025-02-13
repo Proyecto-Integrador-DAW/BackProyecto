@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('warning_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('description');
-            $table->unsignedBigInteger('category_id');
-            $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('warning_categories');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('role')->default('arbitre');
         });
     }
 
@@ -26,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warning_types');
+        Schema::dropIfExists('users');
     }
 };

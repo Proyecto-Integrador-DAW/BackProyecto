@@ -2,49 +2,42 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\BaseController;
 use App\Models\Zones;
+use App\Http\Resources\ZoneResource;
+use App\Models\Teleoperators;
+use App\Models\Patients;
 use Illuminate\Http\Request;
 
-class ZonesController extends Controller
+class ZonesController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return Zones::paginate(10);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Zones $zones)
+    public function show(Zones $zone)
     {
-        //
+        return $this->sendResponse(new ZoneResource($zone), 'Zona recuperada con éxito', 201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Zones $zones)
+    public function patients($id)
     {
-        //
+        $patients = Patients::where('zone_id', $id)->get();
+        return $this->sendResponse($patients, 'Pacientes de la zona recuperados con éxito', 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Zones $zones)
+    
+    public function operators($id)
     {
-        //
+        $operators = Teleoperators::where('zone_id', $id)->get();
+
+        return $this->sendResponse($operators, 'Operadores de la zona recuperados con éxito', 200);
     }
 }

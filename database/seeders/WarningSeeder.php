@@ -17,7 +17,7 @@ class WarningSeeder extends Seeder
     {
         Warnings::create([
             'description' => 'Pastillas para dormir',
-            'type' => 1,
+            'type_id' => 1,
             'start_date' => Carbon::now()->format('Y-m-d'),
             'end_date' => Carbon::now()->addDays(7)->format('Y-m-d'),
             'periodicity' => 'punctual',

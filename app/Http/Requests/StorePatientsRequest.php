@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePatientsRequest extends FormRequest
@@ -22,12 +22,11 @@ class StorePatientsRequest extends FormRequest
     public function rules(): array
     {
         $dateMin = Carbon::now()->subYears(18)->format('Y-m-d');
-
         return [
             'dni' => 'required|string|max:255|unique:patients,dni',
             'name' => 'required|string|max:255',
             'birth_date' => "required|date|before:$dateMin",
-            'adress' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
             'phone_number' => 'required|integer|unique:patients,phone_number',
             'health_card' => 'required|string|max:255|unique:patients,health_card',
             'email' => 'required|email|max:255|unique:patients,email',
@@ -49,7 +48,7 @@ class StorePatientsRequest extends FormRequest
             'birth_date.required' => 'El campo "Fecha de nacimiento" es obligatorio.',
             'birth_date.date' => 'El campo "Fecha de nacimiento" debe ser una fecha válida.',
             'birth_date.before' => 'El paciente debe ser mayor de 18 años.',
-            'adress.required' => 'El campo "Dirección" es obligatorio.',
+            'address.required' => 'El campo "Dirección" es obligatorio.',
             'phone_number.required' => 'El campo "Número de teléfono" es obligatorio.',
             'phone_number.unique' => 'El "Número de teléfono" ya está en uso.',
             'health_card.required' => 'El campo "Tarjeta de salud" es obligatorio.',

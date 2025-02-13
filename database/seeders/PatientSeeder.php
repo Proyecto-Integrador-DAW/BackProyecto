@@ -19,7 +19,7 @@ class PatientSeeder extends Seeder
             'dni' => '12345678A',
             'name' => 'Joan Pérez',
             'birth_date' => Carbon::create('1998', '01', '15'),
-            'adress' => 'Carrer de la Pau, 12, Barcelona',
+            'address' => 'Carrer de la Pau, 12, Barcelona',
             'phone_number' => '612345678',
             'health_card' => 'HC123456',
             'email' => 'joan@example.com',

@@ -19,7 +19,7 @@ class ContactsFactory extends Factory
         return [
             'dni' => $this->faker->unique()->bothify('########?'),
             'name' => $this->faker->name,
-            'adress' => $this->faker->address,
+            'address' => $this->faker->address,
             'phone_number' => $this->faker->unique()->numerify('#########'),
             'email' => $this->faker->unique()->safeEmail,
         ];

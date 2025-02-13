@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warning_types_categories');
+        Schema::dropIfExists('warning_categories');
     }
 };

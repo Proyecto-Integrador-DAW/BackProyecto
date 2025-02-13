@@ -15,13 +15,13 @@ class WarningTypeSeeder extends Seeder
     public function run(): void
     {
         $warningTypes = [
-            ['description' => 'Medicación', 'category' => 1],
-            ['description' => 'Especial/alerta', 'category' => 1],
-            ['description' => 'Después de emergencias', 'category' => 2],
-            ['description' => 'Procesos de duelo', 'category' => 2],
-            ['description' => 'Alta hospitalaria', 'category' => 2],
-            ['description' => 'Suspensión temporal del servicio', 'category' => 3],
-            ['description' => 'Retornos o fin de la ausencia', 'category' => 3],
+            ['description' => 'Medicación', 'category_id' => 1],
+            ['description' => 'Especial/alerta', 'category_id' => 1],
+            ['description' => 'Después de emergencias', 'category_id' => 2],
+            ['description' => 'Procesos de duelo', 'category_id' => 2],
+            ['description' => 'Alta hospitalaria', 'category_id' => 2],
+            ['description' => 'Suspensión temporal del servicio', 'category_id' => 3],
+            ['description' => 'Retornos o fin de la ausencia', 'category_id' => 3],
         ];
 
         foreach ($warningTypes as $warningType) {

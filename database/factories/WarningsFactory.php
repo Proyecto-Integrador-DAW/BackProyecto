@@ -19,7 +19,7 @@ class WarningsFactory extends Factory
     {
         return [
             'description' => $this->faker->sentence(6),
-            'type' => WarningTypes::inRandomOrder()->first()->id ?? 1,
+            'type_id' => WarningTypes::inRandomOrder()->first()->id ?? 1,
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'periodicity' => $this->faker->randomElement(['punctual', 'periodic']),

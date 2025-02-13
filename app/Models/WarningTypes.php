@@ -9,6 +9,11 @@ use Carbon\Carbon;
 class WarningTypes extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'category'];
+    protected $fillable = ['description', 'category_id'];
+
+    public function category()
+{
+    return $this->belongsTo(WarningCategories::class, 'category_id');
+}
 }
  

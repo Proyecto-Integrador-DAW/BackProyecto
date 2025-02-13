@@ -7,16 +7,18 @@ use App\Http\Resources\PatientResource;
 use App\Http\Requests\StorePatientsRequest;
 use App\Http\Requests\UpdatePatientsRequest;
 use App\Models\Patients;
+use Illuminate\Support\Facades\Log;
 
-class PatientsController extends Controller
+class PatientsController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Patients::paginate(10);
+        return $this->sendResponse(Patients::paginate(50), 'Lista de pacientes recuperada con éxito');
     }
+
 
     /**
      * Store a newly created resource in storage.

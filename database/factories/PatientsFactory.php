@@ -20,7 +20,7 @@ class PatientsFactory extends Factory
             'dni' => $this->faker->unique()->bothify('########?'),
             'name' => $this->faker->name,
             'birth_date' => $this->faker->date(),
-            'adress' => $this->faker->address,
+            'address' => $this->faker->address,
             'phone_number' => $this->faker->unique()->numerify('#########'),
             'health_card' => $this->faker->unique()->bothify('#########'),
             'email' => $this->faker->unique()->safeEmail,

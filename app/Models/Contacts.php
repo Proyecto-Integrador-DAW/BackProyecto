@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class Contacts extends Model
 {
     use HasFactory;
-    protected $fillable = ['dni', 'name', 'adress', 'phone_number', 'email'];
+    protected $fillable = ['dni', 'name', 'address', 'phone_number', 'email'];
 
     public function patients()
     {
