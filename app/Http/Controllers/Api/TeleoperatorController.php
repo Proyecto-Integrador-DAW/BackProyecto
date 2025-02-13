@@ -47,19 +47,12 @@
          * Update the specified resource in storage.
          */
         public function update(UpdateTeleoperatorRequest $request, Teleoperator $teleoperator) {
-            $data = $request->validated();
+            
+            $teleoperator->update($request->validated());
         
-            // Si la contraseña ha sido modificada, la actualizamos
-            if (isset($data['password'])) {
-                $data['password'] = Hash::make($data['password']);
-            }
-        
-            // Actualizamos el teleoperador
-            $teleoperator->update($data);
-        
-            // Asociamos los nuevos idiomas
+            // ASOCIAMIENTO DE LOS IDIOMAS MODIFICADOS
             if (isset($data['languages'])) {
-                $teleoperator->languages()->sync($data['languages']); // 'sync' asegura que los idiomas sean reemplazados, no añadidos
+                $teleoperator->languages()->sync($data['languages']);
             }
         
             return $this->sendResponse(new TeleoperatorResource($teleoperator), 'Teleoperador actualizado con éxito', 200);
