@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Zones;
+use App\Models\Zone;
 
 class ZoneSeeder extends Seeder
 {
@@ -21,8 +21,8 @@ class ZoneSeeder extends Seeder
         ];
 
         foreach ($zones as $zone) {
-            Zones::create($zone);
+            Zone::create($zone);
         }
-        Zones::factory()->count(10)->create();
+        Zone::factory()->count(10)->create();
     }
 }

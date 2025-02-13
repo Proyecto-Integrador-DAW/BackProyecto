@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Models\Zones;
+use App\Models\Zone;
 use App\Http\Resources\ZoneResource;
-use App\Models\Teleoperators;
-use App\Models\Patients;
+use App\Models\Teleoperator;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class ZonesController extends BaseController
@@ -16,27 +16,27 @@ class ZonesController extends BaseController
      */
     public function index()
     {
-        return Zones::paginate(10);
+        return Zone::paginate(10);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Zones $zone)
+    public function show(Zone $zone)
     {
         return $this->sendResponse(new ZoneResource($zone), 'Zona recuperada con éxito', 201);
     }
 
     public function patients($id)
     {
-        $patients = Patients::where('zone_id', $id)->get();
+        $patients = Patient::where('zone_id', $id)->get();
         return $this->sendResponse($patients, 'Pacientes de la zona recuperados con éxito', 200);
     }
 
     
     public function operators($id)
     {
-        $operators = Teleoperators::where('zone_id', $id)->get();
+        $operators = Teleoperator::where('zone_id', $id)->get();
 
         return $this->sendResponse($operators, 'Operadores de la zona recuperados con éxito', 200);
     }

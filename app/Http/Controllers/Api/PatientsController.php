@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Resources\PatientResource;
-use App\Http\Requests\StorePatientsRequest;
-use App\Http\Requests\UpdatePatientsRequest;
-use App\Models\Patients;
+use App\Http\Requests\StorePatientRequest;
+use App\Http\Requests\UpdatePatientRequest;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Log;
 
 class PatientsController extends BaseController
@@ -16,23 +16,23 @@ class PatientsController extends BaseController
      */
     public function index()
     {
-        return $this->sendResponse(Patients::paginate(50), 'Lista de pacientes recuperada con éxito');
+        return $this->sendResponse(Patient::paginate(50), 'Lista de pacientes recuperada con éxito');
     }
 
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePatientsRequest $request)
+    public function store(StorePatientRequest $request)
     {
-        $patient = Patients::create($request->validated());
+        $patient = Patient::create($request->validated());
         return $this->sendResponse($patient, 'Paciente creado con éxito', 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Patients $patient)
+    public function show(Patient $patient)
     {
         return $this->sendResponse(new PatientResource($patient), 'Paciente recuperado con éxito', 201);
     }
@@ -40,7 +40,7 @@ class PatientsController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePatientsRequest $request, Patients $patient)
+    public function update(UpdatePatientRequest $request, Patient $patient)
     {
         $patient->update($request->validated());
         return $this->sendResponse($patient, 'Paciente actualizado con éxito', 201);
@@ -49,7 +49,7 @@ class PatientsController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Patients $patient)
+    public function destroy(Patient $patient)
     {
         $patient->delete();
         return $this->sendResponse(null, 'Paciente borrado con éxito', 201);

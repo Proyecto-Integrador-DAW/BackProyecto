@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            WarningCategorySeeder::class,
-            WarningTypeSeeder::class,
-            WarningSeeder::class,
+            AlertCategorySeeder::class,
+            AlertTypeSeeder::class,
+            AlertSeeder::class,
             ZoneSeeder::class,
             TeleoperatorSeeder::class,
             PatientSeeder::class,

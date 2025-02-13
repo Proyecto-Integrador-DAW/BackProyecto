@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\CallTypes;
+use App\Models\CallType;
 
 class CallTypeSeeder extends Seeder
 {
@@ -26,9 +26,9 @@ class CallTypeSeeder extends Seeder
         ];
         
         foreach ($callTypes as $callType) {
-            CallTypes::create($callType);
+            CallType::create($callType);
         }
         
-        CallTypes::factory()->count(10)->create();
+        CallType::factory()->count(10)->create();
     }
 }

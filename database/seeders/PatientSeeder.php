@@ -7,7 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Models\Patients;
+use App\Models\Patient;
 class PatientSeeder extends Seeder
 {
     /**
@@ -15,7 +15,7 @@ class PatientSeeder extends Seeder
      */
     public function run(): void
     {
-        Patients::create([
+        Patient::create([
             'dni' => '12345678A',
             'name' => 'Joan Pérez',
             'birth_date' => Carbon::create('1998', '01', '15'),
@@ -30,6 +30,6 @@ class PatientSeeder extends Seeder
             'economic_situation' => 'Mitjana',
             'autonomy' => 'Alta',
         ]);
-        Patients::factory()->count(10)->create();
+        Patient::factory()->count(10)->create();
     }
 }

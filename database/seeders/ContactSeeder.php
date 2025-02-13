@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Contacts;
+use App\Models\Contact;
 
 class ContactSeeder extends Seeder
 {
@@ -14,13 +14,13 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-        Contacts::create([
+        Contact::create([
             'dni' => '12345678A',
             'name' => 'Paco Pérez',
-            'adress' => '123 Main St',
+            'address' => '123 Main St',
             'phone_number' => 123456789,
             'email' => 'pacope@example.com',
         ]);
-        Contacts::factory()->count(10)->create();
+        Contact::factory()->count(10)->create();
     }
 }

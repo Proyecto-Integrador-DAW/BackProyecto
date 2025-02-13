@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Calls;
+use App\Models\Call;
 use Illuminate\Http\Request;
 
 class CallsController extends BaseController
@@ -13,13 +13,13 @@ class CallsController extends BaseController
      */
     public function index()
     {
-        return Calls::paginate(10);
+        return Call::paginate(10);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCallsRequest $request)
+    public function store(StoreCallRequest $request)
     {
         $call = Calls::create($request->validated());
         return $this->sendResponse($call, 'Cridada Creada amb èxit', 201);
@@ -36,7 +36,7 @@ class CallsController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Calls $calls)
+    public function update(Request $request, Call $call)
     {
         //
     }
@@ -44,7 +44,7 @@ class CallsController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Calls $calls)
+    public function destroy(Call $call)
     {
         //
     }

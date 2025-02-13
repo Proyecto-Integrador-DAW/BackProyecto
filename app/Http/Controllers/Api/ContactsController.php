@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Requests\StoreContactsRequest;
-use App\Http\Requests\UpdateContactsRequest;
+use App\Http\Requests\StoreContactRequest;
+use App\Http\Requests\UpdateContactRequest;
 use App\Http\Resources\ContactResource;
-use App\Models\Contacts;
-use App\Models\Patients;
+use App\Models\Contact;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +19,7 @@ class ContactsController extends BaseController
      */
     public function contacts($patientId)
 {
-    $contacts = Contacts::select('contacts.*', 'contact_patient.relationship')
+    $contacts = Contact::select('contacts.*', 'contact_patient.relationship')
         ->join('contact_patient', 'contacts.id', '=', 'contact_patient.contact_id')
         ->where('contact_patient.patient_id', $patientId)
         ->get();
@@ -30,10 +30,10 @@ class ContactsController extends BaseController
     /**
      * Agregar un contacto a un paciente.
      */
-    public function store(StoreContactsRequest $request, $patientId)
+    public function store(StoreContactRequest $request, $patientId)
 {
     // Verificar si el contacto ya existe por su DNI
-    $contact = Contacts::firstOrCreate(
+    $contact = Contact::firstOrCreate(
         ['dni' => $request->dni],
         $request->validated() // Esto asegura que solo los campos validados se usen
     );
@@ -61,7 +61,7 @@ class ContactsController extends BaseController
     /**
      * Actualizar un contacto.
      */
-    public function update(UpdateContactsRequest $request, Contacts $contact)
+    public function update(UpdateContactRequest $request, Contact $contact)
     {
         $contact->update($request->validated());
         return $this->sendResponse(new ContactResource($contact), 'Contacto actualizado con éxito', 201);
@@ -73,7 +73,7 @@ class ContactsController extends BaseController
     public function destroy($contactId)
     {
         // Verificar si el contacto existe
-        $contact = Contacts::findOrFail($contactId);
+        $contact = Contact::findOrFail($contactId);
 
         // Eliminar la relación en la tabla pivot
         DB::table('contact_patient')->where('contact_id', $contactId)->delete();

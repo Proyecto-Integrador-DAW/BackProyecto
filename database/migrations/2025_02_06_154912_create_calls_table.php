@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('description');
             $table->unsignedBigInteger('call_type');
             $table->string('type');
-            $table->unsignedBigInteger('warning_id')->nullable();
+            $table->unsignedBigInteger('alert_id')->nullable();
             $table->timestamps();
 
             $table->foreign('operator_id')->references('id')->on('teleoperators');
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->foreign('call_type')->references('id')->on('call_types');
-            $table->foreign('warning_id')->references('id')->on('warnings');
+            $table->foreign('alert_id')->references('id')->on('alerts');
         });
     }
 

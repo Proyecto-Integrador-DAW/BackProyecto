@@ -7,7 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
-use App\Models\Teleoperators;
+use App\Models\Teleoperator;
 
 class TeleoperatorSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class TeleoperatorSeeder extends Seeder
      */
     public function run(): void
     {
-        Teleoperators::create([
+        Teleoperator::create([
             'name' => 'Marc Torres',
             'email' => 'marc.torres@example.com',
             'phone_number' => '612345678',
@@ -27,6 +27,6 @@ class TeleoperatorSeeder extends Seeder
             'password' => bcrypt('password123'), 
             'firing_date' => null,  
         ]);
-        Teleoperators::factory()->count(10)->create();
+        Teleoperator::factory()->count(10)->create();
     }
 }
