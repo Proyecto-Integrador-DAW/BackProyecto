@@ -1,31 +1,41 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ZonesController;
-use App\Http\Controllers\Api\TeleoperatorsController;
-use App\Http\Controllers\Api\PatientsController;
-use App\Http\Controllers\Api\ContactsController;
-use App\Http\Controllers\Api\AlertsController;
-use App\Http\Controllers\Api\AuthController;
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\Api\{
+        ZonesController,
+        TeleoperatorsController,
+        PatientsController,
+        ContactsController,
+        AlertController,
+        AuthController
+    };
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-Route::post('login', [AuthController::class, 'login'])->middleware('api');
-Route::post('register', [AuthController::class, 'register'])->middleware('api');
+    // use App\Http\Controllers\Api\ZonesController;
+    // use App\Http\Controllers\Api\TeleoperatorsController;
+    // use App\Http\Controllers\Api\PatientsController;
+    // use App\Http\Controllers\Api\ContactsController;
+    // use App\Http\Controllers\Api\AlertController;
+    // use App\Http\Controllers\Api\AuthController;
 
-Route::middleware(['auth:sanctum','api'])->group( function () {
-    Route::apiResource('zones',  ZonesController::class);
-    Route::apiResource('operators',  TeleoperatorsController::class);
-    Route::apiResource('patients', PatientsController::class);
-    Route::apiResource('contacts',  ContactsController::class);
-    Route::apiResource('alerts',  AlertsController::class);
+    // Route::get('/user', function (Request $request) {
+    //     return $request->user();
+    // })->middleware('auth:sanctum');
+    Route::post('login', [AuthController::class, 'login'])->middleware('api');
+    // Route::post('register', [AuthController::class, 'register'])->middleware('api');
 
-    Route::get('zones/{id}/patients', [ZonesController::class, 'patients'])->name('zones.patients');
-    Route::get('zones/{id}/operators', [ZonesController::class, 'operators'])->name('zones.operators');
-    Route::get('patients/{id}/contacts', [ContactsController::class, 'contacts'])->name('patients.contacts');
-    Route::post('patients/{id}/contacts', [ContactsController::class, 'store'])->name('patients.contacts.store');
-    
-    Route::post('logout', [AuthController::class, 'logout']);
-});
+    Route::middleware(['auth:sanctum','api'])->group( function () {
+        Route::apiResource('/alerts',  AlertController::class);
+        // Route::apiResource('zones',  ZonesController::class);
+        // Route::apiResource('operators',  TeleoperatorsController::class);
+        // Route::apiResource('patients', PatientsController::class);
+        // Route::apiResource('contacts',  ContactsController::class);
+
+        // Route::get('zones/{id}/patients', [ZonesController::class, 'patients'])->name('zones.patients');
+        // Route::get('zones/{id}/operators', [ZonesController::class, 'operators'])->name('zones.operators');
+        // Route::get('patients/{id}/contacts', [ContactsController::class, 'contacts'])->name('patients.contacts');
+        // Route::post('patients/{id}/contacts', [ContactsController::class, 'store'])->name('patients.contacts.store');
+        
+        // Route::post('logout', [AuthController::class, 'logout']);
+    });
+?>

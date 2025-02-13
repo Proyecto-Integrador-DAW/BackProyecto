@@ -56,14 +56,15 @@ services:
         networks:
             - sail
     myadmin:
-        image: 'phpmyadmin:latest' 
+        image: 'phpmyadmin:latest'
         ports:
-            - 8000:80
+            - 8080:80
         environment:
-            PMA_HOST: mysql  
-            MYSQL_ROOT_PASSWORD: '1234'  
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        links:
+            - "mysql:db"
         depends_on:
-            - mysql 
+            - mysql
         networks:
             - sail
 networks:
