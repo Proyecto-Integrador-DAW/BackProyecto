@@ -2,15 +2,14 @@
 
     namespace App\Http\Controllers\Api;
 
-    use App\Http\Controllers\Api\BaseController;
     use App\Http\Resources\TeleoperatorResource;
     use App\Http\Requests\Api\{
         UpdateTeleoperatorRequest,
         StoreTeleoperatorRequest
     };
     use Illuminate\Support\Facades\Hash;
-    use Illuminate\Http\Request;
     use App\Models\Teleoperator;
+    use Illuminate\Http\Request;
     
     class TeleoperatorController extends BaseController {
 
@@ -18,7 +17,7 @@
          * Display a listing of the resource.
          */
         public function index() {
-            return $this->sendResponse(TeleoperatorResource::collection(Teleoperator::paginate()), 'Teleoperadores mostrados con éxito', 200);
+            return TeleoperatorResource::collection(Teleoperator::paginate());
         }
 
         /**

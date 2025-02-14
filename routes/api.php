@@ -3,13 +3,13 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Api\{
-        ZonesController,
-        TeleoperatorsController,
-        PatientsController,
-        ContactsController,
         AlertController,
         AuthController,
-        TeleoperatorController
+        TeleoperatorController,
+        LanguageController,
+        ZonesController,
+        PatientsController,
+        ContactsController,
     };
 
     Route::get('/user', function (Request $request) {
@@ -23,6 +23,7 @@
 
         Route::apiResource('alerts',  AlertController::class);
         Route::apiResource('teleoperators',  TeleoperatorController::class);
+        Route::apiResource('languages',  LanguageController::class);
         // Route::apiResource('zones',  ZonesController::class);
         // Route::apiResource('operators',  TeleoperatorsController::class);
         // Route::apiResource('patients', PatientsController::class);
