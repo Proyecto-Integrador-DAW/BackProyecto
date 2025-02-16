@@ -8,9 +8,9 @@
         TeleoperatorController,
         LanguageController,
         ZoneController,
-        PatientsController,
-        ContactsController,
-};
+        PatientController,
+        EmergencyContactController,
+    };
 
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -25,9 +25,11 @@
         Route::apiResource('teleoperators',  TeleoperatorController::class);
         Route::apiResource('languages',  LanguageController::class);
         Route::apiResource('zones',  ZoneController::class);
+        Route::apiResource('patients', PatientController::class);
+        Route::apiResource('contacts', EmergencyContactController::class);
+
         // Route::apiResource('zones',  ZonesController::class);
         // Route::apiResource('operators',  TeleoperatorsController::class);
-        // Route::apiResource('patients', PatientsController::class);
         // Route::apiResource('contacts',  ContactsController::class);
 
         // Route::get('zones/{id}/patients', [ZonesController::class, 'patients'])->name('zones.patients');

@@ -22,8 +22,8 @@
                 LanguageSeeder::class,
                 TeleoperatorSeeder::class,
                 PatientSeeder::class,
-                ContactSeeder::class,
-                ContactPatientSeeder::class,
+                EmergencyContactSeeder::class,
+                // ContactPatientSeeder::class,
                 CallTypeSeeder::class,
                 CallSeeder::class,
             ]);

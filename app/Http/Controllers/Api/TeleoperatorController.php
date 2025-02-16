@@ -17,7 +17,7 @@
          * Display a listing of the resource.
          */
         public function index() {
-            return TeleoperatorResource::collection(Teleoperator::paginate());
+            return TeleoperatorResource::collection(Teleoperator::paginate(10));
         }
 
         /**
@@ -46,14 +46,16 @@
          * Update the specified resource in storage.
          */
         public function update(UpdateTeleoperatorRequest $request, Teleoperator $teleoperator) {
-            
+
             $teleoperator->update($request->validated());
-        
+
+            $data = $request->validated();
+
             // ASOCIAMIENTO DE LOS IDIOMAS MODIFICADOS
             if (isset($data['languages'])) {
                 $teleoperator->languages()->sync($data['languages']);
             }
-        
+
             return $this->sendResponse(new TeleoperatorResource($teleoperator), 'Teleoperador actualizado con éxito', 200);
         }
 
