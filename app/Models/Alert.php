@@ -4,11 +4,11 @@
 
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Model;
-    use Carbon\Carbon;
+    use Illuminate\Database\Eloquent\SoftDeletes;
 
     class Alert extends Model {
 
-        use HasFactory;
+        use HasFactory, SoftDeletes;
 
         protected $fillable = ['description', 'type_id', 'start_date', 'end_date', 'periodicity', 'week_day'];
 

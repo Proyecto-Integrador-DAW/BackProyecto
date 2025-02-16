@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CallType extends Model
-{
-    use HasFactory;
-    protected $fillable = ['name', 'category'];
-}
+    class CallType extends Model {
+
+        use HasFactory, SoftDeletes;
+
+        protected $fillable = ['name', 'category'];
+    }
+?>

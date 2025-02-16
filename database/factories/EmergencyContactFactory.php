@@ -20,7 +20,7 @@
 
             return [
                 'name' => $this->faker->name(),
-                'phone' => $this->faker->phoneNumber(),
+                'phone_number' => $this->faker->phoneNumber(),
                 'relationship' => $this->faker->randomElement($relations)
             ];
         }

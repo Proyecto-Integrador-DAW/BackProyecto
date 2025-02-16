@@ -16,7 +16,7 @@
 
             EmergencyContact::create([
                 'name' => 'Ángel',
-                'phone' => '666 66 66 66',
+                'phone_number' => '666 66 66 66',
                 'relationship' => 'Nieto'
             ]);
 

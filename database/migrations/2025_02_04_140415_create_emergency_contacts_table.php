@@ -13,7 +13,7 @@
             Schema::create('emergency_contacts', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
-                $table->string('phone')->unique();
+                $table->string('phone_number')->unique();
                 $table->string('relationship');
                 $table->timestamps();
                 // $table->softDeletes();

@@ -10,7 +10,7 @@
         
         use HasFactory, SoftDeletes;
 
-        protected $fillable = ['name', 'phone', 'relationship'];
+        protected $fillable = ['name', 'phone_number', 'relationship'];
 
         public function patients() {
             return $this->belongsToMany(Patient::class, 'patient_emergency_contact');
