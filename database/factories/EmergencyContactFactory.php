@@ -3,6 +3,7 @@
     namespace Database\Factories;
 
     use Illuminate\Database\Eloquent\Factories\Factory;
+    use App\Models\User;
 
     /**
      * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Contacts>
@@ -21,7 +22,8 @@
             return [
                 'name' => $this->faker->name(),
                 'phone_number' => $this->faker->phoneNumber(),
-                'relationship' => $this->faker->randomElement($relations)
+                'relationship' => $this->faker->randomElement($relations),
+                'created_by' => 1
             ];
         }
     }

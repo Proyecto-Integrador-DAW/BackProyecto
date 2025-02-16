@@ -15,8 +15,8 @@
                 $table->string('name');
                 $table->string('phone_number')->unique();
                 $table->string('relationship');
+                $table->foreignId('created_by')->constrained('teleoperators');
                 $table->timestamps();
-                // $table->softDeletes();
             });
         }
 

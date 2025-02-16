@@ -57,6 +57,7 @@
          * Remove the specified resource from storage.
          */
         public function destroy(Patient $patient) {
+            $patient->emergencyContacts()->detach();
             $patient->delete();
             return $this->sendResponse(null, 'Paciente borrado con éxito', 204);
         }

@@ -26,7 +26,8 @@
         Route::apiResource('languages',  LanguageController::class);
         Route::apiResource('zones',  ZoneController::class);
         Route::apiResource('patients', PatientController::class);
-        Route::apiResource('contacts', EmergencyContactController::class);
+        Route::apiResource('contacts', EmergencyContactController::class)
+            ->parameter('contacts', 'emergencyContact');
 
         // Route::apiResource('zones',  ZonesController::class);
         // Route::apiResource('operators',  TeleoperatorsController::class);

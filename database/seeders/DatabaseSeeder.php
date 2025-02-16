@@ -23,7 +23,6 @@
                 TeleoperatorSeeder::class,
                 PatientSeeder::class,
                 EmergencyContactSeeder::class,
-                // ContactPatientSeeder::class,
                 CallTypeSeeder::class,
                 CallSeeder::class,
             ]);

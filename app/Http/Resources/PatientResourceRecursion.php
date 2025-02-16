@@ -5,7 +5,7 @@
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
 
-    class PatientResource extends JsonResource {
+    class PatientResourceRecursion extends JsonResource {
 
         /**
          * Transform the resource into an array.
@@ -28,7 +28,6 @@
                 'housing_situation' => $this->housing_situation,
                 'economic_situation' => $this->economic_situation,
                 'autonomy' => $this->autonomy,
-                'emergency_contacts' => EmergencyContactResourceRecursion::collection($this->emergencyContacts)
             ];
         }
     }

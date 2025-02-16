@@ -25,7 +25,7 @@
                     'required',
                     'string',
                     'max:255',
-                    Rule::unique('patients', 'dni')->ignore($this->patient)
+                    Rule::unique('patients', 'dni')->ignore($this->route('patient')->id)
                 ],
                 'name' => 'required|string|max:255',
                 'birth_date' => 'required|date',
@@ -34,20 +34,20 @@
                     'required',
                     'string',
                     'max:255',
-                    Rule::unique('patients', 'phone_number')->ignore($this->patient)
+                    Rule::unique('patients', 'phone_number')->ignore($this->route('patient')->id)
                 ],
                 'health_card' => [
                     'required',
                     'string',
                     'max:255',
-                    Rule::unique('patients', 'health_card')->ignore($this->patient)
+                    Rule::unique('patients', 'health_card')->ignore($this->route('patient')->id)
                 ],
                 'email' => [
                     'required',
                     'string',
                     'email',
                     'max:255',
-                    Rule::unique('patients', 'email')->ignore($this->patient)
+                    Rule::unique('patients', 'email')->ignore($this->route('patient')->id)
                 ],
                 'zone_id' => 'required|exists:zones,id',
                 'personal_situation' => 'required|string|max:255',

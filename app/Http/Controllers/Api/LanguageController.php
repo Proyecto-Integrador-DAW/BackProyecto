@@ -46,6 +46,7 @@
          * Remove the specified resource from storage.
          */
         public function destroy(Language $language) {
+            $language->teleoperators()->detach();
             $language->delete();
             return $this->sendResponse(null, 'Idioma eliminado con éxito', 204);
         }

@@ -24,6 +24,7 @@
          * Store a newly created resource in storage.
          */
         public function store(StoreTeleoperatorRequest $request) {
+
             $data = $request->validated();
             $data['password'] = Hash::make($data['password']);
 
@@ -47,9 +48,9 @@
          */
         public function update(UpdateTeleoperatorRequest $request, Teleoperator $teleoperator) {
 
-            $teleoperator->update($request->validated());
-
             $data = $request->validated();
+
+            $teleoperator->update($data);
 
             // ASOCIAMIENTO DE LOS IDIOMAS MODIFICADOS
             if (isset($data['languages'])) {
@@ -65,7 +66,7 @@
         public function destroy(Teleoperator $teleoperator) {
             $teleoperator->languages()->detach();
             $teleoperator->delete();
-            return $this->sendResponse([], 'Teleoperador eliminado con éxito', 204);
+            return $this->sendResponse(null, 'Teleoperador eliminado con éxito', 204);
         }
     }
 ?>

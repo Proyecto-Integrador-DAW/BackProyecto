@@ -3,6 +3,7 @@
     namespace App\Http\Requests\Api;
 
     use Illuminate\Foundation\Http\FormRequest;
+    use Illuminate\Validation\Rule;
 
     class UpdateLanguageRequest extends FormRequest {
 
@@ -20,7 +21,12 @@
          */
         public function rules(): array {
             return [
-                'name' => 'required|string|max:255|unique:languages,name,' . $this->route('language')->id,
+                'name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('languages', 'name')->ignore($this->route('language')->id)
+                ],
             ];
         }
 

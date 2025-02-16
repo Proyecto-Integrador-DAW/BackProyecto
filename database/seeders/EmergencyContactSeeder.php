@@ -17,7 +17,8 @@
             EmergencyContact::create([
                 'name' => 'Ángel',
                 'phone_number' => '666 66 66 66',
-                'relationship' => 'Nieto'
+                'relationship' => 'Nieto',
+                'created_by' => 1
             ]);
 
             EmergencyContact::factory()->count(10)->create();

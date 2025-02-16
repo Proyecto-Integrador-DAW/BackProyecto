@@ -14,7 +14,6 @@
                 $table->id();
                 $table->foreignId('patient_id')->constrained()->onDelete('cascade');
                 $table->foreignId('emergency_contact_id')->constrained()->onDelete('cascade');
-                $table->foreignId('created_by')->constrained('teleoperators');
                 $table->timestamps();
             });
         }

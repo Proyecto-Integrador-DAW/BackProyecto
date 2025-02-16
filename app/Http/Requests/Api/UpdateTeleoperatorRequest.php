@@ -25,7 +25,7 @@
                 'email' => [
                     'required',
                     'email',
-                    Rule::unique('teleoperators', 'email')->ignore($this->teleoperator),
+                    Rule::unique('teleoperators', 'email')->ignore($this->route('teleoperator')->id),
                 ],
                 'prefix' => 'required|string',
                 'phone_number' => 'required|string|max:20',
@@ -34,7 +34,7 @@
                 'code' => [
                     'required',
                     'string',
-                    Rule::unique('teleoperators', 'code')->ignore($this->teleoperator),
+                    Rule::unique('teleoperators', 'code')->ignore($this->route('teleoperator')->id),
                 ],
                 'password' => 'nullable|string|min:6',
                 'languages' => 'required|array',
