@@ -18,8 +18,24 @@
         /**
          * Display a listing of the resource.
          */
-        public function index() {
-            return PatientResource::collection(Patient::paginate(20));
+        public function index(Request $request) {
+            $zoneName = $request->query('zone');
+            $cityName = $request->query('city');
+        
+            $pacientes = Patient::query()
+                ->when($zoneName, function ($query) use ($zoneName) {
+                    $query->whereHas('zone', function ($q) use ($zoneName) {
+                        $q->where('zone', $zoneName);
+                    });
+                })
+                ->when($cityName, function ($query) use ($cityName) {
+                    $query->whereHas('zone', function ($q) use ($cityName) {
+                        $q->where('city', $cityName);
+                    });
+                })
+                ->paginate(10);
+        
+            return PatientResource::collection($pacientes);
         }
 
         /**
