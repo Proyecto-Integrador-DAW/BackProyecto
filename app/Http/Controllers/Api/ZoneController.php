@@ -3,6 +3,8 @@
     namespace App\Http\Controllers\Api;
 
     use App\Http\Resources\ZoneResource;
+    use App\Http\Resources\PatientResource;
+    use App\Http\Resources\TeleoperatorResource;
     use App\Http\Requests\Api\{
         StoreZoneRequest,
         UpdateZoneRequest
@@ -48,6 +50,25 @@
         public function destroy(Zone $zone) {
             $zone->delete();
             return $this->sendResponse(null, 'Zona eliminada con éxito', 204);
+        }
+
+
+        public function patients(Zone $zone) {
+
+            if ($zone->patients()->paginate(10)->isEmpty()) {
+                return $this->sendResponse(null, 'No hay pacientes asignados en esta zona', 204);
+            }
+
+            return PatientResource::collection($zone->patients()->paginate(10));
+        }
+    
+        public function teleoperators(Zone $zone) {
+
+            if ($zone->operators()->paginate(10)->isEmpty()) {
+                return $this->sendResponse(null, 'No hay teleoperadores asignados en esta zona', 204);
+            }
+
+            return TeleoperatorResource::collection($zone->operators()->paginate(10));
         }
     }
 ?>
