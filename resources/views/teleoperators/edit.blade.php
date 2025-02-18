@@ -94,6 +94,21 @@
             @enderror
         </div>
 
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Idiomas:</label>
+            @foreach ($languages as $language)
+                <div class="flex items-center">
+                    <input type="checkbox" name="languages[]" value="{{ $language->id }}"
+                        @if($teleoperator->languages->contains($language->id)) checked @endif
+                        class="mr-2 border-gray-300 rounded shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <span class="text-gray-700">{{ $language->name }}</span>
+                </div>
+            @endforeach
+            @error('languages')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
         <button type="submit"
         class="block mx-auto mt-6 p-4 bg-blue-800 text-white rounded border border-black text-center">
             Actualizar Teleoperador

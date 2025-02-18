@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTeleoperatorRequest;
 use App\Http\Requests\UpdateTeleoperatorRequest;
 use App\Models\Teleoperator;
 use App\Models\Zone;
+use App\Models\Language;
 
 
 class TeleoperatorController extends Controller
@@ -30,8 +31,10 @@ class TeleoperatorController extends Controller
     public function edit(Teleoperator $teleoperator) {
         $this->authorize('update', $teleoperator);
         $zones = Zone::all(); 
-        return view('teleoperators.edit', compact('teleoperator', 'zones'));
+        $languages = Language::all();
+        return view('teleoperators.edit', compact('teleoperator', 'zones', 'languages'));
     }
+    
 
     public function destroy(Teleoperator $teleoperator) {
         $teleoperator->delete();
@@ -55,7 +58,13 @@ public function update(UpdateTeleoperatorRequest $request, Teleoperator $teleope
     
     $teleoperator->update($validated);
 
-    return redirect()->route('teleoperators.index')->with('success', 'Zona actualitado correctamente!');
+    if (isset($validated['languages'])) {
+        $teleoperator->languages()->sync($validated['languages']);
+    } else {
+        $teleoperator->languages()->sync([]);
+    }
+
+    return redirect()->route('teleoperators.index')->with('success', 'Teleoperador actualizado correctamente!');
 }
 
 public function delete(Teleoperator $teleoperator)
