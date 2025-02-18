@@ -20,7 +20,8 @@
                 TeleoperatorSeeder::class,
                 PatientSeeder::class,
                 EmergencyContactSeeder::class,
-                AlertSeeder::class
+                AlertSeeder::class,
+                CallSeeder::class
             ]);
         }
     }

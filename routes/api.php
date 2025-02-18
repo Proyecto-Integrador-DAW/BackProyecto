@@ -11,6 +11,7 @@
         ZoneController,
         PatientController,
         EmergencyContactController,
+        CallController
     };
 
     Route::get('/user', function (Request $request) {
@@ -29,15 +30,7 @@
         Route::apiResource('patients', PatientController::class);
         Route::apiResource('contacts', EmergencyContactController::class)
             ->parameter('contacts', 'emergencyContact');
-
-        // Route::apiResource('zones',  ZonesController::class);
-        // Route::apiResource('operators',  TeleoperatorsController::class);
-        // Route::apiResource('contacts',  ContactsController::class);
-
-        // Route::get('zones/{id}/patients', [ZonesController::class, 'patients'])->name('zones.patients');
-        // Route::get('zones/{id}/operators', [ZonesController::class, 'operators'])->name('zones.operators');
-        // Route::get('patients/{id}/contacts', [ContactsController::class, 'contacts'])->name('patients.contacts');
-        // Route::post('patients/{id}/contacts', [ContactsController::class, 'store'])->name('patients.contacts.store');
+        Route::apiResource('calls', CallController::class);
 
         Route::get('/subtypesAlerts', [AlertSubtypeController::class, 'index']);
 

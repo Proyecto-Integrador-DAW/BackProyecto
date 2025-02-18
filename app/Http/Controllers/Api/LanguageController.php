@@ -31,7 +31,7 @@
          * Display the specified resource.
          */
         public function show(Language $language) {
-            return $this->sendResponse(new LanguageResource($language), 'Idioma mostrado con éxito', 201);
+            return $this->sendResponse(new LanguageResource($language), 'Idioma mostrado con éxito', 200);
         }
 
         /**

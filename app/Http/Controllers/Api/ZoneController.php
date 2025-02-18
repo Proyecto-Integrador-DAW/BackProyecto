@@ -33,7 +33,7 @@
          * Display the specified resource.
          */
         public function show(Zone $zone) {
-            return $this->sendResponse(new ZoneResource($zone), 'Zona mostrada con éxito', 201);
+            return $this->sendResponse(new ZoneResource($zone), 'Zona mostrada con éxito', 200);
         }
 
         /**

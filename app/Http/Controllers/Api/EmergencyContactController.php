@@ -41,7 +41,7 @@
          * Display the specified resource.
          */
         public function show(EmergencyContact $emergencyContact) {
-            return $this->sendResponse(new EmergencyContactResource($emergencyContact), 'Contacto de emergencia mostrado con éxito', 201);
+            return $this->sendResponse(new EmergencyContactResource($emergencyContact), 'Contacto de emergencia mostrado con éxito', 200);
         }
 
         /**
