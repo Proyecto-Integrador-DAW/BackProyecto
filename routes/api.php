@@ -3,8 +3,9 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Api\{
-        AlertController,
         AuthController,
+        AlertController,
+        AlertSubtypeController,
         TeleoperatorController,
         LanguageController,
         ZoneController,
@@ -37,6 +38,8 @@
         // Route::get('zones/{id}/operators', [ZonesController::class, 'operators'])->name('zones.operators');
         // Route::get('patients/{id}/contacts', [ContactsController::class, 'contacts'])->name('patients.contacts');
         // Route::post('patients/{id}/contacts', [ContactsController::class, 'store'])->name('patients.contacts.store');
+
+        Route::get('/subtypesAlerts', [AlertSubtypeController::class, 'index']);
 
         Route::get('/zones/{zone}/patients', [ZoneController::class, 'patients']);
         Route::get('/zones/{zone}/teleoperators', [ZoneController::class, 'teleoperators']);

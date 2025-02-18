@@ -33,7 +33,7 @@
             if (isset($data['patients'])) {
                 $contact->patients()->attach($data['patients']);
             }
-            
+
             return $this->sendResponse(new EmergencyContactResource($contact), 'Contacto de emergencia creado con éxito', 201);
         }
 
@@ -50,9 +50,9 @@
         public function update(UpdateEmergencyContactRequest $request, EmergencyContact $emergencyContact) {
 
             $data = $request->validated();
-            // dd($data);
+
             $emergencyContact->update($data);
-            
+
             if (isset($data['patients'])) {
                 $emergencyContact->patients()->sync($data['patients']);
             }

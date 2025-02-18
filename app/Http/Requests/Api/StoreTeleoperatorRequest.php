@@ -64,7 +64,7 @@
                 'password.string' => 'La contraseña debe ser un texto.',
                 'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
         
-                'languages.required' => 'Debe seleccionar al menos un idioma.',
+                'languages.required' => 'Debe tener al menos un idioma seleccionado.',
                 'languages.array' => 'El formato de los idiomas no es válido.',
                 'languages.*.exists' => 'Uno o más idiomas seleccionados no existen en la base de datos.',
             ];
