@@ -15,7 +15,7 @@
          * Display a listing of the resource.
          */
         public function index() {
-            return AlertResource::collection(Alert::paginate());
+            return AlertResource::collection(Alert::paginate(40));
         }
 
         /**

@@ -10,8 +10,10 @@
          * Run the migrations.
          */
         public function up(): void {
-            Schema::table('users', function (Blueprint $table) {
-                $table->string('role')->default('teleoperator');
+            Schema::create('alert_types', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->timestamps();
             });
         }
 
@@ -19,7 +21,7 @@
          * Reverse the migrations.
          */
         public function down(): void {
-            Schema::dropIfExists('users');
+            Schema::dropIfExists('alert_types');
         }
     };
 ?>

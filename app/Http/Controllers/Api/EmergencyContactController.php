@@ -30,6 +30,10 @@
             $data['created_by'] = Auth::user()->id;
 
             $contact = EmergencyContact::create($data);
+            if (isset($data['patients'])) {
+                $contact->patients()->attach($data['patients']);
+            }
+            
             return $this->sendResponse(new EmergencyContactResource($contact), 'Contacto de emergencia creado con éxito', 201);
         }
 

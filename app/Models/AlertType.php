@@ -10,10 +10,10 @@
 
         use HasFactory, SoftDeletes;
 
-        protected $fillable = ['description', 'category_id'];
+        protected $fillable = ['name'];
 
-        public function category() {
-            return $this->belongsTo(AlertCategory::class, 'category_id');
+        public function subtypes() {
+            return $this->hasMany(AlertSubtype::class);
         }
     }
 ?>

@@ -10,6 +10,6 @@
 
         use HasFactory, SoftDeletes;
 
-        protected $fillable = ['date_time', 'operator_id', 'patient_id', 'description', 'call_type', 'type_id', 'alert_id'];
+        protected $fillable = ['date_time', 'operator_id', 'patient_id', 'description', 'call_type', 'type_id', 'alerts_id'];
     }
 ?>

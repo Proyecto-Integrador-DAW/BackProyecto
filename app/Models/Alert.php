@@ -10,10 +10,14 @@
 
         use HasFactory, SoftDeletes;
 
-        protected $fillable = ['description', 'type_id', 'start_date', 'end_date', 'periodicity', 'week_day'];
+        protected $fillable = ['alert_subtype_id', 'title', 'description', 'frequency', 'days_of_week', 'zone_id'];
 
-        public function type() {
-            return $this->belongsTo(AlertType::class, 'type_id');
+        public function alertSubtype() {
+            return $this->belongsTo(AlertSubtype::class, 'alert_subtype_id');
+        }
+
+        public function zone() {
+            return $this->belongsTo(Zone::class);
         }
     }
 ?>

@@ -15,16 +15,12 @@
 
             $this->call([
                 UserSeeder::class,
-                AlertCategorySeeder::class,
-                AlertTypeSeeder::class,
-                AlertSeeder::class,
                 ZoneSeeder::class,
                 LanguageSeeder::class,
                 TeleoperatorSeeder::class,
                 PatientSeeder::class,
                 EmergencyContactSeeder::class,
-                CallTypeSeeder::class,
-                CallSeeder::class,
+                AlertSeeder::class
             ]);
         }
     }
