@@ -4,7 +4,7 @@
 
     use App\Http\Resources\ZoneResource;
     use App\Http\Resources\PatientResource;
-    use App\Http\Resources\TeleoperatorResource;
+    use App\Http\Resources\CallResource;
     use App\Http\Requests\Api\{
         StoreZoneRequest,
         UpdateZoneRequest
@@ -68,7 +68,7 @@
                 return $this->sendResponse(null, 'No hay teleoperadores asignados en esta zona', 204);
             }
 
-            return TeleoperatorResource::collection($zone->operators()->paginate(10));
+            return CallResource::collection($zone->operators()->paginate(10));
         }
     }
 ?>

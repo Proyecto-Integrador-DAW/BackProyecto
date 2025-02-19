@@ -5,6 +5,7 @@
     use App\Http\Controllers\Api\{
         AuthController,
         AlertController,
+        AlertTypeController,
         AlertSubtypeController,
         TeleoperatorController,
         LanguageController,
@@ -33,10 +34,11 @@
         Route::apiResource('calls', CallController::class);
 
         Route::get('/subtypesAlerts', [AlertSubtypeController::class, 'index']);
+        Route::get('/typesAlerts', [AlertTypeController::class, 'index']);
 
         Route::get('/zones/{zone}/patients', [ZoneController::class, 'patients']);
         Route::get('/zones/{zone}/teleoperators', [ZoneController::class, 'teleoperators']);
-
-        // Route::post('logout', [AuthController::class, 'logout']);
+        Route::get('/patients/{patient}/calls', [PatientController::class, 'patientCalls']);
+        Route::post('logout', [AuthController::class, 'logout']);
     });
 ?>
