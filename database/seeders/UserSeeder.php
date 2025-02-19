@@ -17,8 +17,15 @@
             User::create([
                 'name' => 'Admin',
                 'email' => 'admin@admin.com',
-                'password' => Hash::make('password'),
+                'password' => '12345678',
                 'role' => 'administrador'
+            ]);
+
+            User::create([
+                'name' => 'Noemí',
+                'email' => 'noemi@coordinadora.com',
+                'password' => '12345678',
+                'role' => 'coordinador'
             ]);
         }
     }
