@@ -1,33 +1,60 @@
 <?php
 
-namespace Database\Factories;
+    namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Call;
-use App\Models\Teleoperator;
-use App\Models\Patient;
-use App\Models\CallType;
-use App\Models\Alert;
-use Carbon\Carbon;
+    use Illuminate\Database\Eloquent\Factories\Factory;
+    use App\Models\Teleoperator;
+    use App\Models\Patient;
+    use App\Models\Alert;
 
-class CallFactory extends Factory
-{
-    
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Call>
      */
-    public function definition()
-    {
-        return [
-            'date_time' => Carbon::now()->subDays(rand(1, 30)),
-            'operator_id' => Teleoperator::inRandomOrder()->first()->id ?? 1,
-            'patient_id' => Patient::inRandomOrder()->first()->id ?? 1,
-            'description' => $this->faker->sentence(10),
-            'call_type' => CallType::inRandomOrder()->first()->id ?? 1,
-            'type' => $this->faker->randomElement(['emergency', 'routine', 'follow-up']),
-            'alert_id' => Alert::inRandomOrder()->first()->id ?? null,
-        ];
+    class CallFactory extends Factory {
+
+        /**
+         * Define the model's default state.
+         *
+         * @return array<string, mixed>
+         */
+        public function definition(): array {
+
+            $callType = $this->faker->randomElement(['Entrante', 'Saliente']);
+
+            $type = $callType === 'entrante' 
+                ? $this->faker->randomElement([
+                    'Emergencia social', 
+                    'Emergencia sanitaria', 
+                    'Crisis soledad', 
+                    'Alarma sin respuesta', 
+                    'Comunicacion no urgente',
+                    'Notificar absencia', 
+                    'Modificar datos personales', 
+                    'Llamada accidental', 
+                    'Peticion informacion',
+                    'Sugerencia queja reclamacion', 
+                    'Llamada social', 
+                    'Registrar cita medica',
+                    'Otros'
+                ])
+                : $this->faker->randomElement(['Planificada', 'No planificada']);
+
+            $alert = null;
+            if ($type === 'Planificada') {
+                $alert = Alert::inRandomOrder()->first()?->id;
+            } elseif ($type === 'No planificada') {
+                $alert = $this->faker->optional(0.5)->randomElement(Alert::pluck('id')->toArray());
+            }
+
+            return [
+                'teleoperator_id' => Teleoperator::inRandomOrder()->first()->id,
+                'patient_id' => Patient::inRandomOrder()->first()->id,
+                'call_type' => $callType,
+                'type' => $type,
+                'call_time' => $this->faker->dateTimeThisYear(),
+                'description' => $this->faker->optional(0.75)->text(),
+                'alert_id' => $alert
+            ];
+        }
     }
-}
+?>

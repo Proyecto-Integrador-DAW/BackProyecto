@@ -23,7 +23,7 @@
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:teleoperators,email',
                 'prefix' => 'required|string',
-                'phone_number' => 'required|string|max:20',
+                'phone_number' => 'required|string|max:20|unique:teleoperators,phone_number',
                 'zone_id' => 'required|exists:zones,id',
                 'hiring_date' => 'required|date',
                 'code' => 'required|string|unique:teleoperators,code',
@@ -49,7 +49,8 @@
                 'phone_number.required' => 'El número de teléfono es obligatorio.',
                 'phone_number.string' => 'El número de teléfono debe ser un texto.',
                 'phone_number.max' => 'El número de teléfono no puede tener más de 20 caracteres.',
-        
+                'phone_number.unique' => 'Este número de teléfono ya está registrado.',
+
                 'zone_id.required' => 'Debe seleccionar una zona.',
                 'zone_id.exists' => 'La zona seleccionada no existe.',
         
@@ -64,7 +65,7 @@
                 'password.string' => 'La contraseña debe ser un texto.',
                 'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
         
-                'languages.required' => 'Debe seleccionar al menos un idioma.',
+                'languages.required' => 'Debe tener al menos un idioma seleccionado.',
                 'languages.array' => 'El formato de los idiomas no es válido.',
                 'languages.*.exists' => 'Uno o más idiomas seleccionados no existen en la base de datos.',
             ];

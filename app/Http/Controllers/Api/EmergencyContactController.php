@@ -30,6 +30,10 @@
             $data['created_by'] = Auth::user()->id;
 
             $contact = EmergencyContact::create($data);
+            if (isset($data['patients'])) {
+                $contact->patients()->attach($data['patients']);
+            }
+
             return $this->sendResponse(new EmergencyContactResource($contact), 'Contacto de emergencia creado con éxito', 201);
         }
 
@@ -37,7 +41,7 @@
          * Display the specified resource.
          */
         public function show(EmergencyContact $emergencyContact) {
-            return $this->sendResponse(new EmergencyContactResource($emergencyContact), 'Contacto de emergencia mostrado con éxito', 201);
+            return $this->sendResponse(new EmergencyContactResource($emergencyContact), 'Contacto de emergencia mostrado con éxito', 200);
         }
 
         /**
@@ -46,9 +50,9 @@
         public function update(UpdateEmergencyContactRequest $request, EmergencyContact $emergencyContact) {
 
             $data = $request->validated();
-            // dd($data);
+
             $emergencyContact->update($data);
-            
+
             if (isset($data['patients'])) {
                 $emergencyContact->patients()->sync($data['patients']);
             }

@@ -11,5 +11,13 @@
         use HasFactory, SoftDeletes;
 
         protected $fillable = ['city', 'zone'];
+
+        public function patients() {
+            return $this->hasMany(Patient::class, 'zone_id');
+        }
+
+        public function operators() {
+            return $this->hasMany(Teleoperator::class, 'zone_id'); 
+        }
     }
 ?>

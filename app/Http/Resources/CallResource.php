@@ -5,7 +5,7 @@
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
 
-    class AlertResource extends JsonResource {
+    class CallResource extends JsonResource {
 
         /**
          * Transform the resource into an array.
@@ -15,10 +15,12 @@
         public function toArray(Request $request): array {
             return [
                 'id' => $this->id,
-                'alert' => new AlertSubtypeCompactResource($this->alertSubtype),
-                'frequency' => $this->frequency,
-                'days_of_week' => $this->days_of_week,
-                'zone' => new ZoneResource($this->zone)
+                'teleoperator' => new TeleoperatorResource($this->teleoperator),
+                'patient' => new PatientResource($this->patient),
+                'call_type' => $this->call_type,
+                'type' => $this->type,
+                'description' => $this->description,
+                'alert' => new AlertResource($this->alert)
             ];
         }
     }

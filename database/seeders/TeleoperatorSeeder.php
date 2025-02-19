@@ -23,12 +23,12 @@
                 'phone_number' => '612345678',
                 'zone_id' => 1,
                 'hiring_date' => Carbon::create('2020', '01', '15'),
-                'code' => 'T1001',
-                'password' => bcrypt('password123'), 
-                'firing_date' => null,  
+                'code' => null,
+                'password' => '12345678', 
+                'firing_date' => null
             ]);
 
-            Teleoperator::factory()->count(10)->create();
+            Teleoperator::factory()->count(19)->create();
         }
     }
 ?>

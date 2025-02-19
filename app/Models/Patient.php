@@ -19,5 +19,9 @@
         public function zone() {
             return $this->belongsTo(Zone::class);
         }
+
+        public function calls() {
+            return $this->hasMany(Call::class);
+        }
     }
 ?>

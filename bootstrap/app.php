@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -20,6 +21,13 @@ return Application::configure(basePath: dirname(__DIR__))
 
             if ($request->query('debug') === 'true') {
                 dd($e);
+            }
+
+            if ($e->getMessage() === 'Route [login] not defined.') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unauthorized, you are not logged or invalid token',
+                ], 401);
             }
 
             if ($request->is('api/*')) {

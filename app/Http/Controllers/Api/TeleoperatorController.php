@@ -8,9 +8,11 @@
         StoreTeleoperatorRequest
     };
     use Illuminate\Support\Facades\Hash;
+    use Illuminate\Support\Facades\Auth;
     use App\Models\Teleoperator;
-    use Illuminate\Http\Request;
-    
+    use App\Models\User;
+use Illuminate\Http\Request;
+
     class TeleoperatorController extends BaseController {
 
         /**
@@ -30,10 +32,19 @@
 
             $teleoperator = Teleoperator::create($data);
 
-            // ASOCIAMIENTO DE IDIOMAS
+
             $teleoperator->languages()->attach($data['languages']);
 
-            return $this->sendResponse(new TeleoperatorResource($teleoperator), 'Teleoperador creado con éxito', 201);
+
+            $authUser = User::where('email', $teleoperator->email)->firstOrFail();
+            $token = $authUser->createToken('MyAuthApp')->plainTextToken;
+
+            $result = [
+                'teleoperator' => new TeleoperatorResource($teleoperator),
+                'token' => $token
+            ];
+
+            return $this->sendResponse($result, 'Teleoperador creado con éxito', 201);
         }
 
         /**

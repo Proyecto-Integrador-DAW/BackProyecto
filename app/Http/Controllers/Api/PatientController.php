@@ -7,8 +7,8 @@
         StorePatientRequest,
         UpdatePatientRequest
     };
+    use App\Http\Resources\CallResource;
     use App\Models\Patient;
-    use App\Models\EmergencyContact;
     use Illuminate\Http\Request;
 
     use Illuminate\Support\Facades\DB;
@@ -76,6 +76,16 @@
             $patient->emergencyContacts()->detach();
             $patient->delete();
             return $this->sendResponse(null, 'Paciente borrado con éxito', 204);
+        }
+
+
+        public function patientCalls(Patient $patient) {
+
+            if ($patient->calls()->paginate(10)->isEmpty()) {
+                return $this->sendResponse(null, 'No hay pacientes asignados en esta zona', 204);
+            }
+
+            return CallResource::collection($patient->calls()->paginate(10));
         }
     }
 ?>

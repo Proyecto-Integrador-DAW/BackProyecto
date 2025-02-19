@@ -25,11 +25,11 @@
                 'email' => $this->faker->unique()->safeEmail,
                 'prefix' => $this->faker->randomElement($prefixes),
                 'phone_number' => $this->faker->phoneNumber,
-                'zone_id' => Zone::inRandomOrder()->first()->id ?? 1,
+                'zone_id' => Zone::inRandomOrder()->first()->id,
                 'hiring_date' => $this->faker->date(),
-                'code' => $this->faker->unique()->bothify('OP####'),
-                'password' => Hash::make('password'),
-                'firing_date' => $this->faker->optional()->date(),
+                'code' => $this->faker->unique()->optional(0.5)->numberBetween(30, 1000),
+                'password' => Hash::make('12345678'),
+                'firing_date' => $this->faker->optional()->date()
             ];
         }
     }
