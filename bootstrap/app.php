@@ -23,6 +23,13 @@ return Application::configure(basePath: dirname(__DIR__))
                 dd($e);
             }
 
+            if ($e->getMessage() === 'Route [login] not defined.') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Unauthorized, you are not logged or invalid token',
+                ], 401);
+            }
+
             if ($request->is('api/*')) {
                 $statusCode = method_exists($e, 'getStatusCode') ? $e->getStatusCode() : ($e->status ?? 500);
 
