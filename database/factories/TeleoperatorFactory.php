@@ -27,7 +27,7 @@
                 'phone_number' => $this->faker->phoneNumber,
                 'zone_id' => Zone::inRandomOrder()->first()->id,
                 'hiring_date' => $this->faker->date(),
-                'code' => $this->faker->unique()->numberBetween(30, 1000),
+                'code' => $this->faker->unique()->optional(0.5)->numberBetween(30, 1000),
                 'password' => Hash::make('12345678'),
                 'firing_date' => $this->faker->optional()->date()
             ];

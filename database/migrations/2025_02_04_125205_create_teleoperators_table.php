@@ -19,7 +19,7 @@
                 $table->string('phone_number');
                 $table->unsignedBigInteger('zone_id');
                 $table->date('hiring_date');
-                $table->string('code')->unique();
+                $table->string('code')->unique()->nullable();
                 $table->string('password');
                 $table->date('firing_date')->nullable();
                 $table->timestamps();
