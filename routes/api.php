@@ -12,9 +12,13 @@
         ZoneController,
         PatientController,
         EmergencyContactController,
-        CallController
+        CallController,
+        UserController
     };
 
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -23,8 +27,6 @@
 
     Route::post('login', [AuthController::class, 'login'])->middleware('api');
     Route::post('register', [TeleoperatorController::class, 'store'])->middleware('api');
-
-    Route::get('user', [AlertTypeController::class, 'index']);
 
     Route::middleware(['auth:sanctum','api'])->group( function () {
 
@@ -45,6 +47,7 @@
 
         Route::get('/patients/{patient}/calls', [PatientController::class, 'patientCalls']);
 
+        Route::get('/user', [UserController::class, 'show']);
         Route::post('/logout', [AuthController::class, 'logout']);
     });
 ?>
