@@ -7,6 +7,7 @@ use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\TeleoperatorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\EmergencyContactController;
 use App\Http\Middleware\RoleMiddleware;
 
 Route::get('/', function () {
@@ -38,5 +39,9 @@ Route::resource('/teleoperators', TeleoperatorController::class)->only(['index',
 Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,manager')->only(['create', 'store', 'destroy']);
 Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,manager')->only(['edit', 'update']);
 Route::resource('/languages', LanguageController::class)->only(['index', 'show']);
+
+Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,manager')->only(['create', 'store', 'destroy']);
+Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,manager')->only(['edit', 'update']);
+Route::resource('/contacts', EmergencyContactController::class)->only(['index', 'show']);
 
 require __DIR__.'/auth.php';

@@ -15,5 +15,9 @@
         public function patients() {
             return $this->belongsToMany(Patient::class, 'patient_emergency_contact');
         }
+
+        public function teleoperator() {
+            return $this->belongsTo(Teleoperator::class, 'created_by');
+        }
     }
 ?>

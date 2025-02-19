@@ -28,6 +28,16 @@
         </div>
 
         <div class="mb-4">
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña:</label>
+            <input type="text" name="password" id="password" value="{{ old('password') }}" required
+                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 
+                @error('password') border-red-500 @enderror">
+            @error('password')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="mb-4">
             <label for="prefix" class="block text-sm font-medium text-gray-700 mb-1">Prefijo:</label>
             <input type="text" name="prefix" id="prefix" value="{{ old('prefix') }}" required
                 class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 
