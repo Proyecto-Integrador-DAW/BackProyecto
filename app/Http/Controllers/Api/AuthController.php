@@ -50,40 +50,28 @@
          */
         public function login(Request $request) {
 
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                $authUser = Auth::user();
-                $result['token'] =  $authUser->createToken('MyAuthApp')->plainTextToken;
-                $result['name'] =  $authUser->name;
+            $validated = $request->validate([
+                'identifier' => 'required|string',
+                'password' => 'required|string|min:6',
+            ]);
 
+            $identifier = $request->identifier;
+            $credentials = ['password' => $request->password];
+
+            if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+                $credentials['email'] = $identifier;
+            } else {
+                $credentials['code'] = $identifier;
+            }
+
+            if (Auth::attempt($credentials)) {
+                $authUser = Auth::user();
+                $result['token'] = $authUser->createToken('MyAuthApp')->plainTextToken;
+                $result['name'] = $authUser->name;
                 return $this->sendResponse($result, 'User signed in');
             }
 
             return $this->sendError('Unauthorised.', ['error'=>'incorrect Email/Password']);
-        }
-
-        public function register(Request $request) {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
-                'confirm_password' => 'required|same:password',
-            ]);
-
-            if ($validator->fails()){
-                return $this->sendError('Error validation', $validator->errors());
-            }
-
-            try {
-                $input = $request->all();
-                $input['password'] = bcrypt($input['password']);
-                $user = User::create($input);
-                $result['token'] =  $user->createToken('MyAuthApp')->plainTextToken;
-                $result['name'] =  $user->name;
-
-                return $this->sendResponse($result, 'User created successfully.');
-            } catch (\Exception $e) {
-                return $this->sendError('Registration Error' , $e->getMessage());
-            }
         }
 
         public function logout(Request $request) {

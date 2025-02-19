@@ -23,7 +23,7 @@
                 'phone_number' => '612345678',
                 'zone_id' => 1,
                 'hiring_date' => Carbon::create('2020', '01', '15'),
-                'code' => '50',
+                'code' => null,
                 'password' => '12345678', 
                 'firing_date' => null
             ]);

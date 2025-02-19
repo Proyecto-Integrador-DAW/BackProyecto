@@ -25,7 +25,8 @@
                 'name' => 'Noemí',
                 'email' => 'noemi@coordinadora.com',
                 'password' => '12345678',
-                'role' => 'coordinador'
+                'role' => 'coordinador',
+                'code' => '0'
             ]);
         }
     }

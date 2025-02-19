@@ -19,7 +19,7 @@
     })->middleware('auth:sanctum');
 
     Route::post('login', [AuthController::class, 'login'])->middleware('api');
-    // Route::post('register', [AuthController::class, 'register'])->middleware('api');
+    Route::post('register', [TeleoperatorController::class, 'store'])->middleware('api');
 
     Route::middleware(['auth:sanctum','api'])->group( function () {
 

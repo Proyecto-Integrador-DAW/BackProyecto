@@ -13,13 +13,13 @@
 
             Schema::create('teleoperators', function (Blueprint $table) {
                 $table->id();
-                $table->string('name')->unique();
+                $table->string('name');
                 $table->string('email')->unique();
                 $table->string('prefix');
-                $table->string('phone_number');
+                $table->string('phone_number')->unique();
                 $table->unsignedBigInteger('zone_id');
                 $table->date('hiring_date');
-                $table->string('code')->unique()->nullable();
+                $table->string('code')->nullable();
                 $table->string('password');
                 $table->date('firing_date')->nullable();
                 $table->timestamps();
