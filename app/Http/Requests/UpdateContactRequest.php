@@ -16,41 +16,35 @@ class UpdateContactRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function rules(): array
-    {
-        $dateMin = Carbon::now()->subYears(18)->format('Y-m-d');
-
+    public function rules(): array {
         return [
-            'dni' => [
-                'required', 'string', 'max:255',
-                Rule::unique('contacts', 'dni')->ignore($this->contact)
-            ],
             'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
             'phone_number' => [
-                'required', 'string',
-                Rule::unique('contacts', 'phone_number')->ignore($this->contact)
-            ],
-            'email' => [
-                'required', 'email', 'max:255',
-                Rule::unique('contacts', 'email')->ignore($this->contact)
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('emergency_contacts', 'phone_number')->ignore($this->route('contact')->id)
             ],
             'relationship' => 'required|string|max:255',
+            'patients' => 'nullable|array',
+            'patients.*' => 'exists:patients,id'
         ];
     }
-    public function messages()
-    {
+    
+    public function messages(): array {
         return [
-            'dni.required' => 'El campo "DNI" es obligatorio.',
-            'dni.unique' => 'El "DNI" ya está en uso.',
-            'name.required' => 'El campo "Nombre" es obligatorio.',
-            'address.required' => 'El campo "Dirección" es obligatorio.',
-            'phone_number.required' => 'El campo "Número de teléfono" es obligatorio.',
-            'phone_number.unique' => 'El "Número de teléfono" ya está en uso.',
-            'email.required' => 'El campo "Email" es obligatorio.',
-            'email.email' => 'El campo "Email" debe ser una dirección válida.',
-            'email.unique' => 'El "Email" ya está en uso.',
-            'relationship.required' => 'El campo "Relación" es obligatorio.',
+            'name.required' => 'El nombre es obligatorio.',
+            'name.max' => 'El nombre no puede superar los 255 caracteres.',
+
+            'phone_number.required' => 'El número de teléfono es obligatorio.',
+            'phone_number.max' => 'El número de teléfono no puede superar los 255 caracteres.',
+            'phone_number.unique' => 'El número de teléfono ya está registrado.',
+
+            'relationship.required' => 'La relación es obligatoria.',
+            'relationship.max' => 'La relación no puede superar los 255 caracteres.',
+
+            'patients.array' => 'El paciente debe ser un array.',
+            'patients.*.exists' => 'Uno o varios pacientes seleccionados no existen.'
         ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreContactRequest;
@@ -17,48 +18,49 @@ class EmergencyContactController extends Controller
         return view('contacts.index', compact('emergencyContacts'));
     }
    
-    public function show(Language $language) {
-        return view('contacts.show', compact('language'));
+    public function show(EmergencyContact $contact) {
+        return view('contacts.show', compact('contact'));
     }
    
     public function create() {
-        $this->authorize('create', Language::class);
-        return view('contacts.create');
+        $this->authorize('create', EmergencyContact::class);
+        $teleoperators = Teleoperator::all();
+        return view('contacts.create', compact('teleoperators'));
     }
    
-    public function edit(Language $language) {
-        $this->authorize('update', $language);
-        return view('contacts.edit', compact('language'));
+    public function edit(EmergencyContact $contact) {
+        $this->authorize('update', $contact);
+        return view('contacts.edit', compact('contact'));
     }
 
-    public function destroy(Language $language) {
-        $language->delete();
+    public function destroy(EmergencyContact $contact) {
+        $contact->delete();
         return redirect()->route('contacts.index')->with('success', 'Idioma borrado correctamente!');
     }
     
-    public function store(StoreLanguageRequest $request)
+    public function store(StoreContactRequest $request)
 {
     $validated = $request->validated();
-
-    Language::create($validated);
+    $validated['created_by'] = Auth::id();
+    EmergencyContact::create($validated);
 
     return redirect()->route('contacts.index')->with('success', 'Idioma creado correctamente!');
 }
 
-public function update(UpdateLanguageRequest $request, Language $language)
+public function update(UpdateContactRequest $request, EmergencyContact $contact)
 {
-    $this->authorize('update', $language);
+    $this->authorize('update', $contact);
       
     $validated = $request->validated();
     
-    $language->update($validated);
+    $contact->update($validated);
 
     return redirect()->route('contacts.index')->with('success', 'Idioma actualizado correctamente!');
 }
 
-public function delete(Language $language)
+public function delete(EmergencyContact $contact)
 {
-    $language->delete();
+    $contact->delete();
     return redirect()->route('contacts.index')->with('success', 'Idioma borrado correctamente!');
 }
 }

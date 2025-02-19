@@ -34,6 +34,7 @@
             ];
         }
         
+
         public function messages(): array {
             return [
                 'name.required' => 'El nombre es obligatorio.',
