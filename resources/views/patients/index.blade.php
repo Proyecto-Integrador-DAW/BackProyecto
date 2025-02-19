@@ -3,7 +3,7 @@
 @section('title', __('Llistat de Pacients'))
 
 @section('content')
-<h1 class="text-3xl font-bold text-blue-800 mb-6">Llistat de Pacients</h1>
+<h1 class="text-3xl font-bold text-blue-800 mb-6">Listado de Pacientes</h1>
 <table class="w-full border-collapse border border-gray-300">
     <thead class="bg-gray-200">
         <tr>
@@ -30,10 +30,9 @@
                 <td class="border border-gray-300 p-2">{{ $patient->phone_number }}</td>
                 <td class="border border-gray-300 p-2">{{ $patient->health_card }}</td>
                 <td class="border border-gray-300 p-2">{{ $patient->email }}</td>
-                <td class="border border-gray-300 p-2">{{ $patient->zone->name ?? 'N/A' }}</td>
+                <td class="border border-gray-300 p-2">{{ $patient->zone->city ?? 'N/A' }}</td>
                 @auth
                 <td class="border border-gray-300 p-2 flex space-x-4">
-                    <a href="{{ route('patients.show', $patient->id) }}" class="text-green-600 hover:underline">Mostrar</a>
                     @can('update', $patient)
                     <a href="{{ route('patients.edit', $patient->id) }}" class="text-yellow-600 hover:underline">Editar</a>
                     @endcan

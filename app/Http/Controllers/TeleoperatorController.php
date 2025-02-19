@@ -25,7 +25,9 @@ class TeleoperatorController extends Controller
    
     public function create() {
         $this->authorize('create', Teleoperator::class);
-        return view('teleoperators.create');
+        $zones = Zone::all(); 
+        $languages = Language::all();
+        return view('teleoperators.create', compact('zones', 'languages'));
     }
    
     public function edit(Teleoperator $teleoperator) {
@@ -45,9 +47,14 @@ class TeleoperatorController extends Controller
 {
     $validated = $request->validated();
 
-    Teleoperator::create($validated);
+    // Crear el teleoperador
+    $teleoperator = Teleoperator::create($validated);
 
-    return redirect()->route('teleoperators.index')->with('success', 'Zona creado correctamente!');
+    if (isset($validated['languages'])) {
+        $teleoperator->languages()->sync($validated['languages']);
+    }
+
+    return redirect()->route('teleoperators.index')->with('success', 'Teleoperador creado correctamente!');
 }
 
 public function update(UpdateTeleoperatorRequest $request, Teleoperator $teleoperator)

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use App\Http\Requests\StorePatientsRequest;
-use App\Http\Requests\UpdatePatientsRequest;
+use App\Http\Requests\StorePatientRequest;
+use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Patient;
+use App\Models\Zone;
 
 class PatientController extends Controller
 {
@@ -13,6 +14,7 @@ class PatientController extends Controller
 
     public function index() {
         $patients = Patient::all();
+
         return view('patients.index', compact('patients'));
     }
    
@@ -22,13 +24,14 @@ class PatientController extends Controller
    
     public function create() {
         $this->authorize('create', Patient::class);
-        return view('patients.create');
+        $zones = Zone::all(); 
+        return view('patients.create', compact('zones'));
     }
    
     public function edit(Patient $patient) {
         $this->authorize('update', $patient);
-        $equips = Equip::all(); 
-        return view('patients.edit', compact('estadi','equips'));
+        $zones = Zone::all();
+        return view('patients.edit', compact('patient', 'zones'));
     }
 
     public function destroy(Patient $patient) {
@@ -45,7 +48,7 @@ class PatientController extends Controller
     return redirect()->route('patients.index')->with('success', 'Pacient creado correctamente!');
 }
 
-public function update(UpdatePatientsRequest $request, Patient $patient)
+public function update(UpdatePatientRequest $request, Patient $patient)
 {
     $this->authorize('update', $patient);
       
