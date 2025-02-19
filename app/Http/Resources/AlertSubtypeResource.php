@@ -15,7 +15,8 @@
         public function toArray(Request $request): array {
             return [
                 'id' => $this->id,
-                'alert_type' => new AlertTypeResource($this->alertType),
+                // 'alert_type' => new AlertTypeResource($this->alertType),
+                'alert_type' => $this->alert_type_id,
                 'name' => $this->name,
             ];
         }
