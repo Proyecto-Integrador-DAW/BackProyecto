@@ -21,7 +21,8 @@
                 PatientSeeder::class,
                 EmergencyContactSeeder::class,
                 AlertSeeder::class,
-                CallSeeder::class
+                CallSeeder::class,
+                TeleoperatorLanguagesSeeder::class
             ]);
         }
     }

@@ -20,6 +20,19 @@
 
         public function languages() {
             return $this->belongsToMany(Language::class, 'teleoperator_languages')->withTimestamps();
-        }        
+        }
+
+
+        protected static function booted() {
+            static::created(function ($teleoperator) {
+                User::create([
+                    'name' => $teleoperator->name,
+                    'email' => $teleoperator->email,
+                    'password' => bcrypt($teleoperator->password),
+                    'code' => $teleoperator->code,
+                    'role' => 'teleoperador'
+                ]);
+            });
+        }
     }
 ?>
