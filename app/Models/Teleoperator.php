@@ -28,7 +28,7 @@
                 User::create([
                     'name' => $teleoperator->name,
                     'email' => $teleoperator->email,
-                    'password' => bcrypt($teleoperator->password),
+                    'password' => $teleoperator->password,
                     'code' => $teleoperator->code,
                     'role' => 'teleoperador'
                 ]);

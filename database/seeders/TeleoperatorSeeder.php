@@ -24,7 +24,7 @@
                 'zone_id' => 1,
                 'hiring_date' => Carbon::create('2020', '01', '15'),
                 'code' => '50',
-                'password' => bcrypt('12345678'), 
+                'password' => '12345678', 
                 'firing_date' => null
             ]);
 
