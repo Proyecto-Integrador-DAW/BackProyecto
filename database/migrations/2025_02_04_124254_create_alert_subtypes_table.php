@@ -15,7 +15,8 @@
                 $table->unsignedBigInteger('alert_type_id');
                 $table->string('name');
                 $table->timestamps();
-    
+                $table->softDeletes();
+
                 $table->foreign('alert_type_id')->references('id')->on('alert_types')->onDelete('cascade');
             });
         }

@@ -15,6 +15,7 @@
                 $table->string('city');
                 $table->string('zone');
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
 

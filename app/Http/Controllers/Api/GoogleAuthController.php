@@ -16,8 +16,9 @@ namespace App\Http\Controllers\Api;
 
         public function handleGoogleCallback() {
             try {
-                $googleUser = Socialite::driver('google')->stateless()->user();
 
+                $googleUser = Socialite::driver('google')->stateless()->user();
+                
                 $user = User::where('email', $googleUser->getEmail())->first();
 
                 if (!$user) {
@@ -27,17 +28,12 @@ namespace App\Http\Controllers\Api;
                     ], 401);
                 }
 
-                // Generar un token de autenticación
                 $token = $user->createToken('auth_token')->plainTextToken;
 
-                return response()->json([
-                    'message' => 'Usuario autenticado con éxito',
-                    'token' => $token,
-                    'user' => $user
-                ], 200);
+                return redirect('http://localhost:5173/home?token=' . $token);
 
             } catch (\Exception $e) {
-                return response()->json(['error' => 'Error en la autenticación'], 500);
+                return redirect('http://localhost:5173/login?error=auth_failed');
             }
         }
     }

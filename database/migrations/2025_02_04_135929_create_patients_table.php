@@ -26,6 +26,7 @@
                 $table->string('economic_situation');
                 $table->string('autonomy');
                 $table->timestamps();
+                $table->softDeletes();
 
                 $table->foreign('zone_id')->references('id')->on('zones');
             });

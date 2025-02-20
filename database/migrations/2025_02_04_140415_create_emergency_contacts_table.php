@@ -17,6 +17,7 @@
                 $table->string('relationship');
                 $table->foreignId('created_by')->constrained('teleoperators');
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
 
