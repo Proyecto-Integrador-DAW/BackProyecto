@@ -15,8 +15,8 @@
         public function toArray(Request $request): array {
             return [
                 'id' => $this->id,
-                'teleoperator' => $this->teleoperator_id,
-                'patient' => $this->patient_id,
+                'teleoperator' => new TeleoperatorResource($this->teleoperator),
+                'patient' => new PatientResource($this->patient),
                 'call_type' => $this->call_type,
                 'type' => $this->type,
                 'call_time' => $this->call_time,
