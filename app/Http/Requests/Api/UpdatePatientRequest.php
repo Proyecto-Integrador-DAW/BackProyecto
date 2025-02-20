@@ -55,6 +55,8 @@
                 'housing_situation' => 'required|string|max:255',
                 'economic_situation' => 'required|string|max:255',
                 'autonomy' => 'required|string|max:255',
+                'emergency_contacts' => 'nullable|array',
+                'emergency_contacts.*' => 'exists:emergency_contacts,id'
             ];
         }
 
@@ -91,6 +93,9 @@
                 'economic_situation.required' => 'La situación económica es obligatoria.',
 
                 'autonomy.required' => 'La autonomía es obligatoria.',
+
+                'emergency_contacts.array' => 'El formato de los contactos de emergencia no es válido.',
+                'emergency_contacts.*.exists' => 'Uno o más contactos de emergencia seleccionados no existen.'
             ];
         }
     }
