@@ -33,7 +33,7 @@ class UpdateTeleoperatorRequest extends FormRequest
             'hiring_date' => 'required|date',
             'code' => [
                 'required',
-                'string',
+                'integer',
                 Rule::unique('teleoperators', 'code')->ignore($this->route('teleoperator')->id),
             ],
             'password' => 'nullable|string|min:6',
@@ -66,7 +66,7 @@ class UpdateTeleoperatorRequest extends FormRequest
             'hiring_date.date' => 'La fecha de contratación debe ser una fecha válida.',
 
             'code.required' => 'El código es obligatorio.',
-            'code.string' => 'El código debe ser un texto.',
+            'code.integer' => 'El código debe ser numérico.',
             'code.unique' => 'Este código ya está en uso.',
 
             'password.required' => 'La contraseña es obligatoria.',

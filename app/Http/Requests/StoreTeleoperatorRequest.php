@@ -24,7 +24,7 @@
                 'phone_number' => 'required|string|max:20',
                 'zone_id' => 'required|exists:zones,id',
                 'hiring_date' => 'required|date',
-                'code' => 'required|string|unique:teleoperators,code',
+                'code' => 'required|integer|unique:teleoperators,code',
                 'password' => 'required|string|min:6',
                 'languages' => 'required|array|min:1',
                 'languages.*' => 'exists:languages,id'
@@ -55,7 +55,7 @@
                 'hiring_date.date' => 'La fecha de contratación debe ser una fecha válida.',
         
                 'code.required' => 'El código es obligatorio.',
-                'code.string' => 'El código debe ser un texto.',
+                'code.integer' => 'El código debe ser numérico.',
                 'code.unique' => 'Este código ya está en uso.',
         
                 'password.required' => 'La contraseña es obligatoria.',

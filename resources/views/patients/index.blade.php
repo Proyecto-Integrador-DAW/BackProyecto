@@ -14,6 +14,7 @@
             <th class="border border-gray-300 p-2">Teléfono</th>
             <th class="border border-gray-300 p-2">Tarjeta Sanitaria</th>
             <th class="border border-gray-300 p-2">Email</th>
+            <th class="border border-gray-300 p-2">Contactos Asociados</th>
             <th class="border border-gray-300 p-2">Zona</th>
             <th class="border border-gray-300 p-2">Opcions</th>
         </tr>
@@ -30,6 +31,17 @@
                 <td class="border border-gray-300 p-2">{{ $patient->phone_number }}</td>
                 <td class="border border-gray-300 p-2">{{ $patient->health_card }}</td>
                 <td class="border border-gray-300 p-2">{{ $patient->email }}</td>
+                <td class="border border-gray-300 p-2">
+                    @if ($patient->emergencyContacts->isNotEmpty())
+                        <ul>
+                            @foreach ($patient->emergencyContacts as $contact)
+                                <li>{{ $contact->name }}</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <span class="text-gray-500">Sin pacientes</span>
+                    @endif
+                </td>
                 <td class="border border-gray-300 p-2">{{ $patient->zone->city ?? 'N/A' }}</td>
                 @auth
                 <td class="border border-gray-300 p-2 flex space-x-4">

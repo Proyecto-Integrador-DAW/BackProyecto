@@ -15,6 +15,7 @@ class EmergencyContactController extends Controller
 
     public function index() {
         $emergencyContacts = EmergencyContact::all();
+
         return view('contacts.index', compact('emergencyContacts'));
     }
    
