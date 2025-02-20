@@ -75,7 +75,7 @@
 
                 'languages.required' => 'Debe seleccionar al menos un idioma.',
                 'languages.array' => 'El formato de los idiomas no es válido.',
-                'languages.*.exists' => 'Uno o más idiomas seleccionados no existen en la base de datos.',
+                'languages.*.exists' => 'Uno o más idiomas seleccionados no existen.',
             ];
         }
     }

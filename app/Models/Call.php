@@ -10,7 +10,7 @@
 
         use HasFactory, SoftDeletes;
         
-        protected $fillable = ['teleoperator_id', 'patient_id', 'call_type', 'type', 'call_time', 'description', 'alert_id'];
+        protected $fillable = ['teleoperator_id', 'patient_id', 'call_type', 'type', 'call_time', 'title', 'description', 'alert_id'];
     
         public function teleoperator() {
             return $this->belongsTo(Teleoperator::class);

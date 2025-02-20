@@ -33,6 +33,7 @@
                     'Otros'
                 ]);
                 $table->timestamp('call_time');
+                $table->text('title');
                 $table->text('description')->nullable();
                 $table->foreignId('alert_id')->nullable()->constrained('alerts');
                 $table->timestamps();

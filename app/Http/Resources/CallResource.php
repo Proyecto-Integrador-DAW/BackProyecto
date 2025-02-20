@@ -20,6 +20,7 @@
                 'call_type' => $this->call_type,
                 'type' => $this->type,
                 'call_time' => $this->call_time,
+                'title' => $this->title,
                 'description' => $this->description,
                 'alert' => new CallTitleResource($this->alert)
             ];
