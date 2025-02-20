@@ -23,5 +23,9 @@
         public function calls() {
             return $this->hasMany(Call::class);
         }
+
+        public function alerts() {
+            return $this->hasMany(Alert::class, 'zone_id', 'zone_id');
+        }
     }
 ?>

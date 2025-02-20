@@ -16,9 +16,6 @@
         UserController
     };
 
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -46,6 +43,7 @@
         Route::get('/zones/{zone}/teleoperators', [ZoneController::class, 'teleoperators']);
 
         Route::get('/patients/{patient}/calls', [PatientController::class, 'patientCalls']);
+        Route::get('/patients/{patient}/alerts', [PatientController::class, 'alerts']);
 
         Route::get('/user', [UserController::class, 'show']);
         Route::post('/logout', [AuthController::class, 'logout']);

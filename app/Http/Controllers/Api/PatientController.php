@@ -3,15 +3,14 @@
     namespace App\Http\Controllers\Api;
 
     use App\Http\Resources\PatientResource;
+    use App\Http\Resources\AlertResource;
+    use App\Http\Resources\CallResource;
     use App\Http\Requests\Api\{
         StorePatientRequest,
         UpdatePatientRequest
     };
-    use App\Http\Resources\CallResource;
     use App\Models\Patient;
     use Illuminate\Http\Request;
-
-    use Illuminate\Support\Facades\DB;
 
     class PatientController extends BaseController {
 
@@ -86,6 +85,15 @@
             }
 
             return CallResource::collection($patient->calls()->paginate(10));
+        }
+
+        public function alerts(Patient $patient) {
+
+            if ($patient->alerts()->paginate(10)->isEmpty()) {
+                return $this->sendResponse(null, 'No hay alertas en la zona de este paciente', 204);
+            }
+
+            return AlertResource::collection($patient->alerts()->paginate(10));
         }
     }
 ?>
