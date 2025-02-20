@@ -19,10 +19,10 @@ class TeleoperatorController extends Controller
         return view('teleoperators.index', compact('teleoperators'));
     }
 
-    public function show() {
-        return view('teleoperators.show');
+    public function show(Teleoperator $teleoperator){
+        return view('teleoperators.show', compact('teleoperator'));
     }
-   
+    
     public function create() {
         $this->authorize('create', Teleoperator::class);
         $zones = Zone::all(); 

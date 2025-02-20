@@ -35,7 +35,7 @@
                 </td>
                 @auth
                 <td class="border border-gray-300 p-2 flex space-x-4">
-                    <a href="{{ route('teleoperators.show', $contact->id) }}" class="text-green-600 hover:underline">Mostrar</a>
+                    <a href="{{ route('contacts.show', $contact->id) }}" class="text-green-600 hover:underline">Mostrar</a>
                     @can('update', $contact)
                     <a href="{{ route('contacts.edit', $contact->id) }}" class="text-yellow-600 hover:underline">Editar</a>
                     @endcan

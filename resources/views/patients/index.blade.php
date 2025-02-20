@@ -33,6 +33,7 @@
                 <td class="border border-gray-300 p-2">{{ $patient->zone->city ?? 'N/A' }}</td>
                 @auth
                 <td class="border border-gray-300 p-2 flex space-x-4">
+                    <a href="{{ route('patients.show', $patient->id) }}" class="text-green-600 hover:underline">Mostrar</a>
                     @can('update', $patient)
                     <a href="{{ route('patients.edit', $patient->id) }}" class="text-yellow-600 hover:underline">Editar</a>
                     @endcan

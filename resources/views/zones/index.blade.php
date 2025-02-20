@@ -19,7 +19,6 @@
                 <td class="border border-gray-300 p-2">{{ $zone->zone }}</td>
                 @auth
                 <td class="border border-gray-300 p-2 flex space-x-4">
-                    <a href="{{ route('zones.show', $zone->id) }}" class="text-green-600 hover:underline">Mostrar</a>
                     <a href="{{ route('zones.edit', $zone->id) }}" class="text-yellow-600 hover:underline">Editar</a>
                     <form action="{{ route('zones.destroy', $zone->id) }}" method="POST" onsubmit="return confirm('Estàs segur de voler esborrar aquesta zona?');" class="inline">
                         @csrf

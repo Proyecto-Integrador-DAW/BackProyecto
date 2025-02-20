@@ -1,91 +1,106 @@
 <?php
 
-    namespace App\Http\Controllers\Api;
+use App\Models\Patient;
+use App\Models\Call;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-    use App\Http\Resources\PatientResource;
-    use App\Http\Requests\Api\{
-        StorePatientRequest,
-        UpdatePatientRequest
-    };
-    use App\Http\Resources\CallResource;
-    use App\Models\Patient;
-    use Illuminate\Http\Request;
+uses(RefreshDatabase::class);
 
-    use Illuminate\Support\Facades\DB;
+/**
+ * Test: Obtener lista de pacientes
+ */
+test('puede obtener la lista de pacientes', function () {
+    Patient::factory()->count(3)->create();
 
-    class PatientController extends BaseController {
+    $response = $this->getJson('/api/patients');
 
-        /**
-         * Display a listing of the resource.
-         */
-        public function index(Request $request) {
-            $zoneName = $request->query('zone');
-            $cityName = $request->query('city');
-        
-            $pacientes = Patient::query()
-                ->when($zoneName, function ($query) use ($zoneName) {
-                    $query->whereHas('zone', function ($q) use ($zoneName) {
-                        $q->where('zone', $zoneName);
-                    });
-                })
-                ->when($cityName, function ($query) use ($cityName) {
-                    $query->whereHas('zone', function ($q) use ($cityName) {
-                        $q->where('city', $cityName);
-                    });
-                })
-                ->paginate(10);
-        
-            return PatientResource::collection($pacientes);
-        }
+    $response->assertStatus(200)
+        ->assertJsonStructure([
+            'data' => [
+                '*' => ['id', 'name', 'zone_id', 'created_at', 'updated_at']
+            ]
+        ]);
+});
 
-        /**
-         * Store a newly created resource in storage.
-         */
-        public function store(StorePatientRequest $request) {
+/**
+ * Test: Crear un nuevo paciente
+ */
+test('puede crear un paciente', function () {
+    $patientData = [
+        'name' => 'John Doe',
+        'zone_id' => 1,
+        'phone' => '123456789'
+    ];
 
-            $data = $request->validated();
+    $response = $this->postJson('/api/patients', $patientData);
 
-            $patient = Patient::create($data);
+    $response->assertStatus(201)
+        ->assertJson([
+            'success' => true,
+            'data' => ['name' => 'John Doe']
+        ]);
 
-            if (isset($data['emergency_contacts'])) {
-                $patient->emergencyContacts()->attach($data['emergency_contacts']);
-            }
+    $this->assertDatabaseHas('patients', ['name' => 'John Doe']);
+});
 
-            return $this->sendResponse(new PatientResource($patient), 'Paciente creado con éxito', 201);
-        }
+/**
+ * Test: Obtener un paciente específico
+ */
+test('puede obtener un paciente por su ID', function () {
+    $patient = Patient::factory()->create();
 
-        /**
-         * Display the specified resource.
-         */
-        public function show(Patient $patient) {
-            return $this->sendResponse(new PatientResource($patient), 'Paciente mostrado con éxito', 200);
-        }
+    $response = $this->getJson("/api/patients/{$patient->id}");
 
-        /**
-         * Update the specified resource in storage.
-         */
-        public function update(UpdatePatientRequest $request, Patient $patient) {
-            $patient->update($request->validated());
-            return $this->sendResponse($patient, 'Paciente actualizado con éxito', 200);
-        }
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'data' => ['id' => $patient->id]
+        ]);
+});
 
-        /**
-         * Remove the specified resource from storage.
-         */
-        public function destroy(Patient $patient) {
-            $patient->emergencyContacts()->detach();
-            $patient->delete();
-            return $this->sendResponse(null, 'Paciente borrado con éxito', 204);
-        }
+/**
+ * Test: Actualizar un paciente
+ */
+test('puede actualizar un paciente', function () {
+    $patient = Patient::factory()->create();
+    $newData = ['name' => 'Jane Doe'];
 
+    $response = $this->putJson("/api/patients/{$patient->id}", $newData);
 
-        public function patientCalls(Patient $patient) {
+    $response->assertStatus(200)
+        ->assertJson([
+            'success' => true,
+            'data' => ['name' => 'Jane Doe']
+        ]);
 
-            if ($patient->calls()->paginate(10)->isEmpty()) {
-                return $this->sendResponse(null, 'No hay pacientes asignados en esta zona', 204);
-            }
+    $this->assertDatabaseHas('patients', ['id' => $patient->id, 'name' => 'Jane Doe']);
+});
 
-            return CallResource::collection($patient->calls()->paginate(10));
-        }
-    }
-?>
+/**
+ * Test: Eliminar un paciente
+ */
+test('puede eliminar un paciente', function () {
+    $patient = Patient::factory()->create();
+
+    $response = $this->deleteJson("/api/patients/{$patient->id}");
+
+    $response->assertStatus(204);
+    $this->assertDatabaseMissing('patients', ['id' => $patient->id]);
+});
+
+/**
+ * Test: Obtener llamadas de un paciente
+ */
+test('puede obtener las llamadas de un paciente', function () {
+    $patient = Patient::factory()->create();
+    Call::factory()->count(2)->create(['patient_id' => $patient->id]);
+
+    $response = $this->getJson("/api/patients/{$patient->id}/calls");
+
+    $response->assertStatus(200)
+        ->assertJsonStructure([
+            'data' => [
+                '*' => ['id', 'patient_id', 'call_time', 'created_at', 'updated_at']
+            ]
+        ]);
+});

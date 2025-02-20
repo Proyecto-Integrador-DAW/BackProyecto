@@ -18,8 +18,8 @@ class PatientController extends Controller
         return view('patients.index', compact('patients'));
     }
    
-    public function show() {
-        return view('patients.show');
+    public function show(Patient $patient) {
+        return view('patients.show', compact('patient'));
     }
    
     public function create() {
