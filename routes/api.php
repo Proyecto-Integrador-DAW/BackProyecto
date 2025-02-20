@@ -13,9 +13,9 @@
         PatientController,
         EmergencyContactController,
         CallController,
-        UserController
+        UserController,
+        GoogleAuthController
     };
-    use App\Http\Controllers\Auth\GoogleAuthController;
 
 
     Route::get('/user', function (Request $request) {
@@ -26,8 +26,8 @@
     Route::post('/login', [AuthController::class, 'login'])->middleware('api');
     Route::post('/register', [TeleoperatorController::class, 'store'])->middleware('api');
 
-    Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle']);
-    Route::get('/auth/callback/google', [GoogleAuthController::class, 'handleGoogleCallback']);
+    Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->middleware('web');
+    Route::get('/auth/callback/google', [GoogleAuthController::class, 'handleGoogleCallback'])->middleware('web');
 
     Route::middleware(['auth:sanctum','api'])->group( function () {
 
