@@ -36,6 +36,7 @@
                 $table->text('description')->nullable();
                 $table->foreignId('alert_id')->nullable()->constrained('alerts');
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
 

@@ -19,8 +19,8 @@
                 $table->json('days_of_week')->nullable();
                 $table->unsignedBigInteger('zone_id');
                 $table->timestamps();
+                $table->softDeletes();
 
-                
                 $table->foreign('zone_id')->references('id')->on('zones');
                 $table->foreign('alert_subtype_id')->references('id')->on('alert_subtypes')->onDelete('cascade');
             });

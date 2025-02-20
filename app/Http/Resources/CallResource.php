@@ -15,12 +15,13 @@
         public function toArray(Request $request): array {
             return [
                 'id' => $this->id,
-                'teleoperator' => new TeleoperatorResource($this->teleoperator),
-                'patient' => new PatientResource($this->patient),
+                'teleoperator' => $this->teleoperator_id,
+                'patient' => $this->patient_id,
                 'call_type' => $this->call_type,
                 'type' => $this->type,
+                'call_time' => $this->call_time,
                 'description' => $this->description,
-                'alert' => new AlertResource($this->alert)
+                'alert' => new CallTitleResource($this->alert)
             ];
         }
     }

@@ -15,6 +15,7 @@
                 $table->id();
                 $table->string('name')->unique();
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
 

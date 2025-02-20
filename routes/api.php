@@ -13,20 +13,21 @@
         PatientController,
         EmergencyContactController,
         CallController,
-        UserController
+        UserController,
+        GoogleAuthController
     };
 
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 
     Route::get('/user', function (Request $request) {
         return $request->user();
     })->middleware('auth:sanctum');
 
 
-    Route::post('login', [AuthController::class, 'login'])->middleware('api');
-    Route::post('register', [TeleoperatorController::class, 'store'])->middleware('api');
+    Route::post('/login', [AuthController::class, 'login'])->middleware('api');
+    Route::post('/register', [TeleoperatorController::class, 'store'])->middleware('api');
+
+    Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->middleware('web');
+    Route::get('/auth/callback/google', [GoogleAuthController::class, 'handleGoogleCallback'])->middleware('web');
 
     Route::middleware(['auth:sanctum','api'])->group( function () {
 
@@ -46,6 +47,7 @@
         Route::get('/zones/{zone}/teleoperators', [ZoneController::class, 'teleoperators']);
 
         Route::get('/patients/{patient}/calls', [PatientController::class, 'patientCalls']);
+        Route::get('/patients/{patient}/alerts', [PatientController::class, 'alerts']);
 
         Route::get('/user', [UserController::class, 'show']);
         Route::post('/logout', [AuthController::class, 'logout']);

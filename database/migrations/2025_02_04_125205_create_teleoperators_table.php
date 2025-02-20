@@ -23,6 +23,7 @@
                 $table->string('password');
                 $table->date('firing_date')->nullable();
                 $table->timestamps();
+                $table->softDeletes();
 
                 $table->foreign('zone_id')->references('id')->on('zones');
             });
