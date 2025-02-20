@@ -1,34 +1,53 @@
-@extends('layouts.app')
+@extends('layouts.content')
 
-@section('title', 'Añadir Zona')
-
+@section('title', 'Crear Zona')
 @section('content')
-    <h1 class="text-3xl font-bold text-blue-800 mb-6">Añadir Zona</h1>
-    <form action="{{ route('zones.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto" enctype="multipart/form-data">
-        @csrf
-        <div class="mb-4">
-            <label for="city" class="block text-sm font-medium text-gray-700 mb-1">Ciutat:</label>
-            <input type="text" name="city" id="city" required
-                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 
-                @error('city') border-red-500 @enderror">
-            @error('city')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    
+                    <form action="{{ route('zones.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        {{-- CIUDAD --}}
+                        <div class="mb-4">
+                            <label for="city" class="block text-gray-800 dark:text-white font-bold mb-2">Ciudad:</label>
+                            <input type="text"
+                                name="city"
+                                id="city"
+                                class="w-full dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm @error('city') border-red-500 @else border-gray-300 dark:border-gray-700 @enderror"
+                                value="{{ old('city') }}"
+                                required
+                            >
+                            <x-input-error :messages="$errors->get('city')" class="mt-2" />
+                        </div>
+
+                        {{-- ZONA --}}
+                        <div class="mb-4">
+                            <label for="zone" class="block text-gray-800 dark:text-white font-bold mb-2">Zona:</label>
+                            <input type="text"
+                                name="zone"
+                                id="zone" 
+                                class="w-full dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm @error('zone') border-red-500 @else border-gray-300 dark:border-gray-700 @enderror"
+                                value="{{ old('zone') }}"
+                                required
+                            >
+                            <x-input-error :messages="$errors->get('zone')" class="mt-2" />
+                        </div>
+
+                        {{-- BOTONES --}}
+                        <div class="flex flex-warp">
+                            <button type="button" onclick="window.location.href='/zones'" class="w-1/2 mt-2 mr-2 bg-gray-500 text-white font-medium py-3 px-4 rounded-lg shadow hover:bg-gray-600 focus:ring focus:ring-gray-300">
+                                Volver a zonas
+                            </button>
+                            <button type="submit" class="w-1/2 mt-2 ml-2 py-3 px-4 bg-blue-500 text-white font-medium rounded-lg shadow hover:bg-blue-600 focus:ring focus:ring-blue-300">
+                                Crear Zona
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    
-        <div class="mb-4">
-            <label for="zone" class="block text-sm font-medium text-gray-700 mb-1">Zona:</label>
-            <input type="text" name="zone" id="zone" required
-                class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 
-                @error('zone') border-red-500 @enderror">
-            @error('zone')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-    
-        <button type="submit"
-        class="block mx-auto mt-6 p-4 bg-blue-800 text-white rounded border border-black text-center">
-            Añadir Zona
-        </button>
-    </form>
+    </div>
 @endsection
