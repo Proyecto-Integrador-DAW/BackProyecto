@@ -15,6 +15,7 @@
         CallController,
         UserController
     };
+    use App\Http\Controllers\Auth\GoogleAuthController;
 
 
     Route::get('/user', function (Request $request) {
@@ -22,8 +23,11 @@
     })->middleware('auth:sanctum');
 
 
-    Route::post('login', [AuthController::class, 'login'])->middleware('api');
-    Route::post('register', [TeleoperatorController::class, 'store'])->middleware('api');
+    Route::post('/login', [AuthController::class, 'login'])->middleware('api');
+    Route::post('/register', [TeleoperatorController::class, 'store'])->middleware('api');
+
+    Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle']);
+    Route::get('/auth/callback/google', [GoogleAuthController::class, 'handleGoogleCallback']);
 
     Route::middleware(['auth:sanctum','api'])->group( function () {
 
