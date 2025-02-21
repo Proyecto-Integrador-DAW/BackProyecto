@@ -39,6 +39,9 @@
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Tipo</th>
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Fecha y Hora</th>
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Título</th>
+                                @can('view', \App\Models\Call::class)
+                                <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Eliminado</th>
+                                @endcan
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 rounded-tr-lg uppercase">Acciones</th>
                             </tr>
                         </thead>
@@ -70,6 +73,11 @@
                                     <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">
                                         {{ $call->title }}
                                     </td>
+
+                                    {{-- ELIMINADO --}}
+                                    @can('view', $call)
+                                    <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">{{ $call->deleted_at }}</td>
+                                    @endcan
 
                                     {{-- BOTONES --}}
                                     <td class="px-6 py-4">
