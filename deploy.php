@@ -40,6 +40,7 @@
     
     task('deploy:migration', function () {
         run('cd {{deploy_path}}/current && php artisan migrate:refresh --force');
+        run('cd {{deploy_path}}/current && php artisan db:seed');
     });
 
     task('deploy:swagger', function () {
