@@ -28,7 +28,7 @@
                 'firing_date' => null
             ]);
 
-            Teleoperator::factory()->count(19)->create();
+            Teleoperator::factory()->count(4)->create();
         }
     }
 ?>
