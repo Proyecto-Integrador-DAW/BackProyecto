@@ -34,8 +34,7 @@
     });
     
     task('deploy:migration', function () {
-        run('cd {{deploy_path}}/current && php artisan migrate --force');
-        run('cd {{deploy_path}}/current && php artisan db:seed --force');
+        run('cd {{deploy_path}}/current && php artisan migrate:refresh --seed --force');
     });
 
     task('deploy:swagger', function () {
