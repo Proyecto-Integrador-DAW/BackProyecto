@@ -5,6 +5,23 @@
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @OA\Schema(
+ *     schema="TeleoperatorResource",
+ *     description="Esquema del recurso Teleoperador",
+ *     
+ *     @OA\Property(property="id", type="integer", description="Identificador del teleoperador"),
+ *     @OA\Property(property="name", type="string", description="Nombre del teleoperador"),
+ *     @OA\Property(property="email", type="string", format="email", description="Correo electrónico del teleoperador"),
+ *     @OA\Property(property="prefix", type="string", description="Prefijo telefónico"),
+ *     @OA\Property(property="phone_number", type="string", description="Número de teléfono del teleoperador"),
+ *     @OA\Property(property="zone", ref="#/components/schemas/ZoneResource", description="Zona del teleoperador"),
+ *     @OA\Property(property="languages", type="array", @OA\Items(type="string"), description="Idiomas hablados por el teleoperador"),
+ *     @OA\Property(property="hiring_date", type="string", format="date", description="Fecha de contratación"),
+ *     @OA\Property(property="code", type="string", description="Código de identificación del teleoperador"),
+ *     @OA\Property(property="firing_date", type="string", format="date", nullable=true, description="Fecha de despido (puede ser nula si sigue activo)")
+ * )
+ */
     class TeleoperatorResource extends JsonResource {
 
         /**

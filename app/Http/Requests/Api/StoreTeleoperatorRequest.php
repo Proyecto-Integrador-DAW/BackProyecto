@@ -3,7 +3,81 @@
     namespace App\Http\Requests\Api;
 
     use Illuminate\Foundation\Http\FormRequest;
-
+/**
+ * @OA\Schema(
+ *     schema="StoreTeleoperatorRequest",
+ *     description="Validación para la creación de teleoperadores",
+ *     required={"name", "email", "prefix", "phone_number", "zone_id", "hiring_date", "code", "password", "languages"},
+ *     
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Nombre del teleoperador",
+ *         example="María González"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         format="email",
+ *         description="Correo electrónico del teleoperador (único)",
+ *         example="maria.gonzalez@example.com"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="prefix",
+ *         type="string",
+ *         description="Prefijo telefónico",
+ *         example="+34"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="phone_number",
+ *         type="string",
+ *         maxLength=20,
+ *         description="Número de teléfono del teleoperador (único)",
+ *         example="678901234"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="zone_id",
+ *         type="integer",
+ *         description="ID de la zona a la que pertenece el teleoperador",
+ *         example=2
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="hiring_date",
+ *         type="string",
+ *         format="date",
+ *         description="Fecha de contratación del teleoperador",
+ *         example="2024-01-15"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="code",
+ *         type="integer",
+ *         description="Código único del teleoperador",
+ *         example=12345
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="password",
+ *         type="string",
+ *         minLength=6,
+ *         description="Contraseña del teleoperador",
+ *         example="secreta123"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="languages",
+ *         type="array",
+ *         description="Lista de IDs de idiomas que habla el teleoperador",
+ *         @OA\Items(type="integer", example=1)
+ *     )
+ * )
+ */
     class StoreTeleoperatorRequest extends FormRequest {
 
         /**
@@ -26,7 +100,7 @@
                 'phone_number' => 'required|string|max:20|unique:teleoperators,phone_number',
                 'zone_id' => 'required|exists:zones,id',
                 'hiring_date' => 'required|date',
-                'code' => 'required|string|unique:teleoperators,code',
+                'code' => 'required|number|unique:teleoperators,code',
                 'password' => 'required|string|min:6',
                 'languages' => 'required|array',
                 'languages.*' => 'exists:languages,id'
@@ -58,7 +132,7 @@
                 'hiring_date.date' => 'La fecha de contratación debe ser una fecha válida.',
         
                 'code.required' => 'El código es obligatorio.',
-                'code.string' => 'El código debe ser un texto.',
+                'code.number' => 'El código debe ser un número.',
                 'code.unique' => 'Este código ya está en uso.',
         
                 'password.required' => 'La contraseña es obligatoria.',
@@ -67,7 +141,7 @@
         
                 'languages.required' => 'Debe tener al menos un idioma seleccionado.',
                 'languages.array' => 'El formato de los idiomas no es válido.',
-                'languages.*.exists' => 'Uno o más idiomas seleccionados no existen en la base de datos.',
+                'languages.*.exists' => 'Uno o más idiomas seleccionados no existen.',
             ];
         }
     }

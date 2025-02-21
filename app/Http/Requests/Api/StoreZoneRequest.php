@@ -3,7 +3,29 @@
     namespace App\Http\Requests\Api;
 
     use Illuminate\Foundation\Http\FormRequest;
-
+/**
+ * @OA\Schema(
+ *     schema="StoreZoneRequest",
+ *     description="Validación para la creación de zonas",
+ *     required={"city", "zone"},
+ *     
+ *     @OA\Property(
+ *         property="city",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Nombre de la ciudad",
+ *         example="Madrid"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="zone",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Nombre de la zona",
+ *         example="Centro"
+ *     )
+ * )
+ */
     class StoreZoneRequest extends FormRequest {
         /**
          * Determine if the user is authorized to make this request.

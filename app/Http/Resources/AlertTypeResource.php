@@ -4,7 +4,15 @@
 
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
-
+/**
+ * @OA\Schema(
+ *     schema="AlertTypeResource",
+ *     description="Esquema del recurso Tipo de Alerta",
+ *     
+ *     @OA\Property(property="id", type="integer", description="Identificador del tipo de alerta"),
+ *     @OA\Property(property="name", type="string", description="Nombre del tipo de alerta")
+ * )
+ */
     class AlertTypeResource extends JsonResource {
 
         /**

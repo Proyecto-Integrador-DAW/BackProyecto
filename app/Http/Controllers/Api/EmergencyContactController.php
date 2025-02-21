@@ -14,15 +14,43 @@
     class EmergencyContactController extends BaseController {
 
         /**
-         * Display a listing of the resource.
-         */
+     * @OA\Get(
+     *     path="/api/contacts",
+     *     summary="Muestra todos los contactos de emergencia paginados",
+     *     tags={"Emergency Contacts"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de contactos de emergencia",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/EmergencyContactResource")
+     *             )
+     *         )
+     *     )
+     * )
+     */
         public function index() {
             return EmergencyContactResource::collection(EmergencyContact::paginate(100));
         }
 
         /**
-         * Store a newly created resource in storage.
-         */
+     * @OA\Post(
+     *     path="/api/contacts",
+     *     summary="Crea un nuevo contacto de emergencia",
+     *     tags={"Emergency Contacts"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/StoreEmergencyContactRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Contacto de emergencia creado con éxito",
+     *         @OA\JsonContent(ref="#/components/schemas/EmergencyContactResource")
+     *     )
+     * )
+     */
         public function store(StoreEmergencyContactRequest $request) {
 
             $data = $request->validated();
@@ -38,15 +66,53 @@
         }
 
         /**
-         * Display the specified resource.
-         */
+     * @OA\Get(
+     *     path="/api/contacts/{id}",
+     *     summary="Muestra un contacto de emergencia",
+     *     tags={"Emergency Contacts"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del contacto de emergencia",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Contacto de emergencia mostrado con éxito",
+     *         @OA\JsonContent(ref="#/components/schemas/EmergencyContactResource")
+     *     )
+     * )
+     */
         public function show(EmergencyContact $emergencyContact) {
             return $this->sendResponse(new EmergencyContactResource($emergencyContact), 'Contacto de emergencia mostrado con éxito', 200);
         }
 
         /**
-         * Update the specified resource in storage.
-         */
+     * @OA\Put(
+     *     path="/api/contacts/{id}",
+     *     summary="Actualiza un contacto de emergencia",
+     *     tags={"Emergency Contacts"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del contacto de emergencia",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/UpdateEmergencyContactRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Contacto de emergencia actualizado con éxito",
+     *         @OA\JsonContent(ref="#/components/schemas/EmergencyContactResource")
+     *     )
+     * )
+     */
         public function update(UpdateEmergencyContactRequest $request, EmergencyContact $emergencyContact) {
 
             $data = $request->validated();
@@ -60,9 +126,25 @@
             return $this->sendResponse(new EmergencyContactResource($emergencyContact), 'Contacto de emergencia actualizado con éxito', 200);
         }
 
-        /**
-         * Remove the specified resource from storage.
-         */
+            /**
+     * @OA\Delete(
+     *     path="/api/contacts/{id}",
+     *     summary="Elimina un contacto de emergencia",
+     *     tags={"Emergency Contacts"},
+     *     security={{"bearerAuth":{}}}, 
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del contacto de emergencia",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Contacto de emergencia eliminado con éxito"
+     *     )
+     * )
+     */
         public function destroy(EmergencyContact $emergencyContact) {
             $emergencyContact->patients()->detach();
             $emergencyContact->delete();

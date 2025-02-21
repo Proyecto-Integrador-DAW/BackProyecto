@@ -4,7 +4,16 @@
 
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
-
+/**
+ * @OA\Schema(
+ *     schema="EmergencyContactResourceRecursion",
+ *     description="Esquema del recurso Contacto de Emergencia en Recursión",
+ *     
+ *     @OA\Property(property="id", type="integer", description="Identificador del contacto de emergencia"),
+ *     @OA\Property(property="name", type="string", description="Nombre del contacto de emergencia"),
+ *     @OA\Property(property="phone_number", type="string", description="Número de teléfono del contacto de emergencia")
+ * )
+ */
     class EmergencyContactResourceRecursion extends JsonResource {
 
         /**

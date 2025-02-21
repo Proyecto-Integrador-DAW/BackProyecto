@@ -16,15 +16,46 @@ use Illuminate\Http\Request;
     class TeleoperatorController extends BaseController {
 
         /**
-         * Display a listing of the resource.
-         */
+     * @OA\Get(
+     *     path="/api/teleoperators",
+     *     summary="Muestra todos los teleoperadores paginados",
+     *     tags={"Teleoperators"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de teleoperadores",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/TeleoperatorResource")
+     *             )
+     *         )
+     *     )
+     * )
+     */
         public function index() {
             return TeleoperatorResource::collection(Teleoperator::paginate(10));
         }
 
         /**
-         * Store a newly created resource in storage.
-         */
+     * @OA\Post(
+     *     path="/api/teleoperators",
+     *     summary="Crea un nuevo teleoperador",
+     *     tags={"Teleoperators"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/StoreTeleoperatorRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Teleoperador creado con éxito",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="teleoperator", ref="#/components/schemas/TeleoperatorResource"),
+     *             @OA\Property(property="token", type="string")
+     *         )
+     *     )
+     * )
+     */
         public function store(StoreTeleoperatorRequest $request) {
 
             $data = $request->validated();
@@ -48,15 +79,53 @@ use Illuminate\Http\Request;
         }
 
         /**
-         * Display the specified resource.
-         */
+     * @OA\Get(
+     *     path="/api/teleoperators/{id}",
+     *     summary="Muestra un teleoperador",
+     *     tags={"Teleoperators"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del teleoperador",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Teleoperador recuperado con éxito",
+     *         @OA\JsonContent(ref="#/components/schemas/TeleoperatorResource")
+     *     )
+     * )
+     */
         public function show(Teleoperator $teleoperator) {
             return $this->sendResponse(new TeleoperatorResource($teleoperator), 'Teleoperador mostrado con éxito', 200);
         }
 
         /**
-         * Update the specified resource in storage.
-         */
+     * @OA\Put(
+     *     path="/api/teleoperators/{id}",
+     *     summary="Actualiza un teleoperador",
+     *     tags={"Teleoperators"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del teleoperador",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/UpdateTeleoperatorRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Teleoperador actualizado con éxito",
+     *         @OA\JsonContent(ref="#/components/schemas/TeleoperatorResource")
+     *     )
+     * )
+     */
         public function update(UpdateTeleoperatorRequest $request, Teleoperator $teleoperator) {
 
             $data = $request->validated();
@@ -72,8 +141,24 @@ use Illuminate\Http\Request;
         }
 
         /**
-         * Remove the specified resource from storage.
-         */
+     * @OA\Delete(
+     *     path="/api/teleoperators/{id}",
+     *     summary="Elimina un teleoperador",
+     *     tags={"Teleoperators"},
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID del teleoperador",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Teleoperador eliminado con éxito"
+     *     )
+     * )
+     */
         public function destroy(Teleoperator $teleoperator) {
             $teleoperator->languages()->detach();
             $teleoperator->delete();

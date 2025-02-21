@@ -3,7 +3,45 @@
     namespace App\Http\Requests\Api;
 
     use Illuminate\Foundation\Http\FormRequest;
-
+/**
+ * @OA\Schema(
+ *     schema="StoreEmergencyContactRequest",
+ *     description="Validación para la creación de contactos de emergencia",
+ *     required={"name", "phone_number", "relationship"},
+ *     
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Nombre del contacto de emergencia",
+ *         example="Juan Pérez"
+ *     ),
+ *     @OA\Property(
+ *         property="phone_number",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Número de teléfono del contacto de emergencia (único)",
+ *         example="+34 600 123 456"
+ *     ),
+ *     @OA\Property(
+ *         property="relationship",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Relación del contacto con el paciente",
+ *         example="Hijo"
+ *     ),
+ *     @OA\Property(
+ *         property="patients",
+ *         type="array",
+ *         description="Lista de IDs de pacientes asociados a este contacto de emergencia",
+ *         @OA\Items(
+ *             type="integer",
+ *             example=5
+ *         ),
+ *         nullable=true
+ *     )
+ * )
+ */
     class StoreEmergencyContactRequest extends FormRequest {
 
         /**

@@ -4,6 +4,20 @@
 
     use Illuminate\Foundation\Http\FormRequest;
 
+    /**
+ * @OA\Schema(
+ *     schema="StoreLanguageRequest",
+ *     description="Validación para la creación de idiomas",
+ *     required={"name"},
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         maxLength=50,
+ *         description="Nombre del idioma (único)",
+ *         example="Español"
+ *     )
+ * )
+ */
     class StoreLanguageRequest extends FormRequest {
 
         /**

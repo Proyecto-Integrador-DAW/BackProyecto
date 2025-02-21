@@ -4,7 +4,18 @@
 
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
-
+/**
+ * @OA\Schema(
+ *     schema="AlertResource",
+ *     description="Esquema del recurso Alerta",
+ *     
+ *     @OA\Property(property="id", type="integer", description="Identificador de la alerta"),
+ *     @OA\Property(property="alert", ref="#/components/schemas/AlertSubtypeCompactResource", description="Subtipo de alerta asociado"),
+ *     @OA\Property(property="frequency", type="string", description="Frecuencia de la alerta"),
+ *     @OA\Property(property="days_of_week", type="array", @OA\Items(type="string"), description="Días de la semana en los que se activa la alerta"),
+ *     @OA\Property(property="zone", ref="#/components/schemas/ZoneResource", description="Zona geográfica asociada a la alerta")
+ * )
+ */
     class AlertResource extends JsonResource {
 
         /**

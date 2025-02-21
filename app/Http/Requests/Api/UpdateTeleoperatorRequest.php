@@ -4,7 +4,70 @@
 
     use Illuminate\Foundation\Http\FormRequest;
     use Illuminate\Validation\Rule;
-
+/**
+ * @OA\Schema(
+ *     schema="UpdateTeleoperatorRequest",
+ *     description="Validación para la actualización de un teleoperador",
+ *     required={"name", "email", "prefix", "phone_number", "zone_id", "hiring_date", "code", "languages"},
+ *     
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre del teleoperador",
+ *         example="Carlos Pérez"
+ *     ),
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         format="email",
+ *         description="Correo electrónico",
+ *         example="carlos.perez@example.com"
+ *     ),
+ *     @OA\Property(
+ *         property="prefix",
+ *         type="string",
+ *         description="Prefijo telefónico",
+ *         example="+34"
+ *     ),
+ *     @OA\Property(
+ *         property="phone_number",
+ *         type="string",
+ *         description="Número de teléfono",
+ *         example="600123456"
+ *     ),
+ *     @OA\Property(
+ *         property="zone_id",
+ *         type="integer",
+ *         description="ID de la zona asignada",
+ *         example=2
+ *     ),
+ *     @OA\Property(
+ *         property="hiring_date",
+ *         type="string",
+ *         format="date",
+ *         description="Fecha de contratación",
+ *         example="2023-07-15"
+ *     ),
+ *     @OA\Property(
+ *         property="code",
+ *         type="integer",
+ *         description="Código único del teleoperador",
+ *         example=1058
+ *     ),
+ *     @OA\Property(
+ *         property="password",
+ *         type="string",
+ *         nullable=true,
+ *         description="Contraseña del teleoperador",
+ *         example="securepassword123"
+ *     ),
+ *     @OA\Property(
+ *         property="languages",
+ *         type="array",
+ *         @OA\Items(type="integer", description="ID del idioma", example=1)
+ *     )
+ * )
+ */
     class UpdateTeleoperatorRequest extends FormRequest {
 
         /**
@@ -33,7 +96,7 @@
                 'hiring_date' => 'required|date',
                 'code' => [
                     'required',
-                    'string',
+                    'number',
                     Rule::unique('teleoperators', 'code')->ignore($this->route('teleoperator')->id),
                 ],
                 'password' => 'nullable|string|min:6',
@@ -66,7 +129,7 @@
                 'hiring_date.date' => 'La fecha de contratación debe ser una fecha válida.',
 
                 'code.required' => 'El código es obligatorio.',
-                'code.string' => 'El código debe ser un texto.',
+                'code.number' => 'El código debe ser un número.',
                 'code.unique' => 'Este código ya está en uso.',
 
                 'password.required' => 'La contraseña es obligatoria.',
@@ -75,7 +138,7 @@
 
                 'languages.required' => 'Debe seleccionar al menos un idioma.',
                 'languages.array' => 'El formato de los idiomas no es válido.',
-                'languages.*.exists' => 'Uno o más idiomas seleccionados no existen en la base de datos.',
+                'languages.*.exists' => 'Uno o más idiomas seleccionados no existen.',
             ];
         }
     }

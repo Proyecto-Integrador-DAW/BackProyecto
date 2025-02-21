@@ -4,7 +4,26 @@
 
     use Illuminate\Foundation\Http\FormRequest;
 
-    class UpdateZoneRequest extends FormRequest {
+/**
+ * @OA\Schema(
+ *     schema="UpdateZoneRequest",
+ *     description="Validación para la actualización de una zona",
+ *     required={"city", "zone"},
+ *     
+ *     @OA\Property(
+ *         property="city",
+ *         type="string",
+ *         description="Nombre de la ciudad",
+ *         example="Madrid"
+ *     ),
+ *     @OA\Property(
+ *         property="zone",
+ *         type="string",
+ *         description="Nombre de la zona dentro de la ciudad",
+ *         example="Centro"
+ *     )
+ * )
+ */    class UpdateZoneRequest extends FormRequest {
 
         /**
          * Determine if the user is authorized to make this request.
