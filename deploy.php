@@ -38,7 +38,7 @@
     });
 
     task('deploy:swagger', function () {
-        run('cd {{deploy_path}}/current && php artisan l5-swagger:generate');
+        run('cd {{deploy_path}}/release && sudo php artisan l5-swagger:generate');
     });
 
     task('deploy:restartfpm', function () {
@@ -46,7 +46,7 @@
     });
 
     // Hooks de despliegue
-    after('deploy:symlink', 'deploy:backend');
+    after('deploy:vendors', 'deploy:backend');
     after('deploy:backend', 'deploy:permits');
     after('deploy:permits', 'deploy:migration');
     after('deploy:migration', 'deploy:swagger');
