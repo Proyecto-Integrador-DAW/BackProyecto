@@ -96,7 +96,7 @@
                 'hiring_date' => 'required|date',
                 'code' => [
                     'required',
-                    'number',
+                    'integer',
                     Rule::unique('teleoperators', 'code')->ignore($this->route('teleoperator')->id),
                 ],
                 'password' => 'nullable|string|min:6',
