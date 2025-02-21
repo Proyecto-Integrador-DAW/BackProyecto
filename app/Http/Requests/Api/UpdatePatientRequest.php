@@ -73,6 +73,13 @@
  *         description="ID de la zona a la que pertenece el paciente",
  *         example=1
  *     ),
+  * 
+ *     @OA\Property(
+ *         property="associated_teleoperator_id",
+ *         type="integer",
+ *         description="ID del teleoperador asociado al paciente",
+ *         example=1
+ *     ),
  *     
  *     @OA\Property(
  *         property="personal_situation",
