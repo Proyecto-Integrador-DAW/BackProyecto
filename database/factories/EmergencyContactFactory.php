@@ -3,6 +3,7 @@
     namespace Database\Factories;
 
     use Illuminate\Database\Eloquent\Factories\Factory;
+    use App\Models\Teleoperator;
     use App\Models\User;
 
     /**
@@ -23,7 +24,7 @@
                 'name' => $this->faker->name(),
                 'phone_number' => $this->faker->phoneNumber(),
                 'relationship' => $this->faker->randomElement($relations),
-                'created_by' => 1
+                'created_by' => Teleoperator::inRandomOrder()->first()->id
             ];
         }
     }

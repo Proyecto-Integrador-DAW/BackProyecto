@@ -1,67 +1,106 @@
 <?php
 
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreContactRequest;
-use App\Http\Requests\UpdateContactRequest;
-use App\Models\EmergencyContact;
-use App\Models\Teleoperator;
+    namespace App\Http\Controllers;
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+    use Illuminate\Http\Request;
+    use App\Http\Requests\StoreContactRequest;
+    use App\Http\Requests\UpdateContactRequest;
+    use App\Models\EmergencyContact;
+    use App\Models\Teleoperator;
 
-class EmergencyContactController extends Controller
-{
-    use AuthorizesRequests;
+    class EmergencyContactController extends Controller {
 
-    public function index() {
-        $emergencyContacts = EmergencyContact::all();
+        use AuthorizesRequests;
 
-        return view('contacts.index', compact('emergencyContacts'));
-    }
-   
-    public function show(EmergencyContact $contact) {
-        return view('contacts.show', compact('contact'));
-    }
-   
-    public function create() {
-        $this->authorize('create', EmergencyContact::class);
-        $teleoperators = Teleoperator::all();
-        return view('contacts.create', compact('teleoperators'));
-    }
-   
-    public function edit(EmergencyContact $contact) {
-        $this->authorize('update', $contact);
-        return view('contacts.edit', compact('contact'));
-    }
+        public function index() {
 
-    public function destroy(EmergencyContact $contact) {
-        $contact->delete();
-        return redirect()->route('contacts.index')->with('success', 'Idioma borrado correctamente!');
-    }
+            if (auth()->user()->role === 'administrador') {
+                $emergencyContacts = EmergencyContact::withTrashed()->get();
+            } else {
+                $emergencyContacts = EmergencyContact::all();
+            }
+
+            return view('contacts.index', compact('emergencyContacts'));
+        }
     
-    public function store(StoreContactRequest $request)
-{
-    $validated = $request->validated();
-    $validated['created_by'] = Auth::id();
-    EmergencyContact::create($validated);
-
-    return redirect()->route('contacts.index')->with('success', 'Idioma creado correctamente!');
-}
-
-public function update(UpdateContactRequest $request, EmergencyContact $contact)
-{
-    $this->authorize('update', $contact);
-      
-    $validated = $request->validated();
+        public function show(EmergencyContact $contact) {
+            return view('contacts.show', compact('contact'));
+        }
     
-    $contact->update($validated);
+        public function create() {
+            $this->authorize('create', EmergencyContact::class);
+            return view('contacts.create');
+        }
+    
+        public function edit(EmergencyContact $contact) {
+            $this->authorize('edit', $contact);
+            return view('contacts.edit', compact('contact'));
+        }
 
-    return redirect()->route('contacts.index')->with('success', 'Idioma actualizado correctamente!');
-}
+        public function destroy(EmergencyContact $contact) {
 
-public function delete(EmergencyContact $contact)
-{
-    $contact->delete();
-    return redirect()->route('contacts.index')->with('success', 'Idioma borrado correctamente!');
-}
-}
+            $this->authorize('delete', $contact);
+
+            $contact->delete();
+            return redirect()->route('contacts.index')->with('success', '¡Contacto borrado correctamente!');
+        }
+        
+        public function store(StoreContactRequest $request) {
+
+            $this->authorize('edit', EmergencyContact::class);
+
+            $validated = $request->validated();
+
+            $validated['created_by'] = Auth::id();
+
+            $contact = EmergencyContact::create($validated);
+
+            return redirect()->route('contacts.index')
+                ->with('success', '¡Contacto creado correctamente!')
+                ->with('id', $contact->id);
+        }
+
+        public function update(UpdateContactRequest $request, EmergencyContact $contact) {
+
+            $this->authorize('edit', $contact);
+
+            $validated = $request->validated();
+
+            $contact->update($validated);
+
+            return redirect()->route('contacts.index')
+                ->with('success', '¡Contacto actualizado correctamente!')
+                ->with('id', $contact->id);
+        }
+
+        public function restore($id) {
+
+            $this->authorize('restore', EmergencyContact::class);
+
+            $contact = EmergencyContact::withTrashed()->findOrFail($id);
+
+            $this->authorize('restore', $contact);
+
+            $contact->restore();
+
+            return redirect()->route('contacts.index')
+                ->with('success', 'Contacto restaurado correctamente!')
+                ->with('id', $contact->id);
+        }
+
+        public function forceDelete($id) {
+
+            $this->authorize('forceDelete', EmergencyContact::class);
+
+            $contact = EmergencyContact::withTrashed()->findOrFail($id);
+
+            $this->authorize('forceDelete', $contact);
+
+            // $contact->calls()->forceDelete();
+            $contact->forceDelete();
+
+            return redirect()->route('contacts.index')->with('success', 'Contacto eliminado permanentemente.');
+        }
+    }
+?>

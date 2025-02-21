@@ -42,14 +42,14 @@
         Route::delete('/teleoperators/{id}/force-delete', [TeleoperatorController::class, 'forceDelete'])->name('teleoperators.forceDelete');
 
 
-        Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy']);
-        Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['edit', 'update']);
-        Route::resource('/languages', LanguageController::class)->only(['index', 'show']);
+        Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['index', 'show', 'create', 'store', 'destroy', 'edit', 'update']);
+        Route::patch('/languages/{id}/restore', [LanguageController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('languages.restore');
+        Route::delete('/languages/{id}/force-delete', [LanguageController::class, 'forceDelete'])->name('languages.forceDelete');
 
 
-        Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy']);
-        Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['edit', 'update']);
-        Route::resource('/contacts', EmergencyContactController::class)->only(['index', 'show']);
+        Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['index', 'show', 'create', 'store', 'destroy', 'edit', 'update']);
+        Route::patch('/contacts/{id}/restore', [EmergencyContactController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('contacts.restore');
+        Route::delete('/contacts/{id}/force-delete', [EmergencyContactController::class, 'forceDelete'])->name('contacts.forceDelete');
     });
 
     require __DIR__.'/auth.php';

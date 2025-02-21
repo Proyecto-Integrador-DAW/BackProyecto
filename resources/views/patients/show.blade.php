@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="text-left">
-                        <p class="font-bold text-xl">Idiomas:</p>
+                        <p class="font-bold text-xl">Contactos de emergencia:</p>
                         @if ($patient->emergencyContacts->isNotEmpty())
                             <ul class="list-disc list-inside">
                                 @foreach ($patient->emergencyContacts as $contact)
