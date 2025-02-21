@@ -25,7 +25,7 @@
 
     task('deploy:backend', function () {
         run('cd {{deploy_path}}/current && composer install --optimize-autoloader');
-        run('cd {{deploy_path}}/current && sudo npm install && npm run build');
+        run('cd {{deploy_path}}/current && npm install && npm run build');
         run('cd {{deploy_path}}/current && php artisan cache:clear && php artisan config:cache');
     });
     
@@ -36,7 +36,6 @@
     
     task('deploy:migration', function () {
         run('cd {{deploy_path}}/current && php artisan migrate:refresh --force');
-        run('cd {{deploy_path}}/current && php artisan db:seed');
     });
 
     task('deploy:swagger', function () {
