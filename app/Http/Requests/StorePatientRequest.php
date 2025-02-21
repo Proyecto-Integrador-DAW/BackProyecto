@@ -29,6 +29,7 @@ class StorePatientRequest extends FormRequest
             'health_card' => 'required|string|max:255|unique:patients,health_card',
             'email' => 'required|string|email|max:255|unique:patients,email',
             'zone_id' => 'required|exists:zones,id',
+            'associated_teleoperator_id' => 'nullable|exists:teleoperators,id',
             'personal_situation' => 'required|string|max:255',
             'health_situation' => 'required|string|max:255',
             'housing_situation' => 'required|string|max:255',
@@ -61,6 +62,8 @@ class StorePatientRequest extends FormRequest
 
             'zone_id.required' => 'La zona es obligatoria.',
             'zone_id.exists' => 'La zona seleccionada no existe.',
+
+            'associated_teleoperator_id.exists' => 'El teleoperador asociado no existe.',
 
             'personal_situation.required' => 'La situación personal es obligatoria.',
 

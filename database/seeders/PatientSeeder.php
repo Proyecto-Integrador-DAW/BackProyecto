@@ -24,6 +24,7 @@
                 'health_card' => 'HC123456',
                 'email' => 'joan@example.com',
                 'zone_id' => 1,
+                'associated_teleoperator_id' => 1,
                 'personal_situation' => 'Solter',
                 'health_situation' => 'Estable',
                 'housing_situation' => 'Propietat',

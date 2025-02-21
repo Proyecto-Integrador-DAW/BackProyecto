@@ -49,6 +49,7 @@
                 'health_card' => $this->health_card,
                 'email' => $this->email,
                 'zone' => new ZoneResource($this->zone),
+                'associated_teleoperator_id' => new TeleoperatorResource($this->teleoperator),
                 'personal_situation' => $this->personal_situation,
                 'health_situation' => $this->health_situation,
                 'housing_situation' => $this->housing_situation,

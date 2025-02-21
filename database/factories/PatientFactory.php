@@ -4,6 +4,7 @@
 
     use Illuminate\Database\Eloquent\Factories\Factory;
     use App\Models\Zone;
+    use App\Models\Teleoperator;
 
     /**
      * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Patients>
@@ -25,6 +26,7 @@
                 'health_card' => $this->faker->unique()->bothify('##########'),
                 'email' => $this->faker->unique()->safeEmail,
                 'zone_id' => Zone::inRandomOrder()->first()->id,
+                'associated_teleoperator_id' => $this->faker->boolean(75) ? Teleoperator::inRandomOrder()->first()->id : null,
                 'personal_situation' => $this->faker->sentence(2),
                 'health_situation' => $this->faker->sentence(2),
                 'housing_situation' => $this->faker->sentence(2),

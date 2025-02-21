@@ -25,10 +25,12 @@
                 $table->string('housing_situation');
                 $table->string('economic_situation');
                 $table->string('autonomy');
+                $table->unsignedBigInteger('associated_teleoperator_id')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
 
                 $table->foreign('zone_id')->references('id')->on('zones');
+                $table->foreign('associated_teleoperator_id')->references('id')->on('teleoperators');
             });
         }
 

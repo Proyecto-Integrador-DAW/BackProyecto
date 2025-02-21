@@ -145,7 +145,7 @@
     */
         public function update(UpdatePatientRequest $request, Patient $patient) {
             $patient->update($request->validated());
-            return $this->sendResponse($patient, 'Paciente actualizado con éxito', 200);
+            return $this->sendResponse(new PatientResource($patient), 'Paciente actualizado con éxito', 200);
         }
 
         /**
