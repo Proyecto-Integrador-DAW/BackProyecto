@@ -25,8 +25,12 @@
 
     task('deploy:backend', function () {
         run('cd {{deploy_path}}/current && composer install --optimize-autoloader');
-        run('cd {{deploy_path}}/current && sudo npm install && sudo npm run build');
         run('cd {{deploy_path}}/current && php artisan cache:clear && php artisan config:cache');
+    });
+
+    task('deploy:build_assets', function () {
+        run('cd {{release_path}} && npm install');
+        run('cd {{release_path}} && npm run build');
     });
     
     task('deploy:permits', function () {
@@ -48,6 +52,7 @@
 
     // Hooks de despliegue
     after('deploy:vendors', 'deploy:backend');
+    after('deploy:update_code', 'deploy:build_assets');
     after('deploy:backend', 'deploy:permits');
     after('deploy:permits', 'deploy:migration');
     after('deploy:migration', 'deploy:swagger');
