@@ -19,6 +19,7 @@
      *     @OA\Property(property="health_card", type="string", description="Número de tarjeta sanitaria del paciente"),
      *     @OA\Property(property="email", type="string", format="email", description="Correo electrónico del paciente"),
      *     @OA\Property(property="zone_id", type="integer", description="ID de la zona del paciente"),
+     *     @OA\Property(property="associated_teleoperator_id", type="integer", description="ID del teleoperador del paciente"),
      *     @OA\Property(property="personal_situation", type="string", description="Situación personal del paciente"),
      *     @OA\Property(property="health_situation", type="string", description="Situación de salud del paciente"),
      *     @OA\Property(property="housing_situation", type="string", description="Situación de vivienda del paciente"),

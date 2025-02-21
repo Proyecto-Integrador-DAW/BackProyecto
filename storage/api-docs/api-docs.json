@@ -1964,6 +1964,11 @@
                         "type": "integer",
                         "example": 1
                     },
+                    "associated_teleoperator_id": {
+                        "description": "ID del teleoperador asociado al paciente",
+                        "type": "integer",
+                        "example": 1
+                    },
                     "personal_situation": {
                         "description": "Situación personal del paciente",
                         "type": "string",
@@ -2339,6 +2344,11 @@
                         "type": "integer",
                         "example": 1
                     },
+                    "associated_teleoperator_id": {
+                        "description": "ID del teleoperador asociado al paciente",
+                        "type": "integer",
+                        "example": 1
+                    },
                     "personal_situation": {
                         "description": "Situación personal del paciente",
                         "type": "string",
@@ -2702,6 +2712,9 @@
                     },
                     "zone": {
                         "$ref": "#/components/schemas/ZoneResource"
+                    },
+                    "associated_teleoperator_id": {
+                        "$ref": "#/components/schemas/TeleoperatorResource"
                     },
                     "personal_situation": {
                         "description": "Situación personal del paciente",
@@ -3082,6 +3095,10 @@
                     },
                     "zone_id": {
                         "description": "ID de la zona del paciente",
+                        "type": "integer"
+                    },
+                    "associated_teleoperator_id": {
+                        "description": "ID del teleoperador del paciente",
                         "type": "integer"
                     },
                     "personal_situation": {
