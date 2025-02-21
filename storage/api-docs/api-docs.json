@@ -1,0 +1,3258 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Teleassistance API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/alerts": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Muestra todas las alertas paginadas",
+                "operationId": "4478ffd7354aa9ca6132fb9e74bdde0b",
+                "responses": {
+                    "200": {
+                        "description": "Lista de alertas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AlertResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Crea una nueva alerta",
+                "operationId": "42b5297a4f4f281e294bf8339a0a80d8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreAlertRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Alerta creada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/alerts/{id}": {
+            "get": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Muestra una alerta específica",
+                "operationId": "48e65a8f03a14c0b36563c5284e726a3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Alerta mostrada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Actualiza una alerta",
+                "operationId": "037adc62bb0d80e7c7a153cf2445e337",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAlertRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Alerta actualizada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlertResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Alerts"
+                ],
+                "summary": "Elimina una alerta",
+                "operationId": "6dea41ff5a0bbf10775b84b2275d50e0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la alerta",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Alerta eliminada con éxito"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/subtypesAlerts": {
+            "get": {
+                "tags": [
+                    "AlertSubtypes"
+                ],
+                "summary": "Muestra todas las subtipos de alerta paginadas",
+                "operationId": "833e98ca75ca1d6dab33b92dadcf2ef1",
+                "responses": {
+                    "200": {
+                        "description": "Lista de subtipos de alerta",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AlertSubtypeResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/typesAlerts": {
+            "get": {
+                "tags": [
+                    "AlertTypes"
+                ],
+                "summary": "Muestra todos los tipos de alertas paginados",
+                "operationId": "11ad2d251bb9b14f644936f570da8e80",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tipos de alertas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AlertTypeResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Autenticación del usuario",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "1@manager.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login correcte",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "jwt-token"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User signed in"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autoritzat",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorised."
+                                        },
+                                        "info": {
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "incorrect Email/Password"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/calls": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Muestra todas las llamadas paginadas",
+                "operationId": "9a23d14f999134958731dd0346155df0",
+                "responses": {
+                    "200": {
+                        "description": "Lista de llamadas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CallResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "first": {
+                                                    "type": "string",
+                                                    "example": "http://localhost/api/calls?page=1"
+                                                },
+                                                "last": {
+                                                    "type": "string",
+                                                    "example": "http://localhost/api/calls?page=3"
+                                                },
+                                                "prev": {
+                                                    "type": "string",
+                                                    "example": "null"
+                                                },
+                                                "next": {
+                                                    "type": "string",
+                                                    "example": "http://localhost/api/calls?page=2"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "properties": {
+                                                "current_page": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "from": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "last_page": {
+                                                    "type": "integer",
+                                                    "example": 3
+                                                },
+                                                "path": {
+                                                    "type": "string",
+                                                    "example": "http://localhost/api/calls"
+                                                },
+                                                "per_page": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "to": {
+                                                    "type": "integer",
+                                                    "example": 15
+                                                },
+                                                "total": {
+                                                    "type": "integer",
+                                                    "example": 45
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Crea una nueva llamada",
+                "operationId": "db4e93d17f5ef9ad4a6f3a161cf30a45",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreCallRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Llamada creada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/calls/{id}": {
+            "get": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Muestra una llamada",
+                "operationId": "e72c3e9ae2eed11b9dce29f58032517b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Llamada recuperada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Actualiza una llamada",
+                "operationId": "0104abb19faaa5bca335c22b0762e2d6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCallRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Llamada actualizada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Calls"
+                ],
+                "summary": "Elimina una llamada",
+                "operationId": "7ea28db82b97c7b3fe159f3c394be63d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la llamada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Llamada eliminada con éxito"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/contacts": {
+            "get": {
+                "tags": [
+                    "Emergency Contacts"
+                ],
+                "summary": "Muestra todos los contactos de emergencia paginados",
+                "operationId": "db5ac367c6831bbb399da57d685326bf",
+                "responses": {
+                    "200": {
+                        "description": "Lista de contactos de emergencia",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/EmergencyContactResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Emergency Contacts"
+                ],
+                "summary": "Crea un nuevo contacto de emergencia",
+                "operationId": "728901b1e1b1b67379411c7d06d9b733",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreEmergencyContactRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Contacto de emergencia creado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EmergencyContactResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/contacts/{id}": {
+            "get": {
+                "tags": [
+                    "Emergency Contacts"
+                ],
+                "summary": "Muestra un contacto de emergencia",
+                "operationId": "7814f053cd46b197a1c4b726348e398a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto de emergencia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contacto de emergencia mostrado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EmergencyContactResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Emergency Contacts"
+                ],
+                "summary": "Actualiza un contacto de emergencia",
+                "operationId": "ac74e2538fb9f66ab4f055ebe11c2fed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto de emergencia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateEmergencyContactRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contacto de emergencia actualizado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EmergencyContactResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Emergency Contacts"
+                ],
+                "summary": "Elimina un contacto de emergencia",
+                "operationId": "11d797f2e6ad6154338028962d27b7c4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del contacto de emergencia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Contacto de emergencia eliminado con éxito"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/languages": {
+            "get": {
+                "tags": [
+                    "Languages"
+                ],
+                "summary": "Muestra todos los idiomas paginados",
+                "operationId": "1cb1ddff581b67412e8c4d53e8a5286d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de idiomas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/LanguageResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Languages"
+                ],
+                "summary": "Crea un nuevo idioma",
+                "operationId": "371904b4e1f1dd4d8e4b629b88ff672f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreLanguageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Idioma creado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LanguageResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/languages/{id}": {
+            "get": {
+                "tags": [
+                    "Languages"
+                ],
+                "summary": "Muestra un idioma",
+                "operationId": "0f580519be224b9e58ceae07113528c8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del idioma",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Idioma recuperado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LanguageResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Languages"
+                ],
+                "summary": "Actualiza un idioma",
+                "operationId": "44053c19cbd3361ca4f5072687d58a27",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del idioma",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateLanguageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Idioma actualizado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LanguageResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Languages"
+                ],
+                "summary": "Elimina un idioma",
+                "operationId": "666a23dbc64f59f0a85c0eecf4179160",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del idioma",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Idioma eliminado con éxito"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Muestra todos los pacientes paginados con filtros de zona y ciudad",
+                "operationId": "0df0d65f049161931654c3e188ca8f93",
+                "parameters": [
+                    {
+                        "name": "zone",
+                        "in": "query",
+                        "description": "Filtrar por zona",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "Filtrar por ciudad",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de pacientes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PatientResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Crea un nuevo paciente",
+                "operationId": "2149729f1bf1af8877352f04be3a683f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePatientRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Paciente creado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/{id}": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Muestra un paciente",
+                "operationId": "900a000f9712c06fdf96fa64333bbaff",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Paciente recuperado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Actualiza un paciente",
+                "operationId": "49d64723ad7c62df6eddc6fa8a778755",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePatientRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Paciente actualizado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PatientResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Elimina un paciente",
+                "operationId": "0187379ab8f57fd78eeb510643be993b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Paciente eliminado con éxito"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/{id}/calls": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtiene las llamadas de un paciente",
+                "operationId": "2910606ae517db6617360588dd7be813",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de llamadas del paciente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CallResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No hay pacientes asignados en esta zona"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/patients/{id}/alerts": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Obtiene las alertas de un paciente",
+                "operationId": "54cbfc687ea393aa776c10b7db09a844",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del paciente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de alertas del paciente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AlertResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No hay alertas en la zona de este paciente"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/teleoperators": {
+            "get": {
+                "tags": [
+                    "Teleoperators"
+                ],
+                "summary": "Muestra todos los teleoperadores paginados",
+                "operationId": "a819fa4993ecdc315b25c13bd80c4bd2",
+                "responses": {
+                    "200": {
+                        "description": "Lista de teleoperadores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TeleoperatorResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Teleoperators"
+                ],
+                "summary": "Crea un nuevo teleoperador",
+                "operationId": "cb23446058e5c14e457364819aa32e59",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTeleoperatorRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Teleoperador creado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "teleoperator": {
+                                            "$ref": "#/components/schemas/TeleoperatorResource"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/teleoperators/{id}": {
+            "get": {
+                "tags": [
+                    "Teleoperators"
+                ],
+                "summary": "Muestra un teleoperador",
+                "operationId": "354c0202dd2bf451255fb5d0d7524d0a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del teleoperador",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Teleoperador recuperado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TeleoperatorResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Teleoperators"
+                ],
+                "summary": "Actualiza un teleoperador",
+                "operationId": "31b2619ca623a4727cd3c421ef0242b8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del teleoperador",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTeleoperatorRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Teleoperador actualizado con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TeleoperatorResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Teleoperators"
+                ],
+                "summary": "Elimina un teleoperador",
+                "operationId": "a40f12020e5d471b4d3d0d6ce07e68ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del teleoperador",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Teleoperador eliminado con éxito"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/zones": {
+            "get": {
+                "tags": [
+                    "Zones"
+                ],
+                "summary": "Muestra todas las zonas paginadas",
+                "operationId": "0f732fe44c20996cd9dd342f722cb156",
+                "responses": {
+                    "200": {
+                        "description": "Lista de zonas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ZoneResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Zones"
+                ],
+                "summary": "Crea una nueva zona",
+                "operationId": "253822acdf31d7499579454f17b7fc8b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreZoneRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Zona creada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ZoneResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/zones/{id}": {
+            "get": {
+                "tags": [
+                    "Zones"
+                ],
+                "summary": "Muestra una zona",
+                "operationId": "9fbd7dbdda1909cd7ebc9bb4167293d9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la zona",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Zona mostrada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ZoneResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Zones"
+                ],
+                "summary": "Actualiza una zona",
+                "operationId": "28fa1be86dd47c22a90f9db32cdf9481",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la zona",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateZoneRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Zona actualizada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ZoneResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Zones"
+                ],
+                "summary": "Elimina una zona",
+                "operationId": "357ad6da21048b1eed885132d85c7c01",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la zona",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Zona eliminada con éxito"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/zones/{id}/patients": {
+            "get": {
+                "tags": [
+                    "Zones"
+                ],
+                "summary": "Obtiene los pacientes de una zona",
+                "operationId": "63c99002440a126a019dd9a79b74c232",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la zona",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de pacientes en la zona",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PatientResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No hay pacientes asignados en esta zona"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/zones/{id}/teleoperators": {
+            "get": {
+                "tags": [
+                    "Zones"
+                ],
+                "summary": "Obtiene los teleoperadores de una zona",
+                "operationId": "5a8902f614194d61e7479dade83b77cf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la zona",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de teleoperadores en la zona",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CallResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No hay teleoperadores asignados en esta zona"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreAlertRequest": {
+                "description": "Validación para la creación de alertas",
+                "required": [
+                    "alert_subtype_id",
+                    "title",
+                    "description",
+                    "frequency",
+                    "zone_id"
+                ],
+                "properties": {
+                    "alert_subtype_id": {
+                        "description": "ID del subtipo de alerta",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "description": "Título de la alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Alerta de emergencia"
+                    },
+                    "description": {
+                        "description": "Descripción detallada de la alerta",
+                        "type": "string",
+                        "example": "Se ha detectado una anomalía en la zona asignada"
+                    },
+                    "frequency": {
+                        "description": "Frecuencia de la alerta",
+                        "type": "string",
+                        "enum": [
+                            "Puntual",
+                            "Diaria",
+                            "Varios días",
+                            "Semanal",
+                            "Mensual"
+                        ],
+                        "example": "Diaria"
+                    },
+                    "days_of_week": {
+                        "description": "Días de la semana en formato JSON (opcional, solo si aplica)",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "nullable": true
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona donde se generó la alerta",
+                        "type": "integer",
+                        "example": 3
+                    }
+                },
+                "type": "object"
+            },
+            "StoreCallRequest": {
+                "description": "Validación para la creación de llamadas",
+                "required": [
+                    "teleoperator_id",
+                    "patient_id",
+                    "call_type",
+                    "type",
+                    "call_time"
+                ],
+                "properties": {
+                    "teleoperator_id": {
+                        "description": "ID del teleoperador que realizó la llamada",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "patient_id": {
+                        "description": "ID del paciente asociado a la llamada",
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "call_type": {
+                        "description": "Tipo de llamada",
+                        "type": "string",
+                        "enum": [
+                            "Entrante",
+                            "Saliente"
+                        ],
+                        "example": "Entrante"
+                    },
+                    "type": {
+                        "description": "Tipo de llamada específica",
+                        "type": "string",
+                        "enum": [
+                            "Emergencia social",
+                            "Emergencia sanitaria",
+                            "Crisis soledad",
+                            "Alarma sin respuesta",
+                            "Comunicacion no urgente",
+                            "Notificar absencia",
+                            "Modificar datos personales",
+                            "Llamada accidental",
+                            "Peticion informacion",
+                            "Sugerencia queja reclamacion",
+                            "Llamada social",
+                            "Registrar cita medica",
+                            "Planificada",
+                            "No planificada",
+                            "Otros"
+                        ],
+                        "example": "Emergencia sanitaria"
+                    },
+                    "call_time": {
+                        "description": "Fecha y hora en que se realizó la llamada",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-06-01T14:30:00Z"
+                    },
+                    "description": {
+                        "description": "Descripción opcional de la llamada",
+                        "type": "string",
+                        "example": "El paciente reportó una emergencia médica y se derivó al servicio de ambulancias.",
+                        "nullable": true
+                    },
+                    "alert_id": {
+                        "description": "ID de la alerta asociada a la llamada (solo para llamadas salientes planificadas)",
+                        "type": "integer",
+                        "example": 12,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "StoreEmergencyContactRequest": {
+                "description": "Validación para la creación de contactos de emergencia",
+                "required": [
+                    "name",
+                    "phone_number",
+                    "relationship"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del contacto de emergencia",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan Pérez"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del contacto de emergencia (único)",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "+34 600 123 456"
+                    },
+                    "relationship": {
+                        "description": "Relación del contacto con el paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Hijo"
+                    },
+                    "patients": {
+                        "description": "Lista de IDs de pacientes asociados a este contacto de emergencia",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 5
+                        },
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "StoreLanguageRequest": {
+                "description": "Validación para la creación de idiomas",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del idioma (único)",
+                        "type": "string",
+                        "maxLength": 50,
+                        "example": "Español"
+                    }
+                },
+                "type": "object"
+            },
+            "StorePatientRequest": {
+                "description": "Validación para la creación de pacientes",
+                "required": [
+                    "dni",
+                    "name",
+                    "birth_date",
+                    "address",
+                    "phone_number",
+                    "health_card",
+                    "email",
+                    "zone_id",
+                    "personal_situation",
+                    "health_situation",
+                    "housing_situation",
+                    "economic_situation",
+                    "autonomy"
+                ],
+                "properties": {
+                    "dni": {
+                        "description": "DNI del paciente (único)",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "12345678A"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan Pérez"
+                    },
+                    "birth_date": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1985-06-15"
+                    },
+                    "address": {
+                        "description": "Dirección del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Calle Mayor 123, Madrid"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del paciente (único)",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "+34678901234"
+                    },
+                    "health_card": {
+                        "description": "Número de tarjeta sanitaria (único)",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "HC123456789"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente (único)",
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 255,
+                        "example": "juan.perez@example.com"
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona a la que pertenece el paciente",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "associated_teleoperator_id": {
+                        "description": "ID del teleoperador asociado al paciente",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "personal_situation": {
+                        "description": "Situación personal del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Vive solo"
+                    },
+                    "health_situation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Diabetes tipo 2"
+                    },
+                    "housing_situation": {
+                        "description": "Situación de vivienda del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Piso de alquiler"
+                    },
+                    "economic_situation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Pensión de jubilación"
+                    },
+                    "autonomy": {
+                        "description": "Grado de autonomía del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Autónomo con asistencia ocasional"
+                    },
+                    "emergency_contacts": {
+                        "description": "Lista de IDs de contactos de emergencia asociados al paciente",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 5
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTeleoperatorRequest": {
+                "description": "Validación para la creación de teleoperadores",
+                "required": [
+                    "name",
+                    "email",
+                    "prefix",
+                    "phone_number",
+                    "zone_id",
+                    "hiring_date",
+                    "code",
+                    "password",
+                    "languages"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del teleoperador",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "María González"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del teleoperador (único)",
+                        "type": "string",
+                        "format": "email",
+                        "example": "maria.gonzalez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del teleoperador (único)",
+                        "type": "string",
+                        "maxLength": 20,
+                        "example": "678901234"
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona a la que pertenece el teleoperador",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "hiring_date": {
+                        "description": "Fecha de contratación del teleoperador",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-01-15"
+                    },
+                    "code": {
+                        "description": "Código único del teleoperador",
+                        "type": "integer",
+                        "example": 12345
+                    },
+                    "password": {
+                        "description": "Contraseña del teleoperador",
+                        "type": "string",
+                        "minLength": 6,
+                        "example": "secreta123"
+                    },
+                    "languages": {
+                        "description": "Lista de IDs de idiomas que habla el teleoperador",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "StoreZoneRequest": {
+                "description": "Validación para la creación de zonas",
+                "required": [
+                    "city",
+                    "zone"
+                ],
+                "properties": {
+                    "city": {
+                        "description": "Nombre de la ciudad",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Madrid"
+                    },
+                    "zone": {
+                        "description": "Nombre de la zona",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Centro"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateAlertRequest": {
+                "description": "Validación para la actualización de alertas",
+                "required": [
+                    "alert_subtype_id",
+                    "title",
+                    "description",
+                    "frequency",
+                    "zone_id"
+                ],
+                "properties": {
+                    "alert_subtype_id": {
+                        "description": "ID del subtipo de alerta",
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "title": {
+                        "description": "Título de la alerta",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Alerta de emergencia"
+                    },
+                    "description": {
+                        "description": "Descripción detallada de la alerta",
+                        "type": "string",
+                        "example": "El paciente ha activado el botón de emergencia."
+                    },
+                    "frequency": {
+                        "description": "Frecuencia de la alerta",
+                        "type": "string",
+                        "enum": [
+                            "Puntual",
+                            "Diaria",
+                            "Varios días",
+                            "Semanal",
+                            "Mensual"
+                        ],
+                        "example": "Diaria"
+                    },
+                    "days_of_week": {
+                        "description": "Días de la semana en los que se activa la alerta (JSON válido)",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona asociada a la alerta",
+                        "type": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateCallRequest": {
+                "description": "Validación para la actualización de llamadas",
+                "required": [
+                    "teleoperator_id",
+                    "patient_id",
+                    "call_type",
+                    "type",
+                    "call_time"
+                ],
+                "properties": {
+                    "teleoperator_id": {
+                        "description": "ID del teleoperador",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "patient_id": {
+                        "description": "ID del paciente",
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "call_type": {
+                        "description": "Tipo de llamada",
+                        "type": "string",
+                        "enum": [
+                            "Entrante",
+                            "Saliente"
+                        ],
+                        "example": "Entrante"
+                    },
+                    "type": {
+                        "description": "Categoría de la llamada",
+                        "type": "string",
+                        "enum": [
+                            "Emergencia social",
+                            "Emergencia sanitaria",
+                            "Crisis soledad",
+                            "Alarma sin respuesta",
+                            "Comunicacion no urgente",
+                            "Notificar absencia",
+                            "Modificar datos personales",
+                            "Llamada accidental",
+                            "Peticion informacion",
+                            "Sugerencia queja reclamacion",
+                            "Llamada social",
+                            "Registrar cita medica",
+                            "Planificada",
+                            "No planificada",
+                            "Otros"
+                        ],
+                        "example": "Emergencia sanitaria"
+                    },
+                    "call_time": {
+                        "description": "Fecha y hora de la llamada",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-02-20 14:30:00"
+                    },
+                    "description": {
+                        "description": "Descripción adicional de la llamada",
+                        "type": "string",
+                        "example": "El paciente ha solicitado ayuda urgente.",
+                        "nullable": true
+                    },
+                    "alert_id": {
+                        "description": "ID de la alerta asociada, si aplica",
+                        "type": "integer",
+                        "example": 3,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateEmergencyContactRequest": {
+                "description": "Validación para la actualización de contactos de emergencia",
+                "required": [
+                    "name",
+                    "phone_number",
+                    "relationship"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del contacto de emergencia",
+                        "type": "string",
+                        "example": "Juan Pérez"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del contacto",
+                        "type": "string",
+                        "example": "+34678901234"
+                    },
+                    "relationship": {
+                        "description": "Relación del contacto con el paciente",
+                        "type": "string",
+                        "example": "Padre"
+                    },
+                    "patients": {
+                        "description": "Lista de IDs de pacientes asociados",
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "example": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateLanguageRequest": {
+                "description": "Validación para la actualización de un idioma",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del idioma",
+                        "type": "string",
+                        "example": "Español"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePatientRequest": {
+                "description": "Validación para la actualización de un paciente",
+                "required": [
+                    "dni",
+                    "name",
+                    "birth_date",
+                    "address",
+                    "phone_number",
+                    "health_card",
+                    "email",
+                    "zone_id",
+                    "personal_situation",
+                    "health_situation",
+                    "housing_situation",
+                    "economic_situation",
+                    "autonomy"
+                ],
+                "properties": {
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "12345678A"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Juan Pérez"
+                    },
+                    "birth_date": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date",
+                        "example": "1985-06-15"
+                    },
+                    "address": {
+                        "description": "Dirección del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Calle Mayor 123, Madrid"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "+34678901234"
+                    },
+                    "health_card": {
+                        "description": "Número de tarjeta sanitaria (único)",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "HC123456789"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 255,
+                        "example": "juan.perez@example.com"
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona a la que pertenece el paciente",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "associated_teleoperator_id": {
+                        "description": "ID del teleoperador asociado al paciente",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "personal_situation": {
+                        "description": "Situación personal del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Vive solo"
+                    },
+                    "health_situation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Diabetes tipo 2"
+                    },
+                    "housing_situation": {
+                        "description": "Situación de vivienda del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Piso de alquiler"
+                    },
+                    "economic_situation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Pensión de jubilación"
+                    },
+                    "autonomy": {
+                        "description": "Grado de autonomía del paciente",
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "Autónomo con asistencia ocasional"
+                    },
+                    "emergency_contacts": {
+                        "description": "Lista de IDs de contactos de emergencia asociados al paciente",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "example": 5
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateTeleoperatorRequest": {
+                "description": "Validación para la actualización de un teleoperador",
+                "required": [
+                    "name",
+                    "email",
+                    "prefix",
+                    "phone_number",
+                    "zone_id",
+                    "hiring_date",
+                    "code",
+                    "languages"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Nombre del teleoperador",
+                        "type": "string",
+                        "example": "Carlos Pérez"
+                    },
+                    "email": {
+                        "description": "Correo electrónico",
+                        "type": "string",
+                        "format": "email",
+                        "example": "carlos.perez@example.com"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico",
+                        "type": "string",
+                        "example": "+34"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono",
+                        "type": "string",
+                        "example": "600123456"
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona asignada",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "hiring_date": {
+                        "description": "Fecha de contratación",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-07-15"
+                    },
+                    "code": {
+                        "description": "Código único del teleoperador",
+                        "type": "integer",
+                        "example": 1058
+                    },
+                    "password": {
+                        "description": "Contraseña del teleoperador",
+                        "type": "string",
+                        "example": "securepassword123",
+                        "nullable": true
+                    },
+                    "languages": {
+                        "type": "array",
+                        "items": {
+                            "description": "ID del idioma",
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateZoneRequest": {
+                "description": "Validación para la actualización de una zona",
+                "required": [
+                    "city",
+                    "zone"
+                ],
+                "properties": {
+                    "city": {
+                        "description": "Nombre de la ciudad",
+                        "type": "string",
+                        "example": "Madrid"
+                    },
+                    "zone": {
+                        "description": "Nombre de la zona dentro de la ciudad",
+                        "type": "string",
+                        "example": "Centro"
+                    }
+                },
+                "type": "object"
+            },
+            "AlertResource": {
+                "description": "Esquema del recurso Alerta",
+                "properties": {
+                    "id": {
+                        "description": "Identificador de la alerta",
+                        "type": "integer"
+                    },
+                    "alert": {
+                        "$ref": "#/components/schemas/AlertSubtypeCompactResource"
+                    },
+                    "frequency": {
+                        "description": "Frecuencia de la alerta",
+                        "type": "string"
+                    },
+                    "days_of_week": {
+                        "description": "Días de la semana en los que se activa la alerta",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "zone": {
+                        "$ref": "#/components/schemas/ZoneResource"
+                    }
+                },
+                "type": "object"
+            },
+            "AlertSubtypeCompactResource": {
+                "description": "Esquema del recurso Subtipo de Alerta",
+                "properties": {
+                    "name": {
+                        "description": "Nombre del tipo de alerta",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Descripción del subtipo de alerta",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AlertSubtypeResource": {
+                "description": "Esquema del recurso Subtipo de Alerta",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del subtipo de alerta",
+                        "type": "integer"
+                    },
+                    "alert_type": {
+                        "description": "ID del tipo de alerta asociado",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del subtipo de alerta",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AlertTypeResource": {
+                "description": "Esquema del recurso Tipo de Alerta",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del tipo de alerta",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del tipo de alerta",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CallResource": {
+                "description": "Esquema del recurso Llamada",
+                "properties": {
+                    "id": {
+                        "description": "Identificador de la llamada",
+                        "type": "integer"
+                    },
+                    "teleoperator": {
+                        "$ref": "#/components/schemas/TeleoperatorResource"
+                    },
+                    "patient": {
+                        "$ref": "#/components/schemas/PatientResource"
+                    },
+                    "call_type": {
+                        "description": "Tipo de llamada",
+                        "type": "string",
+                        "enum": [
+                            "Entrante",
+                            "Saliente"
+                        ]
+                    },
+                    "type": {
+                        "description": "Tipo específico de la llamada",
+                        "type": "string"
+                    },
+                    "call_time": {
+                        "description": "Fecha y hora de la llamada",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "title": {
+                        "description": "Título de la llamada",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "description": {
+                        "description": "Descripción de la llamada",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "alert": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/CallTitleResource"
+                            }
+                        ],
+                        "nullable": true,
+                        "description": "Alerta asociada a la llamada"
+                    }
+                },
+                "type": "object"
+            },
+            "CallTitleResource": {
+                "description": "Esquema del recurso Título de Llamada",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del título de la llamada",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Título de la llamada",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "EmergencyContactResource": {
+                "description": "Esquema del recurso Contacto de Emergencia",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del contacto de emergencia",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del contacto de emergencia",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del contacto de emergencia",
+                        "type": "string"
+                    },
+                    "patients": {
+                        "description": "Lista de pacientes asociados a este contacto de emergencia",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PatientResourceRecursion"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "EmergencyContactResourceRecursion": {
+                "description": "Esquema del recurso Contacto de Emergencia en Recursión",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del contacto de emergencia",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del contacto de emergencia",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del contacto de emergencia",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LanguageResource": {
+                "description": "Esquema del recurso de Idioma",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del idioma",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del idioma",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PatientResource": {
+                "description": "Esquema del recurso Paciente",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del paciente",
+                        "type": "integer"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "address": {
+                        "description": "Dirección del paciente",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "string"
+                    },
+                    "health_card": {
+                        "description": "Número de tarjeta sanitaria del paciente",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "zone": {
+                        "$ref": "#/components/schemas/ZoneResource"
+                    },
+                    "associated_teleoperator_id": {
+                        "$ref": "#/components/schemas/TeleoperatorResource"
+                    },
+                    "personal_situation": {
+                        "description": "Situación personal del paciente",
+                        "type": "string"
+                    },
+                    "health_situation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string"
+                    },
+                    "housing_situation": {
+                        "description": "Situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "economic_situation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string"
+                    },
+                    "autonomy": {
+                        "description": "Nivel de autonomía del paciente",
+                        "type": "string"
+                    },
+                    "emergency_contacts": {
+                        "description": "Contactos de emergencia asociados al paciente",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EmergencyContactResourceRecursion"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "PatientResourceRecursion": {
+                "description": "Esquema del recurso Paciente en estructuras recursivas",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del paciente",
+                        "type": "integer"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "address": {
+                        "description": "Dirección del paciente",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "string"
+                    },
+                    "health_card": {
+                        "description": "Número de tarjeta sanitaria del paciente",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "zone": {
+                        "$ref": "#/components/schemas/ZoneResource"
+                    },
+                    "personal_situation": {
+                        "description": "Situación personal del paciente",
+                        "type": "string"
+                    },
+                    "health_situation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string"
+                    },
+                    "housing_situation": {
+                        "description": "Situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "economic_situation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string"
+                    },
+                    "autonomy": {
+                        "description": "Nivel de autonomía del paciente",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TeleoperatorResource": {
+                "description": "Esquema del recurso Teleoperador",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del teleoperador",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del teleoperador",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del teleoperador",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "prefix": {
+                        "description": "Prefijo telefónico",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del teleoperador",
+                        "type": "string"
+                    },
+                    "zone": {
+                        "$ref": "#/components/schemas/ZoneResource"
+                    },
+                    "languages": {
+                        "description": "Idiomas hablados por el teleoperador",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "hiring_date": {
+                        "description": "Fecha de contratación",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "code": {
+                        "description": "Código de identificación del teleoperador",
+                        "type": "string"
+                    },
+                    "firing_date": {
+                        "description": "Fecha de despido (puede ser nula si sigue activo)",
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "description": "Esquema del recurso Usuario",
+                "properties": {
+                    "id": {
+                        "description": "Identificador del usuario",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del usuario",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "code": {
+                        "description": "Código identificador del usuario",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ZoneResource": {
+                "description": "Esquema del recurso Zona",
+                "properties": {
+                    "id": {
+                        "description": "Identificador de la zona",
+                        "type": "integer"
+                    },
+                    "city": {
+                        "description": "Nombre de la ciudad",
+                        "type": "string"
+                    },
+                    "zone": {
+                        "description": "Nombre de la zona dentro de la ciudad",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Alert": {
+                "description": "Esquema del modelo Alert",
+                "properties": {
+                    "id": {
+                        "description": "ID de la alerta",
+                        "type": "integer"
+                    },
+                    "alert_subtype_id": {
+                        "description": "ID del subtipo de alerta",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Título de la alerta",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Descripción de la alerta",
+                        "type": "string"
+                    },
+                    "frequency": {
+                        "description": "Frecuencia de la alerta",
+                        "type": "string"
+                    },
+                    "days_of_week": {
+                        "description": "Días de la semana en los que ocurre la alerta",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona relacionada con la alerta",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "AlertSubtype": {
+                "description": "Esquema del modelo AlertSubtype",
+                "properties": {
+                    "id": {
+                        "description": "ID del subtipo de alerta",
+                        "type": "integer"
+                    },
+                    "alert_type_id": {
+                        "description": "ID del tipo de alerta al que pertenece",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del subtipo de alerta",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AlertType": {
+                "description": "Esquema del modelo AlertType",
+                "properties": {
+                    "id": {
+                        "description": "ID del tipo de alerta",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del tipo de alerta",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Call": {
+                "description": "Esquema del modelo Call",
+                "properties": {
+                    "id": {
+                        "description": "ID de la llamada",
+                        "type": "integer"
+                    },
+                    "teleoperator_id": {
+                        "description": "ID del teleoperador que realizó la llamada",
+                        "type": "integer"
+                    },
+                    "patient_id": {
+                        "description": "ID del paciente involucrado en la llamada",
+                        "type": "integer"
+                    },
+                    "call_type": {
+                        "description": "Tipo de llamada",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Clasificación de la llamada",
+                        "type": "string"
+                    },
+                    "call_time": {
+                        "description": "Fecha y hora de la llamada",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "title": {
+                        "description": "Título de la llamada",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Descripción de la llamada",
+                        "type": "string"
+                    },
+                    "alert_id": {
+                        "description": "ID de la alerta asociada (si existe)",
+                        "type": "integer",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "EmergencyContact": {
+                "description": "Esquema del modelo EmergencyContact",
+                "properties": {
+                    "id": {
+                        "description": "ID del contacto de emergencia",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del contacto de emergencia",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del contacto de emergencia",
+                        "type": "string"
+                    },
+                    "relationship": {
+                        "description": "Relación con el paciente",
+                        "type": "string"
+                    },
+                    "created_by": {
+                        "description": "ID del usuario que creó el contacto",
+                        "type": "integer",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Language": {
+                "description": "Esquema del modelo Language",
+                "properties": {
+                    "id": {
+                        "description": "ID del idioma",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del idioma",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Patient": {
+                "description": "Esquema del modelo Patient",
+                "properties": {
+                    "id": {
+                        "description": "ID del paciente",
+                        "type": "integer"
+                    },
+                    "dni": {
+                        "description": "DNI del paciente",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Nombre del paciente",
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "description": "Fecha de nacimiento del paciente",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "address": {
+                        "description": "Dirección del paciente",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del paciente",
+                        "type": "string"
+                    },
+                    "health_card": {
+                        "description": "Número de tarjeta sanitaria del paciente",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del paciente",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona del paciente",
+                        "type": "integer"
+                    },
+                    "associated_teleoperator_id": {
+                        "description": "ID del teleoperador del paciente",
+                        "type": "integer"
+                    },
+                    "personal_situation": {
+                        "description": "Situación personal del paciente",
+                        "type": "string"
+                    },
+                    "health_situation": {
+                        "description": "Situación de salud del paciente",
+                        "type": "string"
+                    },
+                    "housing_situation": {
+                        "description": "Situación de vivienda del paciente",
+                        "type": "string"
+                    },
+                    "economic_situation": {
+                        "description": "Situación económica del paciente",
+                        "type": "string"
+                    },
+                    "autonomy": {
+                        "description": "Nivel de autonomía del paciente",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Teleoperator": {
+                "description": "Esquema del modelo Teleoperator",
+                "properties": {
+                    "id": {
+                        "description": "ID del teleoperador",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nombre del teleoperador",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Correo electrónico del teleoperador",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "prefix": {
+                        "description": "Prefijo del número de teléfono",
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "description": "Número de teléfono del teleoperador",
+                        "type": "string"
+                    },
+                    "zone_id": {
+                        "description": "ID de la zona del teleoperador",
+                        "type": "integer"
+                    },
+                    "hiring_date": {
+                        "description": "Fecha de contratación",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "code": {
+                        "description": "Código único del teleoperador",
+                        "type": "string"
+                    },
+                    "firing_date": {
+                        "description": "Fecha de despido (puede ser nulo)",
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Zone": {
+                "description": "Esquema del modelo Zone",
+                "properties": {
+                    "id": {
+                        "description": "ID de la zona",
+                        "type": "integer"
+                    },
+                    "city": {
+                        "description": "Ciudad de la zona",
+                        "type": "string"
+                    },
+                    "zone": {
+                        "description": "Nombre de la zona",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación del registro",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización del registro",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deleted_at": {
+                        "description": "Fecha de eliminación del registro (soft delete)",
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Alerts",
+            "description": "Alerts"
+        },
+        {
+            "name": "AlertSubtypes",
+            "description": "AlertSubtypes"
+        },
+        {
+            "name": "AlertTypes",
+            "description": "AlertTypes"
+        },
+        {
+            "name": "Autenticación",
+            "description": "Autenticación"
+        },
+        {
+            "name": "Calls",
+            "description": "Calls"
+        },
+        {
+            "name": "Emergency Contacts",
+            "description": "Emergency Contacts"
+        },
+        {
+            "name": "Languages",
+            "description": "Languages"
+        },
+        {
+            "name": "Patients",
+            "description": "Patients"
+        },
+        {
+            "name": "Teleoperators",
+            "description": "Teleoperators"
+        },
+        {
+            "name": "Zones",
+            "description": "Zones"
+        }
+    ]
+}
