@@ -3,7 +3,53 @@
     namespace App\Http\Requests\Api;
 
     use Illuminate\Foundation\Http\FormRequest;
-
+/**
+ * @OA\Schema(
+ *     schema="StoreAlertRequest",
+ *     description="Validación para la creación de alertas",
+ *     required={"alert_subtype_id", "title", "description", "frequency", "zone_id"},
+ *     
+ *     @OA\Property(
+ *         property="alert_subtype_id",
+ *         type="integer",
+ *         description="ID del subtipo de alerta",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="title",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Título de la alerta",
+ *         example="Alerta de emergencia"
+ *     ),
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         description="Descripción detallada de la alerta",
+ *         example="Se ha detectado una anomalía en la zona asignada"
+ *     ),
+ *     @OA\Property(
+ *         property="frequency",
+ *         type="string",
+ *         enum={"Puntual", "Diaria", "Varios días", "Semanal", "Mensual"},
+ *         description="Frecuencia de la alerta",
+ *         example="Diaria"
+ *     ),
+*     @OA\Property(
+*         property="days_of_week",
+*         type="array",
+*         @OA\Items(type="string"),
+*         nullable=true,
+*         description="Días de la semana en formato JSON (opcional, solo si aplica)"
+*     ),
+*     @OA\Property(
+*         property="zone_id",
+*         type="integer",
+*         description="ID de la zona donde se generó la alerta",
+*         example=3
+*     )
+* )
+*/
     class StoreAlertRequest extends FormRequest {
 
         /**

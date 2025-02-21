@@ -4,7 +4,43 @@
 
     use Illuminate\Foundation\Http\FormRequest;
     use Illuminate\Validation\Rule;
-
+/**
+ * @OA\Schema(
+ *     schema="UpdateEmergencyContactRequest",
+ *     description="Validación para la actualización de contactos de emergencia",
+ *     required={"name", "phone_number", "relationship"},
+ *     
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre del contacto de emergencia",
+ *         example="Juan Pérez"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="phone_number",
+ *         type="string",
+ *         description="Número de teléfono del contacto",
+ *         example="+34678901234"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="relationship",
+ *         type="string",
+ *         description="Relación del contacto con el paciente",
+ *         example="Padre"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="patients",
+ *         type="array",
+ *         nullable=true,
+ *         @OA\Items(type="integer"),
+ *         description="Lista de IDs de pacientes asociados",
+ *         example={1, 2, 3}
+ *     )
+ * )
+ */
     class UpdateEmergencyContactRequest extends FormRequest {
 
         /**

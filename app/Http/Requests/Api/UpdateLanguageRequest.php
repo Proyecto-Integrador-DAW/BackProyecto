@@ -4,7 +4,20 @@
 
     use Illuminate\Foundation\Http\FormRequest;
     use Illuminate\Validation\Rule;
-
+/**
+ * @OA\Schema(
+ *     schema="UpdateLanguageRequest",
+ *     description="Validación para la actualización de un idioma",
+ *     required={"name"},
+ *     
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         description="Nombre del idioma",
+ *         example="Español"
+ *     )
+ * )
+ */
     class UpdateLanguageRequest extends FormRequest {
 
         /**

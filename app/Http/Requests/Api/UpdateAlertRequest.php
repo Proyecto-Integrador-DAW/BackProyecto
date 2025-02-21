@@ -3,7 +3,57 @@
     namespace App\Http\Requests\Api;
 
     use Illuminate\Foundation\Http\FormRequest;
-
+/**
+ * @OA\Schema(
+ *     schema="UpdateAlertRequest",
+ *     description="Validación para la actualización de alertas",
+ *     required={"alert_subtype_id", "title", "description", "frequency", "zone_id"},
+ *     
+ *     @OA\Property(
+ *         property="alert_subtype_id",
+ *         type="integer",
+ *         description="ID del subtipo de alerta",
+ *         example=3
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="title",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Título de la alerta",
+ *         example="Alerta de emergencia"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         description="Descripción detallada de la alerta",
+ *         example="El paciente ha activado el botón de emergencia."
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="frequency",
+ *         type="string",
+ *         enum={"Puntual", "Diaria", "Varios días", "Semanal", "Mensual"},
+ *         description="Frecuencia de la alerta",
+ *         example="Diaria"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="days_of_week",
+ *         type="string",
+ *         nullable=true,
+ *         description="Días de la semana en los que se activa la alerta (JSON válido)",
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="zone_id",
+ *         type="integer",
+ *         description="ID de la zona asociada a la alerta",
+ *         example=2
+ *     )
+ * )
+ */
     class UpdateAlertRequest extends FormRequest {
 
         /**

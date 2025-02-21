@@ -3,7 +3,67 @@
     namespace App\Http\Requests\Api;
 
     use Illuminate\Foundation\Http\FormRequest;
-
+/**
+ * @OA\Schema(
+ *     schema="UpdateCallRequest",
+ *     description="Validación para la actualización de llamadas",
+ *     required={"teleoperator_id", "patient_id", "call_type", "type", "call_time"},
+ *     
+ *     @OA\Property(
+ *         property="teleoperator_id",
+ *         type="integer",
+ *         description="ID del teleoperador",
+ *         example=1
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="patient_id",
+ *         type="integer",
+ *         description="ID del paciente",
+ *         example=5
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="call_type",
+ *         type="string",
+ *         enum={"Entrante", "Saliente"},
+ *         description="Tipo de llamada",
+ *         example="Entrante"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="type",
+ *         type="string",
+ *         enum={"Emergencia social", "Emergencia sanitaria", "Crisis soledad", "Alarma sin respuesta", "Comunicacion no urgente", "Notificar absencia", "Modificar datos personales", "Llamada accidental", "Peticion informacion", "Sugerencia queja reclamacion", "Llamada social", "Registrar cita medica", "Planificada", "No planificada", "Otros"},
+ *         description="Categoría de la llamada",
+ *         example="Emergencia sanitaria"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="call_time",
+ *         type="string",
+ *         format="date-time",
+ *         description="Fecha y hora de la llamada",
+ *         example="2024-02-20 14:30:00"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="description",
+ *         type="string",
+ *         nullable=true,
+ *         description="Descripción adicional de la llamada",
+ *         example="El paciente ha solicitado ayuda urgente."
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="alert_id",
+ *         type="integer",
+ *         nullable=true,
+ *         description="ID de la alerta asociada, si aplica",
+ *         example=3
+ *     )
+ * )
+ */
     class UpdateCallRequest extends FormRequest {
 
         /**

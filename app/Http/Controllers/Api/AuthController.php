@@ -7,7 +7,20 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Validator;
     use App\Models\User;
-
+/**
+ * @OA\Info(
+ *    title="Teleassistance API Documentation",
+ *    version="1.0.0",
+ * )
+ * @OA\PathItem(path="/api")
+**  
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT"
+ * )
+ */
     class AuthController extends BaseController {
 
         /**

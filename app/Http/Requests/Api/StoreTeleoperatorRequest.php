@@ -3,7 +3,81 @@
     namespace App\Http\Requests\Api;
 
     use Illuminate\Foundation\Http\FormRequest;
-
+/**
+ * @OA\Schema(
+ *     schema="StoreTeleoperatorRequest",
+ *     description="Validación para la creación de teleoperadores",
+ *     required={"name", "email", "prefix", "phone_number", "zone_id", "hiring_date", "code", "password", "languages"},
+ *     
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         maxLength=255,
+ *         description="Nombre del teleoperador",
+ *         example="María González"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="email",
+ *         type="string",
+ *         format="email",
+ *         description="Correo electrónico del teleoperador (único)",
+ *         example="maria.gonzalez@example.com"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="prefix",
+ *         type="string",
+ *         description="Prefijo telefónico",
+ *         example="+34"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="phone_number",
+ *         type="string",
+ *         maxLength=20,
+ *         description="Número de teléfono del teleoperador (único)",
+ *         example="678901234"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="zone_id",
+ *         type="integer",
+ *         description="ID de la zona a la que pertenece el teleoperador",
+ *         example=2
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="hiring_date",
+ *         type="string",
+ *         format="date",
+ *         description="Fecha de contratación del teleoperador",
+ *         example="2024-01-15"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="code",
+ *         type="integer",
+ *         description="Código único del teleoperador",
+ *         example=12345
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="password",
+ *         type="string",
+ *         minLength=6,
+ *         description="Contraseña del teleoperador",
+ *         example="secreta123"
+ *     ),
+ *     
+ *     @OA\Property(
+ *         property="languages",
+ *         type="array",
+ *         description="Lista de IDs de idiomas que habla el teleoperador",
+ *         @OA\Items(type="integer", example=1)
+ *     )
+ * )
+ */
     class StoreTeleoperatorRequest extends FormRequest {
 
         /**
