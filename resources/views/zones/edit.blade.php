@@ -12,31 +12,36 @@
                         @csrf
                         @method('PUT')
 
-                        {{-- CIUDAD --}}
-                        <div class="mb-4">
-                            <label for="city" class="block text-gray-800 dark:text-white font-bold mb-2">Ciudad:</label>
-                            <input type="text"
-                                name="city"
-                                id="city"
-                                class="w-full dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm @error('city') border-red-500 @else border-gray-300 dark:border-gray-700 @enderror"
-                                value="{{ old('city', $zone->city) }}"
-                                required
-                            >
-                            <x-input-error :messages="$errors->get('city')" class="mt-2" />
+                        {{-- CIUDAD Y ZONA --}}
+                        <div class="mb-4 flex flex-wrap md:flex-nowrap gap-1 md:gap-2">
+                            {{-- CIUDAD --}}
+                            <div class="w-full md:w-1/2">
+                                <label for="city" class="block text-gray-800 dark:text-white font-bold mb-2">Ciudad <span class="text-red-500">*</span></label>
+                                <input type="text"
+                                    name="city"
+                                    id="city"
+                                    class="w-full dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm @error('city') border-red-500 @else border-gray-300 dark:border-gray-700 @enderror"
+                                    value="{{ old('city', $zone->city) }}"
+                                    required
+                                    autofocus
+                                >
+                                <x-input-error :messages="$errors->get('city')" class="mt-2" />
+                            </div>
+
+                            {{-- ZONA --}}
+                            <div class="w-full md:w-1/2">
+                                <label for="zone" class="block text-gray-800 dark:text-white font-bold mb-2">Zona <span class="text-red-500">*</span></label>
+                                <input type="text"
+                                    name="zone"
+                                    id="zone" 
+                                    class="w-full dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm @error('zone') border-red-500 @else border-gray-300 dark:border-gray-700 @enderror"
+                                    value="{{ old('zone', $zone->zone) }}"
+                                    required
+                                >
+                                <x-input-error :messages="$errors->get('zone')" class="mt-2" />
+                            </div>
                         </div>
 
-                        {{-- ZONA --}}
-                        <div class="mb-4">
-                            <label for="zone" class="block text-gray-800 dark:text-white font-bold mb-2">Zona:</label>
-                            <input type="text"
-                                name="zone"
-                                id="zone" 
-                                class="w-full dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm @error('zone') border-red-500 @else border-gray-300 dark:border-gray-700 @enderror"
-                                value="{{ old('zone', $zone->zone) }}"
-                                required
-                            >
-                            <x-input-error :messages="$errors->get('zone')" class="mt-2" />
-                        </div>
 
                         {{-- BOTONES --}}
                         <div class="flex flex-warp">

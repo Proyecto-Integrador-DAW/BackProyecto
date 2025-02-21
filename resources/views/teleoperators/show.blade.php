@@ -1,41 +1,44 @@
-@extends('layouts.app')
+@extends('layouts.content')
 
-@section('title', "Detall del Teleoperador")
-
+@section('title', 'Teleoperador ' . $teleoperator->name)
 @section('content')
-<div class="teleoperador-detall border rounded-lg shadow-md p-4 bg-white">
-    <h2 class="text-xl font-bold text-blue-800">{{ $teleoperator->name }}</h2>
-    
-    <p><strong>Email:</strong> {{ $teleoperator->email }}</p>
-    <p><strong>Telèfono:</strong> {{ $teleoperator->prefix }} {{ $teleoperator->phone_number }}</p>
-    <p><strong>Zona:</strong> {{ $teleoperator->zone->city ?? 'N/A' }}</p>
-    <p><strong>Fecha de contratación:</strong> {{ $teleoperator->hiring_date ?? 'No disponible' }}</p>
-    <p><strong>Fecha de despido:</strong> {{ $teleoperator->firing_date ?? 'Aún no ha sido despedido' }}</p>
-    <p><strong>Código:</strong> {{ $teleoperator->code ?? 'No disponible' }}</p>
-    
-    <p><strong>Idiomas:</strong></p>
-    @if ($teleoperator->languages->isNotEmpty())
-        <ul class="list-disc list-inside">
-            @foreach ($teleoperator->languages as $language)
-                <li>{{ $language->name }}</li>
-            @endforeach
-        </ul>
-    @else
-        <p class="text-gray-500">Sin idiomas registrados</p>
-    @endif
-    
-    <div class="mt-4 flex space-x-4">
-        <a href="{{ route('teleoperators.index') }}" class="text-blue-600 hover:underline">Tornar al llistat</a>
-        @can('update', $teleoperator)
-        <a href="{{ route('teleoperators.edit', $teleoperator->id) }}" class="text-yellow-600 hover:underline">Editar</a>
-        @endcan
-        @can('delete', $teleoperator)
-        <form action="{{ route('teleoperators.destroy', $teleoperator->id) }}" method="POST" onsubmit="return confirm('Estàs segur de voler esborrar aquest teleoperador?');">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="text-red-600 hover:underline">Eliminar</button>
-        </form>
-        @endcan
+    <div class="py-12">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100 text-center space-y-6">
+
+                    <!-- Información del teleoperador -->
+                    <h2 class="text-4xl font-bold text-gray-800 dark:text-white">{{ $teleoperator->name }}</h2>
+                    
+                    <div class="text-left space-y-2">
+                        <p class="text-xl"><strong>Email:</strong> {{ $teleoperator->email }}</p>
+                        <p class="text-xl"><strong>Teléfono:</strong> {{ $teleoperator->prefix }} {{ $teleoperator->phone_number }}</p>
+                        <p class="text-xl"><strong>Zona:</strong> {{ $teleoperator->zone->city }} - {{ $teleoperator->zone->zone }}</p>
+                        <p class="text-xl"><strong>Fecha de contratación:</strong> {{ $teleoperator->hiring_date ?? 'No disponible' }}</p>
+                        <p class="text-xl"><strong>Fecha de despido:</strong> {{ $teleoperator->firing_date ?? 'Aún no ha sido despedido' }}</p>
+                        <p class="text-xl"><strong>Código:</strong> {{ $teleoperator->code ?? 'No disponible' }}</p>
+                    </div>
+                    
+                    <div class="text-left">
+                        <p class="font-bold text-xl">Idiomas:</p>
+                        @if ($teleoperator->languages->isNotEmpty())
+                            <ul class="list-disc list-inside">
+                                @foreach ($teleoperator->languages as $language)
+                                    <li>{{ $language->name }}</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p class="text-gray-500">Este teleoperador no tiene idiomas registrados.</p>
+                        @endif
+                    </div>
+
+                    <!-- Botón volver -->
+                    <button type="button" onclick="window.location.href='/teleoperators'"
+                        class="w-full mt-8 bg-gray-500 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-gray-600 focus:ring focus:ring-gray-300">
+                        Volver al listado
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 @endsection

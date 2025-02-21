@@ -21,7 +21,7 @@
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:teleoperators,email',
                 'prefix' => 'required|string',
-                'phone_number' => 'required|string|max:20',
+                'phone_number' => 'required|string|max:20|unique:teleoperators,phone_number',
                 'zone_id' => 'required|exists:zones,id',
                 'hiring_date' => 'required|date',
                 'code' => 'required|integer|unique:teleoperators,code',
@@ -47,6 +47,7 @@
                 'phone_number.required' => 'El número de teléfono es obligatorio.',
                 'phone_number.string' => 'El número de teléfono debe ser un texto.',
                 'phone_number.max' => 'El número de teléfono no puede tener más de 20 caracteres.',
+                'phone_number.unique' => 'El número ya está registrado.',
         
                 'zone_id.required' => 'Debe seleccionar una zona.',
                 'zone_id.exists' => 'La zona seleccionada no existe.',
