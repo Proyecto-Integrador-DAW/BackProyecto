@@ -111,6 +111,13 @@
                                                         Restaurar
                                                     </button>
                                                 </form>
+                                                <form action="{{ route('calls.forceDelete', $call->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="bg-red-700 text-white py-2 px-4 rounded-lg shadow hover:bg-red-600 flex items-center gap-1" onclick="return confirm('¿Estás seguro de eliminar estea llamada permanentemente?')">
+                                                        ELIMINAR DEFINITIVAMENTE
+                                                    </button>
+                                                </form>
                                             @endif
                                         </div>
                                     </td>
