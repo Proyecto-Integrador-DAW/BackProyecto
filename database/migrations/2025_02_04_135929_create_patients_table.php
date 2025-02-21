@@ -30,7 +30,7 @@
                 $table->softDeletes();
 
                 $table->foreign('zone_id')->references('id')->on('zones');
-                $table->foreign('associated_teleoperator_id')->references('id')->on('teleoperators');
+                $table->foreign('associated_teleoperator_id')->references('id')->on('teleoperators')->onDelete('set null');
             });
         }
 

@@ -36,6 +36,9 @@
             return $this->belongsToMany(Language::class, 'teleoperator_languages')->withTimestamps();
         }
 
+        public function calls() {
+            return $this->hasMany(Call::class);
+        }
 
         protected static function booted() {
             static::created(function ($teleoperator) {

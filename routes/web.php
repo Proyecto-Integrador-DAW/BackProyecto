@@ -25,31 +25,32 @@
     });
 
 
-    Route::resource('/patients', PatientController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy']);
-    Route::resource('/patients', PatientController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['edit', 'update']);
-    Route::resource('/patients', PatientController::class)->only(['index', 'show']);
+    Route::middleware('auth')->group(function () {
+
+        Route::resource('/patients', PatientController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['index', 'show', 'create', 'store', 'destroy', 'edit', 'update']);
+        Route::patch('/patients/{id}/restore', [PatientController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('patients.restore');
+        Route::delete('/patients/{id}/force-delete', [PatientController::class, 'forceDelete'])->name('patients.forceDelete');
 
 
-    Route::resource('/zones', ZoneController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy', 'edit', 'update']);
-    Route::patch('/zones/{id}/restore', [ZoneController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('zones.restore');
-    Route::delete('/zones/{id}/force-delete', [ZoneController::class, 'forceDelete'])->name('zones.forceDelete');
-    Route::resource('/zones', ZoneController::class)->only(['index', 'show']);
+        Route::resource('/zones', ZoneController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['index', 'show', 'create', 'store', 'destroy', 'edit', 'update']);
+        Route::patch('/zones/{id}/restore', [ZoneController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('zones.restore');
+        Route::delete('/zones/{id}/force-delete', [ZoneController::class, 'forceDelete'])->name('zones.forceDelete');
 
 
-    Route::resource('/teleoperators', TeleoperatorController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy', 'edit', 'update']);
-    Route::patch('/teleoperators/{id}/restore', [TeleoperatorController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('teleoperators.restore');
-    Route::delete('/teleoperators/{id}/force-delete', [TeleoperatorController::class, 'forceDelete'])->name('teleoperators.forceDelete');
-    Route::resource('/teleoperators', TeleoperatorController::class)->only(['index', 'show']);
+        Route::resource('/teleoperators', TeleoperatorController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['index', 'show', 'create', 'store', 'destroy', 'edit', 'update']);
+        Route::patch('/teleoperators/{id}/restore', [TeleoperatorController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('teleoperators.restore');
+        Route::delete('/teleoperators/{id}/force-delete', [TeleoperatorController::class, 'forceDelete'])->name('teleoperators.forceDelete');
 
 
-    Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy']);
-    Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['edit', 'update']);
-    Route::resource('/languages', LanguageController::class)->only(['index', 'show']);
+        Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy']);
+        Route::resource('/languages', LanguageController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['edit', 'update']);
+        Route::resource('/languages', LanguageController::class)->only(['index', 'show']);
 
 
-    Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy']);
-    Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['edit', 'update']);
-    Route::resource('/contacts', EmergencyContactController::class)->only(['index', 'show']);
+        Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['create', 'store', 'destroy']);
+        Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['edit', 'update']);
+        Route::resource('/contacts', EmergencyContactController::class)->only(['index', 'show']);
+    });
 
     require __DIR__.'/auth.php';
 ?>

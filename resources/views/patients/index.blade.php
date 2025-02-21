@@ -35,7 +35,7 @@
                             <tr class="divide-x divide-gray-300 dark:divide-gray-700">
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 rounded-tl-lg uppercase">DNI</th>
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Nombre</th>
-                                <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Fecha de Nacimiento</th>
+                                <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Teleoperador asignado</th>
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Dirección</th>
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Teléfono</th>
                                 <th class="px-6 py-3 text-left font-bold text-gray-800 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 uppercase">Tarjeta Sanitaria</th>
@@ -59,8 +59,16 @@
                                     {{-- NOMBRE --}}
                                     <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">{{ $patient->name }}</td>
 
-                                    {{-- CUMPLE --}}
-                                    <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">{{ dd($patient) }}</td>
+                                    {{-- TELEOPERADOR --}}
+                                    <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">
+                                        @if ($patient->teleoperator)
+                                            <a href="{{ route('teleoperators.show', $patient->teleoperator->id) }}" class="text-cyan-600 dark:text-cyan-300 hover:underline">
+                                                {{ $patient->teleoperator->name }}
+                                            </a>
+                                        @else
+                                            No asignado
+                                        @endif
+                                    </td>
 
                                     {{-- DIRECCIÓN --}}
                                     <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">{{ $patient->address }}</td>
@@ -86,22 +94,64 @@
                                             <span class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">Sin contactos</span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">{{ $patient->zone->city ?? 'N/A' }}</td>
-                                    @auth
-                                        <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300 flex space-x-4">
-                                            <a href="{{ route('patients.show', $patient->id) }}" class="text-green-600 hover:underline">Mostrar</a>
-                                            @can('update', $patient)
-                                            <a href="{{ route('patients.edit', $patient->id) }}" class="text-yellow-600 hover:underline">Editar</a>
-                                            @endcan
-                                            @can('delete', $patient)
-                                            <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" onsubmit="return confirm('Estàs segur de voler esborrar aquest pacient?');" class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:underline">Eliminar</button>
-                                            </form>
-                                            @endcan
-                                        </td>
-                                    @endauth
+
+                                    {{-- ELIMINADO --}}
+                                    @can('view', $patient)
+                                        <td class="px-6 py-4 text-md text-gray-800 dark:text-gray-300">{{ $patient->deleted_at }}</td>
+                                    @endcan
+
+                                    {{-- BOTONES --}}
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col sm:flex-row gap-2 justify-center items-center w-full sm:w-auto">
+
+                                            @if(!$patient->trashed()) 
+                                                {{-- MOSTRAR --}}
+                                                <a href="{{ route('patients.show', $patient->id) }}" class="bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 flex items-center gap-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5C7.5 4.5 3.9 7.2 2.25 12c1.65 4.8 5.25 7.5 9.75 7.5s8.1-2.7 9.75-7.5c-1.65-4.8-5.25-7.5-9.75-7.5zM12 9a3 3 0 100 6 3 3 0 000-6z"/>
+                                                    </svg>
+                                                </a>
+
+                                                {{-- EDITAR --}}
+                                                @can('edit', $patient)
+                                                    <a href="{{ route('patients.edit', $patient->id) }}" class="bg-yellow-500 text-white py-2 px-4 rounded-lg shadow hover:bg-yellow-600 flex items-center gap-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16.5V19h2.5L16.5 9.5l-2.5-2.5L4 16.5z"/>
+                                                        </svg>
+                                                    </a>
+                                                @endcan
+
+                                                {{-- ELIMINAR --}}
+                                                @can('delete', $patient)
+                                                    <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" class="inline-block" 
+                                                        onsubmit="return confirm('¿Estás seguro de que deseas eliminar este paciente? Esta acción no se puede deshacer.');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-lg shadow hover:bg-red-600 flex items-center gap-1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h12M9 6V4h6v2m-7 0h8m-6 0v12m4-12v12M4 6h16M7 6v12a2 2 0 002 2h6a2 2 0 002-2V6"/>
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+                                                @endcan
+                                            @else
+                                                <form action="{{ route('patients.restore', $patient->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="bg-indigo-400 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-500 flex items-center gap-1">
+                                                        Restaurar
+                                                    </button>
+                                                </form>
+                                                <form action="{{ route('patients.forceDelete', $patient->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="bg-red-700 text-white py-2 px-4 rounded-lg shadow hover:bg-red-600 flex items-center gap-1" onclick="return confirm('¿Estás seguro de eliminar este teleoperador permanentemente?')">
+                                                        ELIMINAR DEFINITIVAMENTE
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

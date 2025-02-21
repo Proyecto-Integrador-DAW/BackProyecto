@@ -15,9 +15,11 @@
                 $table->string('name');
                 $table->string('phone_number')->unique();
                 $table->string('relationship');
-                $table->foreignId('created_by')->constrained('teleoperators');
+                $table->unsignedBigInteger('created_by')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
+
+                $table->foreign('created_by')->references('id')->on('teleoperators')->onDelete('set null');
             });
         }
 

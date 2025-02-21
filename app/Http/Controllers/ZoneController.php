@@ -58,6 +58,9 @@
         }
 
         public function restore($id) {
+
+            $this->authorize('restore', Zone::class);
+
             $zone = Zone::withTrashed()->findOrFail($id);
 
             $this->authorize('restore', $zone);
@@ -68,6 +71,9 @@
         }
 
         public function forceDelete($id) {
+
+            $this->authorize('forceDelete', Zone::class);
+
             $zone = Zone::withTrashed()->findOrFail($id);
 
             $this->authorize('forceDelete', $zone);

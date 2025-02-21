@@ -85,6 +85,9 @@
         }
 
         public function restore($id) {
+
+            $this->authorize('restore', Teleoperator::class);
+
             $teleoperator = Teleoperator::withTrashed()->findOrFail($id);
 
             $this->authorize('restore', $teleoperator);
@@ -97,10 +100,14 @@
         }
 
         public function forceDelete($id) {
+
+            $this->authorize('forceDelete', Teleoperator::class);
+
             $teleoperator = Teleoperator::withTrashed()->findOrFail($id);
 
             $this->authorize('forceDelete', $teleoperator);
 
+            $teleoperator->calls()->forceDelete();
             $teleoperator->forceDelete();
 
             return redirect()->route('teleoperators.index')->with('success', 'Teleoperador eliminado permanentemente.');

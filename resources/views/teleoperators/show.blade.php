@@ -7,7 +7,6 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 text-center space-y-6">
 
-                    <!-- Información del teleoperador -->
                     <h2 class="text-4xl font-bold text-gray-800 dark:text-white">{{ $teleoperator->name }}</h2>
                     
                     <div class="text-left space-y-2">
