@@ -100,7 +100,7 @@
                 'phone_number' => 'required|string|max:20|unique:teleoperators,phone_number',
                 'zone_id' => 'required|exists:zones,id',
                 'hiring_date' => 'required|date',
-                'code' => 'required|number|unique:teleoperators,code',
+                'code' => 'required|integer|unique:teleoperators,code',
                 'password' => 'required|string|min:6',
                 'languages' => 'required|array',
                 'languages.*' => 'exists:languages,id'
