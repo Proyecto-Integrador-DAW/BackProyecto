@@ -8,6 +8,7 @@
     use App\Http\Controllers\LoginController;
     use App\Http\Controllers\LanguageController;
     use App\Http\Controllers\EmergencyContactController;
+    use App\Http\Controllers\CallController;
     use App\Http\Middleware\RoleMiddleware;
 
     Route::get('/', function () {
@@ -50,6 +51,10 @@
         Route::resource('/contacts', EmergencyContactController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['index', 'show', 'create', 'store', 'destroy', 'edit', 'update']);
         Route::patch('/contacts/{id}/restore', [EmergencyContactController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('contacts.restore');
         Route::delete('/contacts/{id}/force-delete', [EmergencyContactController::class, 'forceDelete'])->name('contacts.forceDelete');
+
+        Route::resource('/calls', CallController::class)->middleware(RoleMiddleware::class.':administrador,coordinador')->only(['index', 'show', 'create', 'store', 'destroy', 'edit', 'update']);
+        Route::patch('/calls/{id}/restore', [CallController::class, 'restore'])->middleware(RoleMiddleware::class.':administrador,coordinador')->name('calls.restore');
+        Route::delete('/calls/{id}/force-delete', [CallController::class, 'forceDelete'])->name('calls.forceDelete');
     });
 
     require __DIR__.'/auth.php';

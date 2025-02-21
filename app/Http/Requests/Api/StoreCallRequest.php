@@ -50,6 +50,15 @@
  *         description="Fecha y hora en que se realizó la llamada",
  *         example="2024-06-01T14:30:00Z"
  *     ),
+ *
+ *     @OA\Property(
+ *         property="title",
+ *         type="string",
+ *         nullable=true,
+ *         description="Título de la llamada",
+ *         example="El paciente ha solicitado ayuda urgente."
+ *     ),
+ *    
  *     @OA\Property(
  *         property="description",
  *         type="string",
@@ -93,6 +102,7 @@
                     'Planificada', 'No planificada', 'Otros'
                 ])],
                 'call_time' => 'required|date',
+                'title' => 'required|string',
                 'description' => 'nullable|string',
                 'alert_id' => 'nullable|exists:alerts,id',
             ];
@@ -152,6 +162,8 @@
 
                 'call_time.required' => 'El campo hora de la llamada es obligatorio.',
                 'call_time.date' => 'El campo hora de la llamada debe ser una fecha válida.',
+
+                'title.string' => 'El campo título debe ser un texto válido.',
 
                 'description.string' => 'El campo descripción debe ser un texto válido.',
 
