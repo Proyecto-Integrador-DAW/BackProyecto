@@ -1830,6 +1830,12 @@
                         "format": "date-time",
                         "example": "2024-06-01T14:30:00Z"
                     },
+                    "title": {
+                        "description": "Título de la llamada",
+                        "type": "string",
+                        "example": "El paciente ha solicitado ayuda urgente.",
+                        "nullable": true
+                    },
                     "description": {
                         "description": "Descripción opcional de la llamada",
                         "type": "string",
@@ -2209,6 +2215,12 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2024-02-20 14:30:00"
+                    },
+                    "title": {
+                        "description": "Título de la llamada",
+                        "type": "string",
+                        "example": "El paciente ha solicitado ayuda urgente.",
+                        "nullable": true
                     },
                     "description": {
                         "description": "Descripción adicional de la llamada",
